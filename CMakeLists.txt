@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(ThicC VERSION 1989.0.1)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
 if (CMAKE_C_COMPILER_ID MATCHES "Clang")

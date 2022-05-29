@@ -45,6 +45,7 @@ extern "C"
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <math.h>
 
 	void test_boolean_casting(void);
 	void test_character_casting(void);
@@ -103,6 +104,13 @@ extern "C"
 	void test_object_operation(void);
 	void test(void);
 
+	MutableBoolean loose_equal(Double _left, Double _right) {
+		Double absolute_left = fabs(_left), absolute_right = fabs(_right);
+		return fabs(_left - _right)
+		       <= ((absolute_left > absolute_right ? absolute_right : absolute_left)
+		           * 0.000001);
+	}
+
 	void a_subroutine(MutableLet self, MutableLet args) {
 		Let index = let_long(0l);
 		Let text = let_string(as_string(index_of(args, index)));
@@ -146,6 +154,41 @@ extern "C"
 		unlet(result);
 		return EXIT_SUCCESS;
 	}
+
+#undef THICC_INTEGER_TEST
+#define THICC_INTEGER_TEST(TYPE, SUFFIX)                                                                               \
+	void test_##TYPE##_operation(void)                                                         						   \
+	{                                                                                                                  \
+		MutableLet left  = let_##TYPE(2##SUFFIX);                                                                              \
+		MutableLet right = let_##TYPE(2##SUFFIX);                                                                              \
+		assert(equal(sum(left, right), let_##TYPE(4##SUFFIX)));                                                                \
+		assert(equal(difference(left, right), let_##TYPE(0##SUFFIX)));                                                         \
+		assert(equal(product(left, right), let_##TYPE(4##SUFFIX)));                                                            \
+		assert(equal(quotient(left, right), let_##TYPE(1##SUFFIX)));                                                           \
+		assert(equal(modulo(left, right), let_##TYPE(0##SUFFIX)));                                                             \
+		assert(equal(power(left, right), let_##TYPE(4##SUFFIX)));                                                              \
+		assert(loose_equal(as_double(root(left, right)), sqrt(2)));                                                         \
+		assert(equal(logarithm(left, right), let_##TYPE(1##SUFFIX)));                                                          \
+		assert(equal(negative(left), let_integer(-2)));                                                                 \
+		assert(equal(positive(left), let_##TYPE(2##SUFFIX)));                                                                  \
+		assert(equal(indirection(left), let_##TYPE(2##SUFFIX)));                                                               \
+		assert(equal(bit_and(left, right), let_##TYPE(2##SUFFIX)));                                                            \
+		assert(equal(bit_or(left, right), let_##TYPE(2##SUFFIX)));                                                             \
+		assert(equal(bit_xor(left, right), let_##TYPE(0##SUFFIX)));                                                            \
+		assert(equal(index_of(left, right), let_##TYPE(2##SUFFIX)));                                                           \
+	}
+
+	THICC_INTEGER_TEST(short, )
+	THICC_INTEGER_TEST(unsigned_short, u)
+	THICC_INTEGER_TEST(integer, )
+	THICC_INTEGER_TEST(unsigned_integer, u)
+	THICC_INTEGER_TEST(long, l)
+	THICC_INTEGER_TEST(unsigned_long, ul)
+#if THICC_IF(THICC_C_AT_LEAST(1999))
+	THICC_INTEGER_TEST(long_long, ll)
+	THICC_INTEGER_TEST(unsigned_long_long, ull)
+#endif
+
 
 	void test(void) {
 		test_character_casting();
@@ -300,208 +343,6 @@ extern "C"
 		unlet(sum_string);
 		unlet(string);
 		unlet(empty_string);
-	}
-
-	void test_short_operation(void) {
-		MutableLet a = let_short((short) 2);
-		MutableLet b = let_short((short) 2);
-		Let four = let_short(4);
-		Let char_and = let_short(((short) 2) & ((short) 2));
-		Let char_xor = let_short(((short) 2) ^ ((short) 2));
-		Let char_or = let_short(((short) 2) | ((short) 2));
-		Let char_complement = let_short(~(short) 2);
-		Let char_minus = let_short(-(short) 2);
-		Let zero = let_integer(0);
-		Let negative_one = let_integer(-1);
-		Let char_minus_one = let_short(((short) 2) - 1);
-		Let char_plus_one = let_short(((short) 2) + 1);
-
-		assert(equal(sum(a, b), four));
-		assert(equal(difference(a, b), zero));
-		assert(equal(modulo(a, b), zero));
-		assert(equal(bit_and(a, b), char_and));
-		assert(equal(bit_or(a, b), char_or));
-		assert(equal(bit_xor(a, b), char_xor));
-		assert(equal(index_of(a, negative_one), b));
-		assert(equal(bit_complement(a), char_complement));
-		assert(equal(negative(a), char_minus));
-		assert(equal(positive(a), b));
-		assert(equal(bit_not(a), zero));
-		assert(equal(indirection(a), b));
-		assert(equal(post_increment(a), b));
-		assert(equal(pre_decrement(a), char_minus_one));
-		assert(equal(post_decrement(a), b));
-		assert(equal(pre_increment(a), char_plus_one));
-		assert(equal(a, b));
-	}
-
-	void test_unsigned_short_operation(void) {
-		MutableLet a = let_unsigned_short((unsigned short) 2);
-		MutableLet b = let_unsigned_short((unsigned short) 2);
-		Let four = let_unsigned_short(4);
-		Let char_and = let_unsigned_short(((unsigned short) 2) & ((unsigned short) 2));
-		Let char_xor = let_unsigned_short(((unsigned short) 2) ^ ((unsigned short) 2));
-		Let char_or = let_unsigned_short(((unsigned short) 2) | ((unsigned short) 2));
-		Let char_complement = let_unsigned_short(~(unsigned short) 2);
-		Let char_minus = let_integer(-2);
-		Let zero = let_integer(0);
-		Let negative_one = let_integer(-1);
-		Let char_minus_one = let_unsigned_short(((unsigned short) 2) - 1);
-		Let char_plus_one = let_unsigned_short(((unsigned short) 2) + 1);
-
-		assert(equal(sum(a, b), four));
-		assert(equal(difference(a, b), zero));
-		assert(equal(modulo(a, b), zero));
-		assert(equal(bit_and(a, b), char_and));
-		assert(equal(bit_or(a, b), char_or));
-		assert(equal(bit_xor(a, b), char_xor));
-		assert(equal(index_of(a, negative_one), b));
-		assert(equal(bit_complement(a), char_complement));
-		assert(equal(negative(a), char_minus));
-		assert(equal(positive(a), b));
-		assert(equal(bit_not(a), zero));
-		assert(equal(indirection(a), b));
-		assert(equal(post_increment(a), b));
-		assert(equal(pre_decrement(a), char_minus_one));
-		assert(equal(post_decrement(a), b));
-		assert(equal(pre_increment(a), char_plus_one));
-		assert(equal(a, b));
-	}
-
-	void test_integer_operation(void) {
-		MutableLet a = let_integer(2);
-		MutableLet b = let_integer(2);
-		Let four = let_integer(4);
-		Let char_and = let_integer(2 & 2);
-		Let char_xor = let_integer(2 ^ 2);
-		Let char_or = let_integer(2 | 2);
-		Let char_complement = let_integer(~2);
-		Let char_minus = let_integer(-2);
-		Let zero = let_integer(0);
-		Let negative_one = let_integer(-1);
-		Let char_minus_one = let_integer(2 - 1);
-		Let char_plus_one = let_integer(2 + 1);
-
-		assert(equal(sum(a, b), four));
-		assert(equal(difference(a, b), zero));
-		assert(equal(modulo(a, b), zero));
-		assert(equal(bit_and(a, b), char_and));
-		assert(equal(bit_or(a, b), char_or));
-		assert(equal(bit_xor(a, b), char_xor));
-		assert(equal(index_of(a, negative_one), b));
-		assert(equal(bit_complement(a), char_complement));
-		assert(equal(negative(a), char_minus));
-		assert(equal(positive(a), b));
-		assert(equal(bit_not(a), zero));
-		assert(equal(indirection(a), b));
-		assert(equal(post_increment(a), b));
-		assert(equal(pre_decrement(a), char_minus_one));
-		assert(equal(post_decrement(a), b));
-		assert(equal(pre_increment(a), char_plus_one));
-		assert(equal(a, b));
-	}
-
-	void test_unsigned_integer_operation(void) {
-		MutableLet a = let_unsigned_integer(2u);
-		MutableLet b = let_unsigned_integer(2u);
-		Let four = let_unsigned_integer(4u);
-		Let char_and = let_unsigned_integer(2u & 2u);
-		Let char_xor = let_unsigned_integer(2u ^ 2u);
-		Let char_or = let_unsigned_integer(2u | 2u);
-		Let char_complement = let_unsigned_integer(~2u);
-		Let char_minus = let_long(-2l);
-		Let zero = let_unsigned_integer(0u);
-		Let negative_one = let_integer(-1);
-		Let char_minus_one = let_unsigned_integer(2u - 1u);
-		Let char_plus_one = let_unsigned_integer(2u + 1u);
-
-		assert(equal(sum(a, b), four));
-		assert(equal(difference(a, b), zero));
-		assert(equal(modulo(a, b), zero));
-		assert(equal(bit_and(a, b), char_and));
-		assert(equal(bit_or(a, b), char_or));
-		assert(equal(bit_xor(a, b), char_xor));
-		assert(equal(index_of(a, negative_one), b));
-		assert(equal(bit_complement(a), char_complement));
-		assert(equal(negative(a), char_minus));
-		assert(equal(positive(a), b));
-		assert(equal(bit_not(a), zero));
-		assert(equal(indirection(a), b));
-		assert(equal(post_increment(a), b));
-		assert(equal(pre_decrement(a), char_minus_one));
-		assert(equal(post_decrement(a), b));
-		assert(equal(pre_increment(a), char_plus_one));
-		assert(equal(a, b));
-	}
-
-	void test_long_operation(void) {
-		MutableLet a = let_long(2l);
-		MutableLet b = let_long(2l);
-		Let four = let_long(4l);
-		Let char_and = let_long(2l & 2l);
-		Let char_xor = let_long(2l ^ 2l);
-		Let char_or = let_long(2l | 2l);
-		Let char_complement = let_long(~2l);
-		Let char_minus = let_long(-2l);
-		Let zero = let_long(0l);
-		Let negative_one = let_long(-1l);
-		Let char_minus_one = let_long(2l - 1l);
-		Let char_plus_one = let_long(2l + 1l);
-
-		assert(equal(sum(a, b), four));
-		assert(equal(difference(a, b), zero));
-		assert(equal(modulo(a, b), zero));
-		assert(equal(bit_and(a, b), char_and));
-		assert(equal(bit_or(a, b), char_or));
-		assert(equal(bit_xor(a, b), char_xor));
-		assert(equal(index_of(a, negative_one), b));
-		assert(equal(bit_complement(a), char_complement));
-		assert(equal(negative(a), char_minus));
-		assert(equal(positive(a), b));
-		assert(equal(bit_not(a), zero));
-		assert(equal(indirection(a), b));
-		assert(equal(post_increment(a), b));
-		assert(equal(pre_decrement(a), char_minus_one));
-		assert(equal(post_decrement(a), b));
-		assert(equal(pre_increment(a), char_plus_one));
-		assert(equal(a, b));
-	}
-
-	void test_unsigned_long_operation(void) {
-		MutableLet a = let_unsigned_long(2ul);
-		MutableLet b = let_unsigned_long(2ul);
-		Let four = let_unsigned_long(4ul);
-		Let char_and = let_unsigned_long(2ul & 2ul);
-		Let char_xor = let_unsigned_long(2ul ^ 2ul);
-		Let char_or = let_unsigned_long(2ul | 2ul);
-		Let char_complement = let_unsigned_long(~2ul);
-#if THICC_IF(THICC_C89)
-		Let char_minus = let_long(-2l);
-#else
-	    Let char_minus = let_long_long(-2ll);
-#endif
-		Let zero = let_unsigned_long(0ul);
-		Let negative_one = let_long(-1l);
-		Let char_minus_one = let_unsigned_long(2ul - 1ul);
-		Let char_plus_one = let_unsigned_long(2ul + 1ul);
-
-		assert(equal(sum(a, b), four));
-		assert(equal(difference(a, b), zero));
-		assert(equal(modulo(a, b), zero));
-		assert(equal(bit_and(a, b), char_and));
-		assert(equal(bit_or(a, b), char_or));
-		assert(equal(bit_xor(a, b), char_xor));
-		assert(equal(index_of(a, negative_one), b));
-		assert(equal(bit_complement(a), char_complement));
-		assert(equal(negative(a), char_minus));
-		assert(equal(positive(a), b));
-		assert(equal(bit_not(a), zero));
-		assert(equal(indirection(a), b));
-		assert(equal(post_increment(a), b));
-		assert(equal(pre_decrement(a), char_minus_one));
-		assert(equal(post_decrement(a), b));
-		assert(equal(pre_increment(a), char_plus_one));
-		assert(equal(a, b));
 	}
 
 	void test_float_operation(void) {
