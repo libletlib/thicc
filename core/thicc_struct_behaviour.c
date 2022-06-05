@@ -65,9 +65,7 @@ extern "C"
 #include "../operations/thicc_bit_or.h"
 #include "../operations/thicc_bit_xor.h"
 #include "../operations/thicc_comparison.h"
-#include "../operations/thicc_decrement.h"
 #include "../operations/thicc_difference.h"
-#include "../operations/thicc_increment.h"
 #include "../operations/thicc_index_of.h"
 #include "../operations/thicc_indirection.h"
 #include "../operations/thicc_logarithm.h"
@@ -138,8 +136,6 @@ extern "C"
 	                               boolean_indirection,
 	                               boolean_negative,
 	                               boolean_positive,
-	                               boolean_increment,
-	                               boolean_decrement,
 	                               boolean_comparison};
 
 	Behaviour character_behaviour = {character_rank,
@@ -188,8 +184,6 @@ extern "C"
 	                                 character_indirection,
 	                                 character_negative,
 	                                 character_positive,
-	                                 character_increment,
-	                                 character_decrement,
 	                                 character_comparison};
 
 	Behaviour signed_character_behaviour = {signed_character_rank,
@@ -238,8 +232,6 @@ extern "C"
 	                                        signed_character_indirection,
 	                                        signed_character_negative,
 	                                        signed_character_positive,
-	                                        signed_character_increment,
-	                                        signed_character_decrement,
 	                                        signed_character_comparison};
 
 	Behaviour unsigned_character_behaviour = {unsigned_character_rank,
@@ -288,8 +280,6 @@ extern "C"
 	                                          unsigned_character_indirection,
 	                                          unsigned_character_negative,
 	                                          unsigned_character_positive,
-	                                          unsigned_character_increment,
-	                                          unsigned_character_decrement,
 	                                          unsigned_character_comparison};
 
 	Behaviour short_behaviour = {short_rank,
@@ -338,8 +328,6 @@ extern "C"
 	                             short_indirection,
 	                             short_negative,
 	                             short_positive,
-	                             short_increment,
-	                             short_decrement,
 	                             short_comparison};
 
 	Behaviour unsigned_short_behaviour = {unsigned_short_rank,
@@ -388,8 +376,6 @@ extern "C"
 	                                      unsigned_short_indirection,
 	                                      unsigned_short_negative,
 	                                      unsigned_short_positive,
-	                                      unsigned_short_increment,
-	                                      unsigned_short_decrement,
 	                                      unsigned_short_comparison};
 
 	Behaviour integer_behaviour = {integer_rank,
@@ -438,8 +424,6 @@ extern "C"
 	                               integer_indirection,
 	                               integer_negative,
 	                               integer_positive,
-	                               integer_increment,
-	                               integer_decrement,
 	                               integer_comparison};
 
 	Behaviour unsigned_integer_behaviour = {unsigned_integer_rank,
@@ -488,8 +472,6 @@ extern "C"
 	                                        unsigned_integer_indirection,
 	                                        unsigned_integer_negative,
 	                                        unsigned_integer_positive,
-	                                        unsigned_integer_increment,
-	                                        unsigned_integer_decrement,
 	                                        unsigned_integer_comparison};
 
 	Behaviour long_behaviour = {long_rank,
@@ -538,8 +520,6 @@ extern "C"
 	                            long_indirection,
 	                            long_negative,
 	                            long_positive,
-	                            long_increment,
-	                            long_decrement,
 	                            long_comparison};
 
 	Behaviour unsigned_long_behaviour = {unsigned_long_rank,
@@ -588,8 +568,6 @@ extern "C"
 	                                     unsigned_long_indirection,
 	                                     unsigned_long_negative,
 	                                     unsigned_long_positive,
-	                                     unsigned_long_increment,
-	                                     unsigned_long_decrement,
 	                                     unsigned_long_comparison};
 
 	Behaviour float_behaviour = {float_rank,
@@ -638,8 +616,6 @@ extern "C"
 	                             float_indirection,
 	                             float_negative,
 	                             float_positive,
-	                             float_increment,
-	                             float_decrement,
 	                             float_comparison};
 
 	Behaviour double_behaviour = {double_rank,
@@ -688,8 +664,6 @@ extern "C"
 	                              double_indirection,
 	                              double_negative,
 	                              double_positive,
-	                              double_increment,
-	                              double_decrement,
 	                              double_comparison};
 
 	Behaviour long_double_behaviour = {long_double_rank,
@@ -738,8 +712,6 @@ extern "C"
 	                                   long_double_indirection,
 	                                   long_double_negative,
 	                                   long_double_positive,
-	                                   long_double_increment,
-	                                   long_double_decrement,
 	                                   long_double_comparison};
 
 	Behaviour string_behaviour = {string_rank,
@@ -788,8 +760,6 @@ extern "C"
 	                              string_indirection,
 	                              string_negative,
 	                              string_positive,
-	                              string_increment,
-	                              string_decrement,
 	                              string_comparison};
 
 	Behaviour subroutine_behaviour = {subroutine_rank,
@@ -838,8 +808,6 @@ extern "C"
 	                                  subroutine_indirection,
 	                                  subroutine_negative,
 	                                  subroutine_positive,
-	                                  subroutine_increment,
-	                                  subroutine_decrement,
 	                                  subroutine_comparison};
 
 	Behaviour function_behaviour = {function_rank,
@@ -888,8 +856,6 @@ extern "C"
 	                                function_indirection,
 	                                function_negative,
 	                                function_positive,
-	                                function_increment,
-	                                function_decrement,
 	                                function_comparison};
 
 	Behaviour array_behaviour = {
@@ -939,8 +905,6 @@ extern "C"
 	    array_indirection,
 	    array_negative,
 	    array_positive,
-	    array_increment,
-	    array_decrement,
 	    array_comparison,
 	};
 
@@ -990,8 +954,6 @@ extern "C"
 	                              object_indirection,
 	                              object_negative,
 	                              object_positive,
-	                              object_increment,
-	                              object_decrement,
 	                              object_comparison};
 
 #ifdef __cplusplus

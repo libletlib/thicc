@@ -52,21 +52,21 @@ extern "C"
 	}
 
 	MutableLet character_quotient(Let _left, Let _right) {
-		if(_left.value.character_type != _right.value.character_type)
-			return let_copy(_left);
-		return let_empty();
+		if(_left.value.character_type % _right.value.character_type == 0)
+			return let_character((Character) (_left.value.character_type / _right.value.character_type));
+		return let_float(as_float(_left) / as_float(_right));
 	}
 	
 	MutableLet signed_character_quotient(Let _left, Let _right) {
-		if(_left.value.signed_character_type != _right.value.signed_character_type)
-			return let_copy(_left);
-		return let_empty();
+		if(_left.value.signed_character_type % _right.value.signed_character_type == 0)
+			return let_signed_character((SignedCharacter) (_left.value.signed_character_type / _right.value.signed_character_type));
+		return let_float(as_float(_left) / as_float(_right));
 	}
 
 	MutableLet unsigned_character_quotient(Let _left, Let _right) {
-		if(_left.value.unsigned_character_type != _right.value.unsigned_character_type)
-			return let_copy(_left);
-		return let_empty();
+		if(_left.value.unsigned_character_type % _right.value.unsigned_character_type == 0)
+			return let_unsigned_character((UnsignedCharacter) (_left.value.unsigned_character_type / _right.value.unsigned_character_type));
+		return let_float(as_float(_left) / as_float(_right));
 	}
 	
 	MutableLet short_quotient(Let _left, Let _right) {

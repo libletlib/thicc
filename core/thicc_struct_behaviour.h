@@ -92,8 +92,6 @@ extern "C"
 		MutableLet (*const indirection)(Let);
 		MutableLet (*const negative)(Let);
 		MutableLet (*const positive)(Let);
-		MutableLet (*const increment)(Let);
-		MutableLet (*const decrement)(Let);
 		MutableComparison (*const comparison)(Let, Let);
 	};
 

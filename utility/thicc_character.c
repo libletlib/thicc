@@ -151,7 +151,7 @@ extern "C"
 		}
 	}
 
-	int signed_character_to_number(SignedCharacter _signed_character) {
+	MutableInteger signed_character_to_number(SignedCharacter _signed_character) {
 		switch(_signed_character) {
 			case '0':
 				return 0X0;
@@ -276,6 +276,185 @@ extern "C"
 				return (UnsignedCharacterPromotedType) 0XF;
 			default:
 				return (UnsignedCharacterPromotedType) _unsigned_character;
+		}
+	}
+
+	MutableCharacter character_from_number(CharacterPromotedType _number) {
+		switch(_number) {
+			case 0x0:
+				return '0';
+			case 0x1:
+				return '1';
+			case 0x2:
+				return '2';
+			case 0x3:
+				return '3';
+			case 0x4:
+				return '4';
+			case 0x5:
+				return '5';
+			case 0x6:
+				return '6';
+			case 0x7:
+				return '7';
+			case 0x8:
+				return '8';
+			case 0x9:
+				return '9';
+			case 0xA:
+				return 'A';
+			case 0XB:
+				return 'B';
+			case 0XC:
+				return 'C';
+			case 0XD:
+				return 'D';
+			case 0XE:
+				return 'E';
+			case 0XF:
+				return 'F';
+#if THICC_IF(THICC_CHAR_SIGNED)
+			case -0x1:
+				return -'1';
+			case -0x2:
+				return -'2';
+			case -0x3:
+				return -'3';
+			case -0x4:
+				return -'4';
+			case -0x5:
+				return -'5';
+			case -0x6:
+				return -'6';
+			case -0x7:
+				return -'7';
+			case -0x8:
+				return -'8';
+			case -0x9:
+				return -'9';
+			case -0xA:
+				return -'A';
+			case -0XB:
+				return -'B';
+			case -0XC:
+				return -'C';
+			case -0XD:
+				return -'D';
+			case -0XE:
+				return -'E';
+			case -0XF:
+				return -'F';
+#endif
+			default:
+				return (Character) _number;
+		}
+	}
+
+	MutableSignedCharacter signed_character_from_number(Integer _number) {
+		switch(_number) {
+			case 0x0:
+				return '0';
+			case 0x1:
+				return '1';
+			case 0x2:
+				return '2';
+			case 0x3:
+				return '3';
+			case 0x4:
+				return '4';
+			case 0x5:
+				return '5';
+			case 0x6:
+				return '6';
+			case 0x7:
+				return '7';
+			case 0x8:
+				return '8';
+			case 0x9:
+				return '9';
+			case 0xA:
+				return 'A';
+			case 0XB:
+				return 'B';
+			case 0XC:
+				return 'C';
+			case 0XD:
+				return 'D';
+			case 0XE:
+				return 'E';
+			case 0XF:
+				return 'F';
+			case -0x1:
+				return -'1';
+			case -0x2:
+				return -'2';
+			case -0x3:
+				return -'3';
+			case -0x4:
+				return -'4';
+			case -0x5:
+				return -'5';
+			case -0x6:
+				return -'6';
+			case -0x7:
+				return -'7';
+			case -0x8:
+				return -'8';
+			case -0x9:
+				return -'9';
+			case -0xA:
+				return -'A';
+			case -0XB:
+				return -'B';
+			case -0XC:
+				return -'C';
+			case -0XD:
+				return -'D';
+			case -0XE:
+				return -'E';
+			case -0XF:
+				return -'F';
+			default:
+				return (SignedCharacter) _number;
+		}
+	}
+
+	MutableUnsignedCharacter unsigned_character_from_number(UnsignedCharacterPromotedType _number) {
+		switch(_number) {
+			case 0x0:
+				return '0';
+			case 0x1:
+				return '1';
+			case 0x2:
+				return '2';
+			case 0x3:
+				return '3';
+			case 0x4:
+				return '4';
+			case 0x5:
+				return '5';
+			case 0x6:
+				return '6';
+			case 0x7:
+				return '7';
+			case 0x8:
+				return '8';
+			case 0x9:
+				return '9';
+			case 0xA:
+				return 'A';
+			case 0XB:
+				return 'B';
+			case 0XC:
+				return 'C';
+			case 0XD:
+				return 'D';
+			case 0XE:
+				return 'E';
+			case 0XF:
+				return 'F';
+			default:
+				return (UnsignedCharacter) _number;
 		}
 	}
 

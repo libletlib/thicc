@@ -190,22 +190,6 @@ extern "C"
 		return copy;
 	}
 
-	MutableArray array_map_increment(MutableArray _array) {
-		Size length = array_length(_array);
-		MutableSize index = 0;
-		for(; index < length; ++index)
-			_array[index] = pre_increment(_array[index]);
-		return _array;
-	}
-
-	MutableArray array_map_decrement(MutableArray _array) {
-		Size length = array_length(_array);
-		MutableSize index = 0;
-		for(; index < length; ++index)
-			_array[index] = pre_decrement(_array[index]);
-		return _array;
-	}
-
 	MutableLet array_element_at(ImmutableArray _array, Long _index) {
 		Long size = (Long) array_length(_array);
 		if(_index >= 0l && _index < size)

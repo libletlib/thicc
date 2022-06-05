@@ -70,9 +70,7 @@ extern "C"
 #include "../../operations/thicc_bit_or.h"
 #include "../../operations/thicc_bit_xor.h"
 #include "../../operations/thicc_comparison.h"
-#include "../../operations/thicc_decrement.h"
 #include "../../operations/thicc_difference.h"
-#include "../../operations/thicc_increment.h"
 #include "../../operations/thicc_index_of.h"
 #include "../../operations/thicc_indirection.h"
 #include "../../operations/thicc_logarithm.h"
@@ -132,8 +130,6 @@ extern "C"
 	                                 long_long_indirection,
 	                                 long_long_negative,
 	                                 long_long_positive,
-	                                 long_long_increment,
-	                                 long_long_decrement,
 	                                 long_long_comparison};
 
 	Behaviour unsigned_long_long_behaviour = {unsigned_long_long_rank,
@@ -180,8 +176,6 @@ extern "C"
 	                                          unsigned_long_long_indirection,
 	                                          unsigned_long_long_negative,
 	                                          unsigned_long_long_positive,
-	                                          unsigned_long_long_increment,
-	                                          unsigned_long_long_decrement,
 	                                          unsigned_long_long_comparison};
 
 	#if THICC_IF(THICC_HAS_COMPLEX)
@@ -227,8 +221,6 @@ extern "C"
 	                               float_complex_indirection,
 	                               float_complex_negative,
 	                               float_complex_positive,
-	                               float_complex_increment,
-	                               float_complex_decrement,
 	                               float_complex_comparison};
 
 	Behaviour double_complex_behaviour = {double_complex_rank,
@@ -273,8 +265,6 @@ extern "C"
 	                                     double_complex_indirection,
 	                                     double_complex_negative,
 	                                     double_complex_positive,
-	                                     double_complex_increment,
-	                                     double_complex_decrement,
 	                                     double_complex_comparison};
 
 	Behaviour long_double_complex_behaviour = {long_double_complex_rank,
@@ -319,8 +309,6 @@ extern "C"
 	                                     long_double_complex_indirection,
 	                                     long_double_complex_negative,
 	                                     long_double_complex_positive,
-	                                     long_double_complex_increment,
-	                                     long_double_complex_decrement,
 	                                     long_double_complex_comparison};
 	#endif
 

@@ -52,8 +52,11 @@ extern "C"
 	MutableBoolean signed_character_is_empty(SignedCharacter);
 	MutableBoolean unsigned_character_is_empty(UnsignedCharacter);
 	MutableCharacterPromotedType character_to_number(Character);
-	int signed_character_to_number(SignedCharacter);
+	MutableInteger signed_character_to_number(SignedCharacter);
 	MutableUnsignedCharacterPromotedType unsigned_character_to_number(UnsignedCharacter);
+	MutableCharacter character_from_number(CharacterPromotedType);
+	MutableSignedCharacter signed_character_from_number(Integer);
+	MutableUnsignedCharacter unsigned_character_from_number(UnsignedCharacterPromotedType);
 
 #ifdef __cplusplus
 }

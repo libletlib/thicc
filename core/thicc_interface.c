@@ -537,26 +537,6 @@ extern "C"
 		return _let.behaviour->negative(_let);
 	}
 
-	MutableLet pre_increment(Let _let) {
-		return _let.behaviour->increment(_let);
-	}
-
-	MutableLet pre_decrement(Let _let) {
-		return _let.behaviour->decrement(_let);
-	}
-
-	MutableLet post_increment(MutableLet _let) {
-		Let temporary = let_copy(_let);
-		_let = pre_increment(_let);
-		return temporary;
-	}
-
-	MutableLet post_decrement(MutableLet _let) {
-		Let temporary = let_copy(_let);
-		_let = pre_decrement(_let);
-		return temporary;
-	}
-
 	MutableComparison compare(Let _left, Let _right) {
 		Let left = evaluate_let_value(_left);
 		Let right = evaluate_let_value(_right);

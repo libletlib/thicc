@@ -60,8 +60,6 @@ extern "C"
 	MutableArray array_map_bit_complement(ImmutableArray);
 	MutableArray array_map_positive(ImmutableArray);
 	MutableArray array_map_negative(ImmutableArray);
-	MutableArray array_map_increment(MutableArray);
-	MutableArray array_map_decrement(MutableArray);
 	MutableLet array_element_at(ImmutableArray, Long);
 	MutableArray array_empty(void);
 	MutableBoolean array_is_empty(ImmutableArray);
