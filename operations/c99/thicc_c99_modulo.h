@@ -49,7 +49,7 @@ extern "C"
 
 	MutableLet long_long_modulo(Let, Let);
 	MutableLet unsigned_long_long_modulo(Let, Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_modulo(Let, Let);
 	MutableLet double_complex_modulo(Let, Let);
 	MutableLet long_double_complex_modulo(Let, Let);

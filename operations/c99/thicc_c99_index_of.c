@@ -63,7 +63,7 @@ extern "C"
 		return result;
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_index_of(Let _let, Let _index) {
 		if(equal(_index, let_long(0l)))
 			return let_float(crealf(_let.value.float_complex_type));

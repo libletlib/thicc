@@ -45,7 +45,7 @@ extern "C"
 
 #include "../../core/thicc_typedef.h"
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 
 	MutableLongDoubleComplex boolean_as_long_double_complex(Let);
 	MutableLongDoubleComplex character_as_long_double_complex(Let);

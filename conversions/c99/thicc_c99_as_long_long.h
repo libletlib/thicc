@@ -62,7 +62,7 @@ extern "C"
 	MutableLongLong float_as_long_long(Let);
 	MutableLongLong double_as_long_long(Let);
 	MutableLongLong long_double_as_long_long(Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLongLong float_complex_as_long_long(Let);
 	MutableLongLong double_complex_as_long_long(Let);
 	MutableLongLong long_double_complex_as_long_long(Let);

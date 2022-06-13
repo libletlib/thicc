@@ -65,7 +65,7 @@ extern "C"
 		MutableFloat (*const as_float)(Let);
 		MutableDouble (*const as_double)(Let);
 		MutableLongDouble (*const as_long_double)(Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 		MutableFloatComplex (*const as_float_complex)(Let);
 		MutableDoubleComplex (*const as_double_complex)(Let);
 		MutableLongDoubleComplex (*const as_long_double_complex)(Let);
@@ -105,9 +105,16 @@ extern "C"
 	extern Behaviour unsigned_integer_behaviour;
 	extern Behaviour long_behaviour;
 	extern Behaviour unsigned_long_behaviour;
+	extern Behaviour long_long_behaviour;
+	extern Behaviour unsigned_long_long_behaviour;
+	extern Behaviour long_long_behaviour;
+	extern Behaviour unsigned_long_long_behaviour;
 	extern Behaviour float_behaviour;
 	extern Behaviour double_behaviour;
 	extern Behaviour long_double_behaviour;
+	extern Behaviour float_complex_behaviour;
+	extern Behaviour double_complex_behaviour;
+	extern Behaviour long_double_complex_behaviour;
 	extern Behaviour string_behaviour;
 	extern Behaviour subroutine_behaviour;
 	extern Behaviour function_behaviour;

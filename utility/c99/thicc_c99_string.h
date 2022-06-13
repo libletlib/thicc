@@ -48,7 +48,7 @@
 #if THICC_IF(THICC_C_AT_LEAST(1999))
 	    MutableString string_from_long_long(LongLong);
 	    MutableString string_from_unsigned_long_long(UnsignedLongLong);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	    MutableSize characters_in_float_complex(FloatComplex);
 	    MutableSize characters_in_double_complex(DoubleComplex);
 	    MutableSize characters_in_long_double_complex(LongDoubleComplex);

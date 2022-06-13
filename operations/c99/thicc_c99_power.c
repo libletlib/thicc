@@ -77,7 +77,7 @@ extern "C"
 		    return let_unsigned_long(result);
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_power(Let _left, Let _right) {
 		return let_float_complex(THICC_COMPLEX_POWERF(_left.value.float_complex_type, _right.value.float_complex_type));
 	}

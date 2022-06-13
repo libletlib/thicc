@@ -64,7 +64,7 @@ extern "C"
 		float_rank = 12,
 		double_rank = 13,
 		long_double_rank = 14,
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 		float_complex_rank = 15,
 		double_complex_rank = 16,
 		long_double_complex_rank = 17,

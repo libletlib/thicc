@@ -42,7 +42,7 @@ extern "C"
 
 #include "thicc_c99_complex.h"
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 
 	MutableBoolean complex_float_equal(FloatComplex _left, FloatComplex _right) {
 		if(math_float_equal(crealf(_left), crealf(_right)) && math_float_equal(cimagf(_left), cimagf(_right)))

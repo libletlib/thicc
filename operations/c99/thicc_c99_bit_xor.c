@@ -55,7 +55,7 @@ extern "C"
 		return let_unsigned_long_long(_left.value.unsigned_long_long_type ^ _right.value.unsigned_long_long_type);
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_bit_xor(Let _left, Let _right) {
 		MutableFloatBytes left_real, right_real, left_imaginary, right_imaginary;
 		left_real.real = crealf(_left.value.float_complex_type);

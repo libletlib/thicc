@@ -54,7 +54,7 @@ extern "C"
 		return let_long_double(THICC_LOGARITHML(as_long_double(_left), as_long_double(_right)));
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_logarithm(Let _left, Let _right) {
 		return let_float_complex(THICC_COMPLEX_LOGARITHMF(_left.value.float_complex_type, _right.value.float_complex_type));
 	}

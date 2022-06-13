@@ -164,7 +164,7 @@ extern "C"
 				return let_double(as_double(_let));
 			case long_double_rank:
 				return let_long_double(as_long_double(_let));
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 			case float_complex_rank:
 				return let_float_complex(as_float_complex(_let));
 			case double_complex_rank:
@@ -254,6 +254,14 @@ extern "C"
 		return _let.behaviour->as_unsigned_long(_let);
 	}
 
+	MutableLongLong as_long_long(Let _let) {
+		return _let.behaviour->as_long_long(_let);
+	}
+
+	MutableUnsignedLongLong as_unsigned_long_long(Let _let) {
+		return _let.behaviour->as_unsigned_long_long(_let);
+	}
+
 	MutableFloat as_float(Let _let) {
 		return _let.behaviour->as_float(_let);
 	}
@@ -264,6 +272,18 @@ extern "C"
 
 	MutableLongDouble as_long_double(Let _let) {
 		return _let.behaviour->as_long_double(_let);
+	}
+
+	MutableFloatComplex as_float_complex(Let _let) {
+		return _let.behaviour->as_float_complex(_let);
+	}
+
+	MutableDoubleComplex as_double_complex(Let _let) {
+		return _let.behaviour->as_double_complex(_let);
+	}
+
+	MutableLongDoubleComplex as_long_double_complex(Let _let) {
+		return _let.behaviour->as_long_double_complex(_let);
 	}
 
 	MutableString as_string(Let _let) {

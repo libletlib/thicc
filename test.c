@@ -64,7 +64,7 @@ extern "C"
 	void test_float_casting(void);
 	void test_double_casting(void);
 	void test_long_double_casting(void);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	void test_float_complex_casting(void);
 	void test_double_complex_casting(void);
 	void test_long_double_complex_casting(void);
@@ -92,7 +92,7 @@ extern "C"
 	void test_float_operation(void);
 	void test_double_operation(void);
 	void test_long_double_operation(void);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	void test_float_complex_operation(void);
 	void test_double_complex_operation(void);
 	void test_long_double_complex_operation(void);
@@ -226,7 +226,7 @@ extern "C"
 	}
 
 #undef THICC_COMPLEX_TEST
-#define THICC_COMPLEX_TEST(TYPE, SUFFIX)                                                                              \
+#define THICC_COMPLEX_TEST(TYPE, SUFFIX)                                                                               \
 	void test_##TYPE##_operation(void)                                                                                 \
 	{                                                                                                                  \
 		MutableLet left  = let_##TYPE(2##SUFFIX);                                                                      \
@@ -237,7 +237,7 @@ extern "C"
 		assert(equal(quotient(left, right), let_##TYPE(1##SUFFIX)));                                                   \
 		assert(equal(modulo(left, right), let_##TYPE(0##SUFFIX)));                                                     \
 		assert(equal(power(left, right), let_##TYPE(4##SUFFIX)));                                                      \
-		assert(loose_equal(as_double(root(left, right)), sqrt(2.0)));                                                    \
+		assert(loose_equal(as_double(root(left, right)), sqrt(2.0)));                                                  \
 		assert(equal(logarithm(left, right), let_##TYPE(1##SUFFIX)));                                                  \
 		assert(equal(negative(left), let_integer(-2)));                                                                \
 		assert(equal(positive(left), let_##TYPE(2##SUFFIX)));                                                          \

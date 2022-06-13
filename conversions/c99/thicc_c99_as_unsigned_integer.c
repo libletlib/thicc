@@ -55,7 +55,7 @@ extern "C"
 		return (UnsignedInteger) _let.value.unsigned_long_long_type;
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableUnsignedInteger float_complex_as_unsigned_integer(Let _let) {
 		return (UnsignedInteger) (THICC_ROUNDF(cabsf(_let.value.float_complex_type)));
 	}

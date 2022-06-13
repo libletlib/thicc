@@ -54,7 +54,7 @@ extern "C"
 		return object_empty();
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableObject float_complex_as_object(Let _let) {
 		return object_empty();
 	}

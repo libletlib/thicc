@@ -62,7 +62,7 @@ MutableUnsignedLongLong unsigned_long_long_as_unsigned_long_long(Let);
 MutableUnsignedLongLong float_as_unsigned_long_long(Let);
 MutableUnsignedLongLong double_as_unsigned_long_long(Let);
 MutableUnsignedLongLong long_double_as_unsigned_long_long(Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 MutableUnsignedLongLong float_complex_as_unsigned_long_long(Let);
 MutableUnsignedLongLong double_complex_as_unsigned_long_long(Let);
 MutableUnsignedLongLong long_double_complex_as_unsigned_long_long(Let);

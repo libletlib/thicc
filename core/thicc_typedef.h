@@ -252,26 +252,43 @@ typedef UnsignedCharacterPromotedType CharacterPromotedType;
 
 #if THICC_IF(THICC_C_AT_LEAST(1999))
 	typedef long long MutableLongLong;
-	typedef MutableLongLong const LongLong;
 	typedef unsigned long long MutableUnsignedLongLong;
-	typedef MutableUnsignedLongLong const UnsignedLongLong;
-#endif
-
-#undef THICC_HAS_COMPLEX
-#if THICC_IF(THICC_C_AT_LEAST(1999)) THICC_AND(!defined __STDC_NO_COMPLEX__)
-	#define THICC_HAS_COMPLEX THICC_YES
-	typedef float _Complex MutableFloatComplex;
-	typedef MutableFloatComplex const FloatComplex;
-	typedef double _Complex MutableDoubleComplex;
-	typedef MutableDoubleComplex const DoubleComplex;
-	typedef long double _Complex MutableLongDoubleComplex;
-	typedef MutableLongDoubleComplex const LongDoubleComplex;
 #else
-	#define THICC_HAS_COMPLEX THICC_NO
+    typedef long MutableLongLong;
+    typedef unsigned long MutableUnsignedLongLong;
 #endif
+typedef MutableUnsignedLongLong const UnsignedLongLong;
+typedef MutableLongLong const LongLong;
+
+#undef THICC_HAS_STD_COMPLEX
+#if THICC_IF(THICC_C_AT_LEAST(1999)) THICC_AND(!defined __STDC_NO_COMPLEX__)
+	#define THICC_HAS_STD_COMPLEX THICC_YES
+	typedef float _Complex MutableFloatComplex;
+	typedef double _Complex MutableDoubleComplex;
+	typedef long double _Complex MutableLongDoubleComplex;
+#else
+	#define THICC_HAS_STD_COMPLEX THICC_NO
+	typedef struct {
+		float real;
+	    float imaginary;
+	} MutableFloatComplex;
+
+    typedef struct {
+	    double real;
+	    double imaginary;
+    } MutableDoubleComplex;
+
+    typedef struct {
+	    long double real;
+	    long double imaginary;
+    } MutableLongDoubleComplex;
+#endif
+	typedef MutableFloatComplex const FloatComplex;
+	typedef MutableDoubleComplex const DoubleComplex;
+	typedef MutableLongDoubleComplex const LongDoubleComplex;
 
 #undef THICC_HAS_IMAGINARY
-#if THICC_IF(THICC_HAS_COMPLEX) && ( \
+#if THICC_IF(THICC_HAS_STD_COMPLEX) && ( \
        (((THICC_C_VERSION >= 1999) && (THICC_C_VERSION < 2023) && (defined __STDC_IEC_559_COMPLEX__)) \
     || ((THICC_C_AT_LEAST(2023)) && (defined __STDC_IEC_60559_COMPLEX__))) \
     && (defined _Imaginary_I && defined imaginary))

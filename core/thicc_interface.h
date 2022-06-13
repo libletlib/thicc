@@ -64,9 +64,14 @@ extern "C"
 	MutableUnsignedInteger as_unsigned_integer(Let);
 	MutableLong as_long(Let);
 	MutableUnsignedLong as_unsigned_long(Let);
+	MutableLongLong as_long_long(Let);
+	MutableUnsignedLongLong as_unsigned_long_long(Let);
 	MutableFloat as_float(Let);
 	MutableDouble as_double(Let);
 	MutableLongDouble as_long_double(Let);
+	MutableFloatComplex as_float_complex(Let);
+	MutableDoubleComplex as_double_complex(Let);
+	MutableLongDoubleComplex as_long_double_complex(Let);
 	MutableString as_string(Let);
 	MutableSubroutine as_subroutine(Let);
 	MutableFunction as_function(Let);

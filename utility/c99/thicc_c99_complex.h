@@ -45,7 +45,7 @@ extern "C"
 
 #include "../../core/thicc_typedef.h"
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	#include <complex.h>
 	#include "../thicc_math.h"
 	#undef THICC_IMAGINARYF

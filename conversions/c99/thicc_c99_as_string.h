@@ -49,7 +49,7 @@ extern "C"
 
 	MutableString long_long_as_string(Let);
 	MutableString unsigned_long_long_as_string(Let);
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableString float_complex_as_string(Let);
 	MutableString double_complex_as_string(Let);
 	MutableString long_double_complex_as_string(Let);

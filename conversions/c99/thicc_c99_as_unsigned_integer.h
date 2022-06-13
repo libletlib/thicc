@@ -49,7 +49,7 @@ extern "C"
 
 	MutableUnsignedInteger long_long_as_unsigned_integer(Let);
 	MutableUnsignedInteger unsigned_long_long_as_unsigned_integer(Let);
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableUnsignedInteger float_complex_as_unsigned_integer(Let);
 	MutableUnsignedInteger double_complex_as_unsigned_integer(Let);
 	MutableUnsignedInteger long_double_complex_as_unsigned_integer(Let);

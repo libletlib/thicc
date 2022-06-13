@@ -50,7 +50,7 @@ extern "C"
 
 #if THICC_IF(THICC_C_AT_LEAST(1999))
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet string_to_number(ImmutableString _string) {
 		char const* const full_stop = strchr(_string, '.');
 		if(full_stop) {
@@ -92,7 +92,7 @@ MutableString string_from_unsigned_long_long(UnsignedLongLong _number) {
 	return buffer;
 }
 
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 MutableSize characters_in_float_complex(FloatComplex _number) {
 	return characters_in_float(crealf(_number)) + characters_in_float(cimagf(_number)) + 1; // Add one for imag i.
 }

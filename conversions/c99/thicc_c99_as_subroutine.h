@@ -49,7 +49,7 @@ extern "C"
 
 	MutableSubroutine long_long_as_subroutine(Let);
 	MutableSubroutine unsigned_long_long_as_subroutine(Let);
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableSubroutine float_complex_as_subroutine(Let);
 	MutableSubroutine double_complex_as_subroutine(Let);
 	MutableSubroutine long_double_complex_as_subroutine(Let);

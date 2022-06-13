@@ -53,7 +53,7 @@ extern "C"
 	MutableFloat unsigned_long_long_as_float(Let _let) {
 		return (Float) _let.value.unsigned_long_long_type;
 	}
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableFloat float_complex_as_float(Let _let) {
 		return cabsf(_let.value.float_complex_type);
 	}

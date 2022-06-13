@@ -50,7 +50,7 @@
 
 MutableArray long_long_as_array(Let);
 MutableArray unsigned_long_long_as_array(Let);
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 MutableArray float_complex_as_array(Let);
 MutableArray double_complex_as_array(Let);
 MutableArray long_double_complex_as_array(Let);

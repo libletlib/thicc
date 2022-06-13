@@ -56,7 +56,7 @@ extern "C"
 		return let_long_double(THICC_ROOTL(as_long_double(_right), as_long_double(_left)));
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_root(Let _left, Let _right) {
 		return let_float_complex(THICC_COMPLEX_ROOTF(_left.value.float_complex_type, _right.value.float_type));
 	}

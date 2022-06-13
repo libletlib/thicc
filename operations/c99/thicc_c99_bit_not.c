@@ -59,7 +59,7 @@ extern "C"
 		return let_boolean(THICC_YES);
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_bit_not(Let _let) {
 		if(complex_float_equal(_let.value.float_complex_type, THICC_COMPLEXF(0.0f, 0.0f)))
 			return let_boolean(THICC_NO);

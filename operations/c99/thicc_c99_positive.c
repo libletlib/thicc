@@ -55,7 +55,7 @@ extern "C"
 		return let_unsigned_long_long(_let.value.unsigned_long_long_type);
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_positive(Let _let) {
 		return let_float_complex(THICC_COMPLEXF(+crealf(_let.value.float_complex_type), +cimagf(_let.value.float_complex_type)));
 	}

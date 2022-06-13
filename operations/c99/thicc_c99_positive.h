@@ -49,7 +49,7 @@ extern "C"
 
 	MutableLet long_long_positive(Let);
 	MutableLet unsigned_long_long_positive(Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_positive(Let);
 	MutableLet double_complex_positive(Let);
 	MutableLet long_double_complex_positive(Let);

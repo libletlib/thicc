@@ -45,7 +45,7 @@ extern "C"
 
 #include "../../core/thicc_typedef.h"
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 
 	MutableFloatComplex boolean_as_float_complex(Let);
 	MutableFloatComplex character_as_float_complex(Let);

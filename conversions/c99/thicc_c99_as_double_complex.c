@@ -46,7 +46,7 @@ extern "C"
 #include "../../utility/c99/thicc_c99_complex.h"
 #include "../../utility/thicc_function.h"
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 
 	MutableDoubleComplex boolean_as_double_complex(Let _let) {
 		return _let.value.boolean_type ? THICC_COMPLEXD(1.0, 0.0) : THICC_COMPLEXD(0.0, 0.0);

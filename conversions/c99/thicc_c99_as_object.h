@@ -49,7 +49,7 @@ extern "C"
 
 	MutableObject long_long_as_object(Let);
 	MutableObject unsigned_long_long_as_object(Let);
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableObject float_complex_as_object(Let);
 	MutableObject double_complex_as_object(Let);
 	MutableObject long_double_complex_as_object(Let);

@@ -49,7 +49,7 @@
 
 MutableCharacter long_long_as_character(Let);
 MutableCharacter unsigned_long_long_as_character(Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 MutableCharacter float_complex_as_character(Let);
 MutableCharacter double_complex_as_character(Let);
 MutableCharacter long_double_complex_as_character(Let);

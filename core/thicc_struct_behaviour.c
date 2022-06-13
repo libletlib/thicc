@@ -42,8 +42,8 @@ extern "C"
 
 #include "thicc_struct_behaviour.h"
 #include "../conversions/thicc_as_array.h"
-#include "../conversions/thicc_as_character.h"
 #include "../conversions/thicc_as_boolean.h"
+#include "../conversions/thicc_as_character.h"
 #include "../conversions/thicc_as_double.h"
 #include "../conversions/thicc_as_float.h"
 #include "../conversions/thicc_as_function.h"
@@ -79,17 +79,6 @@ extern "C"
 #include "../operations/thicc_sum.h"
 #include "thicc_memory.h"
 
-#if THICC_IF(THICC_C_AT_LEAST(1999))
-	#include "../conversions/c99/thicc_c99_as_boolean.h"
-	#include "../conversions/c99/thicc_c99_as_long_long.h"
-	#include "../conversions/c99/thicc_c99_as_unsigned_long_long.h"
-#if THICC_IF(THICC_HAS_COMPLEX)
-	#include "../conversions/c99/thicc_c99_as_float_complex.h"
-	#include "../conversions/c99/thicc_c99_as_double_complex.h"
-	#include "../conversions/c99/thicc_c99_as_long_double_complex.h"
-#endif
-#endif
-
 	Behaviour boolean_behaviour = {boolean_rank,
 	                               stack_deallocate,
 	                               boolean_as_boolean,
@@ -102,18 +91,14 @@ extern "C"
 	                               boolean_as_unsigned_integer,
 	                               boolean_as_long,
 	                               boolean_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                               boolean_as_long_long,
 	                               boolean_as_unsigned_long_long,
-#endif
 	                               boolean_as_float,
 	                               boolean_as_double,
 	                               boolean_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                               boolean_as_float_complex,
 	                               boolean_as_double_complex,
 	                               boolean_as_long_double_complex,
-#endif
 	                               boolean_as_string,
 	                               boolean_as_subroutine,
 	                               boolean_as_function,
@@ -150,18 +135,14 @@ extern "C"
 	                                 character_as_unsigned_integer,
 	                                 character_as_long,
 	                                 character_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                 character_as_long_long,
 	                                 character_as_unsigned_long_long,
-#endif
 	                                 character_as_float,
 	                                 character_as_double,
 	                                 character_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                 character_as_float_complex,
 	                                 character_as_double_complex,
 	                                 character_as_long_double_complex,
-#endif
 	                                 character_as_string,
 	                                 character_as_subroutine,
 	                                 character_as_function,
@@ -198,18 +179,14 @@ extern "C"
 	                                        signed_character_as_unsigned_integer,
 	                                        signed_character_as_long,
 	                                        signed_character_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                        signed_character_as_long_long,
 	                                        signed_character_as_unsigned_long_long,
-#endif
 	                                        signed_character_as_float,
 	                                        signed_character_as_double,
 	                                        signed_character_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                        signed_character_as_float_complex,
 	                                        signed_character_as_double_complex,
 	                                        signed_character_as_long_double_complex,
-#endif
 	                                        signed_character_as_string,
 	                                        signed_character_as_subroutine,
 	                                        signed_character_as_function,
@@ -246,18 +223,14 @@ extern "C"
 	                                          unsigned_character_as_unsigned_integer,
 	                                          unsigned_character_as_long,
 	                                          unsigned_character_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                          unsigned_character_as_long_long,
 	                                          unsigned_character_as_unsigned_long_long,
-#endif
 	                                          unsigned_character_as_float,
 	                                          unsigned_character_as_double,
 	                                          unsigned_character_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                          unsigned_character_as_float_complex,
 	                                          unsigned_character_as_double_complex,
 	                                          unsigned_character_as_long_double_complex,
-#endif
 	                                          unsigned_character_as_string,
 	                                          unsigned_character_as_subroutine,
 	                                          unsigned_character_as_function,
@@ -294,18 +267,14 @@ extern "C"
 	                             short_as_unsigned_integer,
 	                             short_as_long,
 	                             short_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                             short_as_long_long,
 	                             short_as_unsigned_long_long,
-#endif
 	                             short_as_float,
 	                             short_as_double,
 	                             short_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                             short_as_float_complex,
 	                             short_as_double_complex,
 	                             short_as_long_double_complex,
-#endif
 	                             short_as_string,
 	                             short_as_subroutine,
 	                             short_as_function,
@@ -342,18 +311,14 @@ extern "C"
 	                                      unsigned_short_as_unsigned_integer,
 	                                      unsigned_short_as_long,
 	                                      unsigned_short_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                      unsigned_short_as_long_long,
 	                                      unsigned_short_as_unsigned_long_long,
-#endif
 	                                      unsigned_short_as_float,
 	                                      unsigned_short_as_double,
 	                                      unsigned_short_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                      unsigned_short_as_float_complex,
 	                                      unsigned_short_as_double_complex,
 	                                      unsigned_short_as_long_double_complex,
-#endif
 	                                      unsigned_short_as_string,
 	                                      unsigned_short_as_subroutine,
 	                                      unsigned_short_as_function,
@@ -390,18 +355,14 @@ extern "C"
 	                               integer_as_unsigned_integer,
 	                               integer_as_long,
 	                               integer_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                               integer_as_long_long,
 	                               integer_as_unsigned_long_long,
-#endif
 	                               integer_as_float,
 	                               integer_as_double,
 	                               integer_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                               integer_as_float_complex,
 	                               integer_as_double_complex,
 	                               integer_as_long_double_complex,
-#endif
 	                               integer_as_string,
 	                               integer_as_subroutine,
 	                               integer_as_function,
@@ -438,18 +399,14 @@ extern "C"
 	                                        unsigned_integer_as_unsigned_integer,
 	                                        unsigned_integer_as_long,
 	                                        unsigned_integer_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                        unsigned_integer_as_long_long,
 	                                        unsigned_integer_as_unsigned_long_long,
-#endif
 	                                        unsigned_integer_as_float,
 	                                        unsigned_integer_as_double,
 	                                        unsigned_integer_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                        unsigned_integer_as_float_complex,
 	                                        unsigned_integer_as_double_complex,
 	                                        unsigned_integer_as_long_double_complex,
-#endif
 	                                        unsigned_integer_as_string,
 	                                        unsigned_integer_as_subroutine,
 	                                        unsigned_integer_as_function,
@@ -486,18 +443,14 @@ extern "C"
 	                            long_as_unsigned_integer,
 	                            long_as_long,
 	                            long_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                            long_as_long_long,
 	                            long_as_unsigned_long_long,
-#endif
 	                            long_as_float,
 	                            long_as_double,
 	                            long_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                            long_as_float_complex,
 	                            long_as_double_complex,
 	                            long_as_long_double_complex,
-#endif
 	                            long_as_string,
 	                            long_as_subroutine,
 	                            long_as_function,
@@ -534,18 +487,14 @@ extern "C"
 	                                     unsigned_long_as_unsigned_integer,
 	                                     unsigned_long_as_long,
 	                                     unsigned_long_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                     unsigned_long_as_long_long,
 	                                     unsigned_long_as_unsigned_long_long,
-#endif
 	                                     unsigned_long_as_float,
 	                                     unsigned_long_as_double,
 	                                     unsigned_long_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                     unsigned_long_as_float_complex,
 	                                     unsigned_long_as_double_complex,
 	                                     unsigned_long_as_long_double_complex,
-#endif
 	                                     unsigned_long_as_string,
 	                                     unsigned_long_as_subroutine,
 	                                     unsigned_long_as_function,
@@ -570,6 +519,94 @@ extern "C"
 	                                     unsigned_long_positive,
 	                                     unsigned_long_comparison};
 
+	Behaviour long_long_behaviour = {long_long_rank,
+	                                 stack_deallocate,
+	                                 long_long_as_boolean,
+	                                 long_long_as_character,
+	                                 long_long_as_signed_character,
+	                                 long_long_as_unsigned_character,
+	                                 long_long_as_short,
+	                                 long_long_as_unsigned_short,
+	                                 long_long_as_integer,
+	                                 long_long_as_unsigned_integer,
+	                                 long_long_as_long,
+	                                 long_long_as_unsigned_long,
+	                                 long_long_as_long_long,
+	                                 long_long_as_unsigned_long_long,
+	                                 long_long_as_float,
+	                                 long_long_as_double,
+	                                 long_long_as_long_double,
+	                                 long_long_as_float_complex,
+	                                 long_long_as_double_complex,
+	                                 long_long_as_long_double_complex,
+	                                 long_long_as_string,
+	                                 long_long_as_subroutine,
+	                                 long_long_as_function,
+	                                 long_long_as_array,
+	                                 long_long_as_object,
+	                                 long_long_sum,
+	                                 long_long_difference,
+	                                 long_long_product,
+	                                 long_long_quotient,
+	                                 long_long_power,
+	                                 long_long_modulo,
+	                                 long_long_logarithm,
+	                                 long_long_root,
+	                                 long_long_bit_and,
+	                                 long_long_bit_or,
+	                                 long_long_bit_xor,
+	                                 long_long_bit_not,
+	                                 long_long_bit_complement,
+	                                 long_long_index_of,
+	                                 long_long_indirection,
+	                                 long_long_negative,
+	                                 long_long_positive,
+	                                 long_long_comparison};
+
+	Behaviour unsigned_long_long_behaviour = {unsigned_long_long_rank,
+	                                          stack_deallocate,
+	                                          unsigned_long_long_as_boolean,
+	                                          unsigned_long_long_as_character,
+	                                          unsigned_long_long_as_signed_character,
+	                                          unsigned_long_long_as_unsigned_character,
+	                                          unsigned_long_long_as_short,
+	                                          unsigned_long_long_as_unsigned_short,
+	                                          unsigned_long_long_as_integer,
+	                                          unsigned_long_long_as_unsigned_integer,
+	                                          unsigned_long_long_as_long,
+	                                          unsigned_long_long_as_unsigned_long,
+	                                          unsigned_long_long_as_long_long,
+	                                          unsigned_long_long_as_unsigned_long_long,
+	                                          unsigned_long_long_as_float,
+	                                          unsigned_long_long_as_double,
+	                                          unsigned_long_long_as_long_double,
+	                                          unsigned_long_long_as_float_complex,
+	                                          unsigned_long_long_as_double_complex,
+	                                          unsigned_long_long_as_long_double_complex,
+	                                          unsigned_long_long_as_string,
+	                                          unsigned_long_long_as_subroutine,
+	                                          unsigned_long_long_as_function,
+	                                          unsigned_long_long_as_array,
+	                                          unsigned_long_long_as_object,
+	                                          unsigned_long_long_sum,
+	                                          unsigned_long_long_difference,
+	                                          unsigned_long_long_product,
+	                                          unsigned_long_long_quotient,
+	                                          unsigned_long_long_power,
+	                                          unsigned_long_long_modulo,
+	                                          unsigned_long_long_logarithm,
+	                                          unsigned_long_long_root,
+	                                          unsigned_long_long_bit_and,
+	                                          unsigned_long_long_bit_or,
+	                                          unsigned_long_long_bit_xor,
+	                                          unsigned_long_long_bit_not,
+	                                          unsigned_long_long_bit_complement,
+	                                          unsigned_long_long_index_of,
+	                                          unsigned_long_long_indirection,
+	                                          unsigned_long_long_negative,
+	                                          unsigned_long_long_positive,
+	                                          unsigned_long_long_comparison};
+
 	Behaviour float_behaviour = {float_rank,
 	                             stack_deallocate,
 	                             float_as_boolean,
@@ -582,18 +619,14 @@ extern "C"
 	                             float_as_unsigned_integer,
 	                             float_as_long,
 	                             float_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                             float_as_long_long,
 	                             float_as_unsigned_long_long,
-#endif
 	                             float_as_float,
 	                             float_as_double,
 	                             float_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                             float_as_float_complex,
 	                             float_as_double_complex,
 	                             float_as_long_double_complex,
-#endif
 	                             float_as_string,
 	                             float_as_subroutine,
 	                             float_as_function,
@@ -630,18 +663,14 @@ extern "C"
 	                              double_as_unsigned_integer,
 	                              double_as_long,
 	                              double_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                              double_as_long_long,
 	                              double_as_unsigned_long_long,
-#endif
 	                              double_as_float,
 	                              double_as_double,
 	                              double_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                              double_as_float_complex,
 	                              double_as_double_complex,
 	                              double_as_long_double_complex,
-#endif
 	                              double_as_string,
 	                              double_as_subroutine,
 	                              double_as_function,
@@ -678,18 +707,14 @@ extern "C"
 	                                   long_double_as_unsigned_integer,
 	                                   long_double_as_long,
 	                                   long_double_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                   long_double_as_long_long,
 	                                   long_double_as_unsigned_long_long,
-#endif
 	                                   long_double_as_float,
 	                                   long_double_as_double,
 	                                   long_double_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                   long_double_as_float_complex,
 	                                   long_double_as_double_complex,
 	                                   long_double_as_long_double_complex,
-#endif
 	                                   long_double_as_string,
 	                                   long_double_as_subroutine,
 	                                   long_double_as_function,
@@ -714,6 +739,138 @@ extern "C"
 	                                   long_double_positive,
 	                                   long_double_comparison};
 
+	Behaviour float_complex_behaviour = {float_complex_rank,
+	                                     stack_deallocate,
+	                                     float_complex_as_boolean,
+	                                     float_complex_as_character,
+	                                     float_complex_as_signed_character,
+	                                     float_complex_as_unsigned_character,
+	                                     float_complex_as_short,
+	                                     float_complex_as_unsigned_short,
+	                                     float_complex_as_integer,
+	                                     float_complex_as_unsigned_integer,
+	                                     float_complex_as_long,
+	                                     float_complex_as_unsigned_long,
+	                                     float_complex_as_long_long,
+	                                     float_complex_as_unsigned_long_long,
+	                                     float_complex_as_float,
+	                                     float_complex_as_double,
+	                                     float_complex_as_long_double,
+	                                     float_complex_as_float_complex,
+	                                     float_complex_as_double_complex,
+	                                     float_complex_as_long_double_complex,
+	                                     float_complex_as_string,
+	                                     float_complex_as_subroutine,
+	                                     float_complex_as_function,
+	                                     float_complex_as_array,
+	                                     float_complex_as_object,
+	                                     float_complex_sum,
+	                                     float_complex_difference,
+	                                     float_complex_product,
+	                                     float_complex_quotient,
+	                                     float_complex_power,
+	                                     float_complex_modulo,
+	                                     float_complex_logarithm,
+	                                     float_complex_root,
+	                                     float_complex_bit_and,
+	                                     float_complex_bit_or,
+	                                     float_complex_bit_xor,
+	                                     float_complex_bit_not,
+	                                     float_complex_bit_complement,
+	                                     float_complex_index_of,
+	                                     float_complex_indirection,
+	                                     float_complex_negative,
+	                                     float_complex_positive,
+	                                     float_complex_comparison};
+
+	Behaviour double_complex_behaviour = {double_complex_rank,
+	                                      stack_deallocate,
+	                                      double_complex_as_boolean,
+	                                      double_complex_as_character,
+	                                      double_complex_as_signed_character,
+	                                      double_complex_as_unsigned_character,
+	                                      double_complex_as_short,
+	                                      double_complex_as_unsigned_short,
+	                                      double_complex_as_integer,
+	                                      double_complex_as_unsigned_integer,
+	                                      double_complex_as_long,
+	                                      double_complex_as_unsigned_long,
+	                                      double_complex_as_long_long,
+	                                      double_complex_as_unsigned_long_long,
+	                                      double_complex_as_float,
+	                                      double_complex_as_double,
+	                                      double_complex_as_long_double,
+	                                      double_complex_as_float_complex,
+	                                      double_complex_as_double_complex,
+	                                      double_complex_as_long_double_complex,
+	                                      double_complex_as_string,
+	                                      double_complex_as_subroutine,
+	                                      double_complex_as_function,
+	                                      double_complex_as_array,
+	                                      double_complex_as_object,
+	                                      double_complex_sum,
+	                                      double_complex_difference,
+	                                      double_complex_product,
+	                                      double_complex_quotient,
+	                                      double_complex_power,
+	                                      double_complex_modulo,
+	                                      double_complex_logarithm,
+	                                      double_complex_root,
+	                                      double_complex_bit_and,
+	                                      double_complex_bit_or,
+	                                      double_complex_bit_xor,
+	                                      double_complex_bit_not,
+	                                      double_complex_bit_complement,
+	                                      double_complex_index_of,
+	                                      double_complex_indirection,
+	                                      double_complex_negative,
+	                                      double_complex_positive,
+	                                      double_complex_comparison};
+
+	Behaviour long_double_complex_behaviour = {long_double_complex_rank,
+	                                           stack_deallocate,
+	                                           long_double_complex_as_boolean,
+	                                           long_double_complex_as_character,
+	                                           long_double_complex_as_signed_character,
+	                                           long_double_complex_as_unsigned_character,
+	                                           long_double_complex_as_short,
+	                                           long_double_complex_as_unsigned_short,
+	                                           long_double_complex_as_integer,
+	                                           long_double_complex_as_unsigned_integer,
+	                                           long_double_complex_as_long,
+	                                           long_double_complex_as_unsigned_long,
+	                                           long_double_complex_as_long_long,
+	                                           long_double_complex_as_unsigned_long_long,
+	                                           long_double_complex_as_float,
+	                                           long_double_complex_as_double,
+	                                           long_double_complex_as_long_double,
+	                                           long_double_complex_as_float_complex,
+	                                           long_double_complex_as_double_complex,
+	                                           long_double_complex_as_long_double_complex,
+	                                           long_double_complex_as_string,
+	                                           long_double_complex_as_subroutine,
+	                                           long_double_complex_as_function,
+	                                           long_double_complex_as_array,
+	                                           long_double_complex_as_object,
+	                                           long_double_complex_sum,
+	                                           long_double_complex_difference,
+	                                           long_double_complex_product,
+	                                           long_double_complex_quotient,
+	                                           long_double_complex_power,
+	                                           long_double_complex_modulo,
+	                                           long_double_complex_logarithm,
+	                                           long_double_complex_root,
+	                                           long_double_complex_bit_and,
+	                                           long_double_complex_bit_or,
+	                                           long_double_complex_bit_xor,
+	                                           long_double_complex_bit_not,
+	                                           long_double_complex_bit_complement,
+	                                           long_double_complex_index_of,
+	                                           long_double_complex_indirection,
+	                                           long_double_complex_negative,
+	                                           long_double_complex_positive,
+	                                           long_double_complex_comparison};
+
 	Behaviour string_behaviour = {string_rank,
 	                              string_deallocate,
 	                              string_as_boolean,
@@ -726,18 +883,14 @@ extern "C"
 	                              string_as_unsigned_integer,
 	                              string_as_long,
 	                              string_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                              string_as_long_long,
 	                              string_as_unsigned_long_long,
-#endif
 	                              string_as_float,
 	                              string_as_double,
 	                              string_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                              string_as_float_complex,
 	                              string_as_double_complex,
 	                              string_as_long_double_complex,
-#endif
 	                              string_as_string,
 	                              string_as_subroutine,
 	                              string_as_function,
@@ -774,18 +927,14 @@ extern "C"
 	                                  subroutine_as_unsigned_integer,
 	                                  subroutine_as_long,
 	                                  subroutine_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                  subroutine_as_long_long,
 	                                  subroutine_as_unsigned_long_long,
-#endif
 	                                  subroutine_as_float,
 	                                  subroutine_as_double,
 	                                  subroutine_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                  subroutine_as_float_complex,
 	                                  subroutine_as_double_complex,
 	                                  subroutine_as_long_double_complex,
-#endif
 	                                  subroutine_as_string,
 	                                  subroutine_as_subroutine,
 	                                  subroutine_as_function,
@@ -822,18 +971,14 @@ extern "C"
 	                                function_as_unsigned_integer,
 	                                function_as_long,
 	                                function_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                                function_as_long_long,
 	                                function_as_unsigned_long_long,
-#endif
 	                                function_as_float,
 	                                function_as_double,
 	                                function_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                                function_as_float_complex,
 	                                function_as_double_complex,
 	                                function_as_long_double_complex,
-#endif
 	                                function_as_string,
 	                                function_as_subroutine,
 	                                function_as_function,
@@ -871,18 +1016,14 @@ extern "C"
 	    array_as_unsigned_integer,
 	    array_as_long,
 	    array_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	    array_as_long_long,
 	    array_as_unsigned_long_long,
-#endif
 	    array_as_float,
 	    array_as_double,
 	    array_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	    array_as_float_complex,
 	    array_as_double_complex,
 	    array_as_long_double_complex,
-#endif
 	    array_as_string,
 	    array_as_subroutine,
 	    array_as_function,
@@ -920,18 +1061,14 @@ extern "C"
 	                              object_as_unsigned_integer,
 	                              object_as_long,
 	                              object_as_unsigned_long,
-#if THICC_IF(THICC_C_AT_LEAST(1999))
 	                              object_as_long_long,
 	                              object_as_unsigned_long_long,
-#endif
 	                              object_as_float,
 	                              object_as_double,
 	                              object_as_long_double,
-#if THICC_IF(THICC_HAS_COMPLEX)
 	                              object_as_float_complex,
 	                              object_as_double_complex,
 	                              object_as_long_double_complex,
-#endif
 	                              object_as_string,
 	                              object_as_subroutine,
 	                              object_as_function,

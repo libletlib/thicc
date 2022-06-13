@@ -54,7 +54,7 @@ extern "C"
 		return function_empty();
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableFunction float_complex_as_function(Let _let) {
 		return function_empty();
 	}

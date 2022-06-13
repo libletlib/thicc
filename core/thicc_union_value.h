@@ -64,7 +64,7 @@ extern "C"
 		MutableFloat float_type;
 		MutableDouble double_type;
 		MutableLongDouble long_double_type;
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 		MutableFloatComplex float_complex_type;
 		MutableDoubleComplex double_complex_type;
 		MutableLongDoubleComplex long_double_complex_type;

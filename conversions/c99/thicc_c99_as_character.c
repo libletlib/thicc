@@ -55,7 +55,7 @@ extern "C"
 		return (Character) _let.value.unsigned_long_long_type;
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableCharacter float_complex_as_character(Let _let) {
 		return (Character) (THICC_ROUNDF(cabsf(_let.value.float_complex_type)));
 	}

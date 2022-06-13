@@ -49,7 +49,7 @@ extern "C"
 
 	MutableDouble long_long_as_double(Let);
 	MutableDouble unsigned_long_long_as_double(Let);
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableDouble float_complex_as_double(Let);
 	MutableDouble double_complex_as_double(Let);
 	MutableDouble long_double_complex_as_double(Let);

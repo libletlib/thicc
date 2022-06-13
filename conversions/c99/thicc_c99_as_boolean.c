@@ -57,7 +57,7 @@ MutableBoolean unsigned_long_long_as_boolean(Let _let) {
 	return _let.value.unsigned_short_type ? THICC_YES : THICC_NO;
 }
 
-	#if THICC_IF(THICC_HAS_COMPLEX)
+	#if THICC_IF(THICC_HAS_STD_COMPLEX)
 MutableBoolean float_complex_as_boolean(Let _let) {
 	return complex_float_equal(_let.value.float_complex_type, THICC_COMPLEXF(0.0f, 0.0f)) ? THICC_NO : THICC_YES;
 }

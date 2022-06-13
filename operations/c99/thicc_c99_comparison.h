@@ -49,7 +49,7 @@ extern "C"
 
 	MutableComparison long_long_comparison(Let, Let);
 	MutableComparison unsigned_long_long_comparison(Let, Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableComparison float_complex_comparison(Let, Let);
 	MutableComparison double_complex_comparison(Let, Let);
 	MutableComparison long_double_complex_comparison(Let, Let);

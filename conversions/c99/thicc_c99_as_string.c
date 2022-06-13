@@ -54,7 +54,7 @@ extern "C"
 	MutableString unsigned_long_long_as_string(Let _let) {
 		return string_from_unsigned_long_long(_let.value.unsigned_long_long_type);
 	}
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableString float_complex_as_string(Let _let) {
 		return string_from_float_complex(_let.value.float_complex_type);
 	}

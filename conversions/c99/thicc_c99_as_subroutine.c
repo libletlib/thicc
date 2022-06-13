@@ -54,7 +54,7 @@ extern "C"
 		return subroutine_empty();
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableSubroutine float_complex_as_subroutine(Let _let) {
 		return subroutine_empty();
 	}

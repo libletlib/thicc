@@ -49,7 +49,7 @@ extern "C"
 
 	MutableLet long_long_indirection(Let);
 	MutableLet unsigned_long_long_indirection(Let);
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableLet float_complex_indirection(Let);
 	MutableLet double_complex_indirection(Let);
 	MutableLet long_double_complex_indirection(Let);

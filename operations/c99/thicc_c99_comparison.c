@@ -62,7 +62,7 @@ extern "C"
 		return THICC_EQUAL;
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableComparison float_complex_comparison(Let _left, Let _right) {
 		return complex_float_comparison(_left.value.float_complex_type, _right.value.float_complex_type);
 	}

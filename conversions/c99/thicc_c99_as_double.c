@@ -54,7 +54,7 @@ extern "C"
 		return (Double) _let.value.unsigned_long_long_type;
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableDouble float_complex_as_double(Let _let) {
 		return (Double) cabsf(_let.value.float_complex_type);
 	}

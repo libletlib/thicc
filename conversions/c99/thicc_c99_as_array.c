@@ -54,7 +54,7 @@ extern "C"
 		return array_from_elements(1, &_let);
 	}
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 	MutableArray float_complex_as_array(Let _let) {
 		return array_from_elements(1, &_let);
 	}

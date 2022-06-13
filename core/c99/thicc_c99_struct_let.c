@@ -59,7 +59,7 @@ MutableLet let_unsigned_long_long(UnsignedLongLong _value) {
 	return let;
 }
 
-#if THICC_IF(THICC_HAS_COMPLEX)
+#if THICC_IF(THICC_HAS_STD_COMPLEX)
 MutableLet let_float_complex(FloatComplex _value) {
 	MutableLet let = let_init();
 	let.value.float_complex_type = _value;
