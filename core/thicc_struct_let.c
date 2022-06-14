@@ -123,6 +123,20 @@ extern "C"
 		return let;
 	}
 
+	MutableLet let_long_long(LongLong _value) {
+		MutableLet let = let_init();
+		let.value.long_long_type = _value;
+		let.behaviour = &long_long_behaviour;
+		return let;
+	}
+
+	MutableLet let_unsigned_long_long(UnsignedLongLong _value) {
+		MutableLet let = let_init();
+		let.value.unsigned_long_long_type = _value;
+		let.behaviour = &unsigned_long_long_behaviour;
+		return let;
+	}
+
 	MutableLet let_float(Float _value) {
 		MutableLet let = let_init();
 		let.value.float_type = _value;
@@ -141,6 +155,27 @@ extern "C"
 		MutableLet let = let_init();
 		let.value.long_double_type = _value;
 		let.behaviour = &long_double_behaviour;
+		return let;
+	}
+
+	MutableLet let_float_complex(FloatComplex _value) {
+		MutableLet let = let_init();
+		let.value.float_complex_type = _value;
+		let.behaviour = &float_complex_behaviour;
+		return let;
+	}
+
+	MutableLet let_double_complex(DoubleComplex _value) {
+		MutableLet let = let_init();
+		let.value.double_complex_type = _value;
+		let.behaviour = &double_complex_behaviour;
+		return let;
+	}
+
+	MutableLet let_long_double_complex(LongDoubleComplex _value) {
+		MutableLet let = let_init();
+		let.value.long_double_complex_type = _value;
+		let.behaviour = &long_double_complex_behaviour;
 		return let;
 	}
 
