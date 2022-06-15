@@ -239,6 +239,8 @@ extern "C"
 		if(let_is_empty(_let))
 			return let_empty();
 		switch(_let.behaviour->rank) {
+			case boolean_rank:
+				return let_boolean(_let.value.boolean_type);
 			case character_rank:
 				return let_character(_let.value.character_type);
 			case signed_character_rank:
@@ -257,12 +259,22 @@ extern "C"
 				return let_long(_let.value.long_type);
 			case unsigned_long_rank:
 				return let_unsigned_long(_let.value.unsigned_long_type);
+			case long_long_rank:
+				return let_long_long(_let.value.long_long_type);
+			case unsigned_long_long_rank:
+				return let_unsigned_long_long(_let.value.unsigned_long_long_type);
 			case float_rank:
 				return let_float(_let.value.float_type);
 			case double_rank:
 				return let_double(_let.value.double_type);
 			case long_double_rank:
 				return let_long_double(_let.value.long_double_type);
+			case float_complex_rank:
+				return let_float_complex((_let.value.float_complex_type));
+			case double_complex_rank:
+				return let_double_complex(_let.value.double_complex_type);
+			case long_double_complex_rank:
+				return let_long_double_complex(_let.value.long_double_complex_type);
 			case string_rank:
 				return let_string(_let.value.string_type);
 			case subroutine_rank:
