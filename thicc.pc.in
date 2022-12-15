@@ -1,0 +1,12 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+execution_prefix=@CMAKE_INSTALL_PREFIX@
+library_directory=${execution_prefix}/@CMAKE_INSTALL_LIBDIR@
+include_directory=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: @PROJECT_NAME@
+Description: @PROJECT_DESCRIPTION@
+Version: @PROJECT_VERSION@
+
+Requires:
+Libs: -L${library_directory} -lthicc
+Cflags: -I${include_directory}
