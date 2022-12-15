@@ -1,6 +1,6 @@
 # ThicC
 
-Simple ducktyping in ANSI C/ISO C89.
+Simple ducktyping in ANSI C/ISO C89. Adheres strictly to the standard
 
 ## Recurse you a factorial
 ```c

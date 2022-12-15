@@ -28,8 +28,8 @@ jobs:
         working-directory: ${{runner.workspace}}/build
         run: |
           cmake -DCMAKE_BUILD_TYPE=Debug \
-                -DCMAKE_CXX_COMPILER=clang \
-                -DCMAKE_CXX_STANDARD=${{ matrix.standard }} \
+                -DCMAKE_C_COMPILER=clang \
+                -DCMAKE_C_STANDARD=${{ matrix.standard }} \
                 $GITHUB_WORKSPACE
 
       - name: Test
