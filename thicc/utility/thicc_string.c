@@ -105,7 +105,7 @@ THICC_NODISCARD static char* string_tokenise_helper(char* THICC_RESTRICT _string
 }
 
 THICC_NODISCARD MutableArray string_tokenise(MutableString _string, String _delimiter) {
-  char* THICC_RESTRICT state;
+  char* state;
   char* THICC_RESTRICT position = _string.string;
   MutableString token;
   MutableArray result;
