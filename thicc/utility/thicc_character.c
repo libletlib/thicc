@@ -37,6 +37,7 @@ extern "C" {
 #endif
 
 #include "thicc_character.h"
+#include "../core/thicc_struct_string.h"
 
 THICC_NODISCARD MutableCharacterPromotedType character_to_number(Character _character) {
   switch (_character) {
@@ -66,10 +67,11 @@ THICC_NODISCARD MutableCharacterPromotedType character_to_number(Character _char
 }
 
 THICC_NODISCARD MutableBoolean character_in_string(Character _needle, String _haystack) {
-  while (*_haystack != '\0') {
-	if (_needle == *_haystack)
+  Character* _haystack_pointer = _haystack.string;
+  while (*_haystack_pointer != '\0') {
+	if (_needle == *_haystack_pointer)
 	  return THICC_YES;
-	++_haystack;
+	++_haystack_pointer;
   }
   return THICC_NO;
 }

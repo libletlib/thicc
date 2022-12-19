@@ -85,7 +85,7 @@ THICC_NODISCARD Var array_bit_complement(Let _let) {
 }
 
 THICC_NODISCARD Var object_bit_complement(Let _let) {
-  Let property_name = move_string("~");
+  Let property_name = move_string(string_literal("~"));
   Let property		= member(_let, property_name);
   Var result;
 

@@ -87,7 +87,7 @@ THICC_NODISCARD Var array_negative(Let _let) {
 }
 
 THICC_NODISCARD Var object_negative(Let _let) {
-  Let property_name = move_string("negative");
+  Let property_name = move_string(string_literal("negative"));
   Let property		= member(_let, property_name);
   Var result;
 

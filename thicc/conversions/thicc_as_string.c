@@ -44,7 +44,7 @@ extern "C" {
 #include "../utility/thicc_string.h"
 
 THICC_NODISCARD MutableString boolean_as_string(Let _let) {
-  return _let.value.boolean_type ? string_copy("true") : string_copy("false");
+  return _let.value.boolean_type ? string_copy(string_literal("true")) : string_copy(string_literal("false"));
 }
 
 THICC_NODISCARD MutableString character_as_string(Let _let) {
@@ -68,7 +68,7 @@ THICC_NODISCARD MutableString complex_as_string(Let _let) {
 }
 
 THICC_NODISCARD MutableString string_as_string(Let _let) {
-  return string_copy(string_view(_let));
+  return string_copy(_let.value.string_type);
 }
 
 THICC_NODISCARD MutableString function_as_string(Let _let) {
@@ -79,11 +79,11 @@ THICC_NODISCARD MutableString function_as_string(Let _let) {
 }
 
 THICC_NODISCARD MutableString array_as_string(Let _let) {
-  return string_from_array(array_view(_let));
+  return string_from_array(_let.value.array_type);
 }
 
 THICC_NODISCARD MutableString object_as_string(Let _let) {
-  Let conversion_value = member(_let, move_string("string_type"));
+  Let conversion_value = member(_let, move_string(string_literal("string")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let			temporary = object_method_invoke(_let, conversion_value, 2, &_let);

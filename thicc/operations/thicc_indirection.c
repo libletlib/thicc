@@ -66,7 +66,7 @@ THICC_NODISCARD Var complex_indirection(Let _let) {
 }
 
 THICC_NODISCARD Var string_indirection(Let _let) {
-  return let_character(*_let.value.string_type);
+  return let_character(*string_view(_let));
 }
 
 THICC_NODISCARD Var function_indirection(Let _let) {
@@ -77,11 +77,11 @@ THICC_NODISCARD Var function_indirection(Let _let) {
 }
 
 THICC_NODISCARD Var array_indirection(Let _let) {
-  return let_copy(*_let.value.array_type);
+  return let_copy(*_let.value.array_type.array);
 }
 
 THICC_NODISCARD Var object_indirection(Let _let) {
-  Let property_name = move_string("indirection");
+  Let property_name = move_string(string_literal("indirection"));
   Let property		= member(_let, property_name);
   Var result;
 

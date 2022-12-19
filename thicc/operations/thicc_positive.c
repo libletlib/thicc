@@ -87,7 +87,7 @@ THICC_NODISCARD Var array_positive(Let _let) {
 }
 
 THICC_NODISCARD Var object_positive(Let _let) {
-  Let property_name = move_string("positive");
+  Let property_name = move_string(string_literal("positive"));
   Let property		= member(_let, property_name);
   Var result;
 

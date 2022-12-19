@@ -72,7 +72,7 @@ THICC_NODISCARD Var complex_bit_and(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var string_bit_and(Let _left, Let _right) {
-  return move_string(string_filter_and(string_view(_left), string_view(_right)));
+  return move_string(string_filter_and(_left.value.string_type, _right.value.string_type));
 }
 
 THICC_NODISCARD Var function_bit_and(Let _left, Let _right) {
@@ -85,11 +85,11 @@ THICC_NODISCARD Var function_bit_and(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var array_bit_and(Let _left, Let _right) {
-  return move_array(array_filter_and(array_view(_left), array_view(_right)));
+  return move_array(array_filter_and(_left.value.array_type, _right.value.array_type));
 }
 
 THICC_NODISCARD Var object_bit_and(Let _left, Let _right) {
-  Let property_name = move_string("&");
+  Let property_name = move_string(string_literal("&"));
   Let property		= member(_left, property_name);
   Var result;
 

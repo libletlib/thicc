@@ -42,6 +42,13 @@ extern "C" {
 #include "../core/thicc_struct_complex.h"
 #include <math.h>
 
+#undef THICC_ABS
+#if THICC_C89
+#define THICC_ABS(_value) (labs(_value))
+#else
+#define THICC_ABS(_value) (llabs(_value))
+#endif
+
 #undef THICC_FABS
 #if THICC_C89
 #define THICC_FABS(_value) ((Real) fabs((double) (_value)))

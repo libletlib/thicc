@@ -85,7 +85,7 @@ THICC_NODISCARD Var array_product(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var object_product(Let _left, Let _right) {
-  Let property_name = move_string("*");
+  Let property_name = move_string(string_literal("*"));
   Let property		= member(_left, property_name);
   Var result;
 

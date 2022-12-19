@@ -67,7 +67,7 @@ THICC_NODISCARD MutableComplex complex_as_complex(Let _let) {
 }
 
 THICC_NODISCARD MutableComplex string_as_complex(Let _let) {
-  return string_to_complex(string_view(_let));
+  return string_to_complex(_let.value.string_type);
 }
 
 THICC_NODISCARD MutableComplex function_as_complex(Let _let) {
@@ -82,7 +82,7 @@ THICC_NODISCARD MutableComplex array_as_complex(Let _let) {
 }
 
 THICC_NODISCARD MutableComplex object_as_complex(Let _let) {
-  Let conversion_value = member(_let, move_string("complex_type"));
+  Let conversion_value = member(_let, move_string(string_literal("complex")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);

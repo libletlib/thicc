@@ -43,12 +43,12 @@ extern "C" {
 #include "thicc_function.h"
 
 THICC_NODISCARD MutableSize object_size(ImmutableObject _object) {
-  return array_length(((Root) _object)->members.value.array_type[0].value.array_type);
+  return ((Root) _object)->members.value.array_type.array[0].value.array_type.length;
 }
 
 THICC_NODISCARD MutableComparison object_compare(ImmutableObject _left, ImmutableObject _right) {
   MutableArray left_keys, right_keys;
-  MutableSize  left_size, right_size, index = 0;
+  MutableSize  index = 0;
 
   if (!_left && !_right)
 	return THICC_EQUAL;
@@ -57,20 +57,18 @@ THICC_NODISCARD MutableComparison object_compare(ImmutableObject _left, Immutabl
   if (!_left)
 	return THICC_RIGHT_GREATER;
 
-  left_keys	 = ((Root) _left)->members.value.array_type[0].value.array_type;
-  right_keys = ((Root) _right)->members.value.array_type[0].value.array_type;
-  left_size	 = array_length(left_keys);
-  right_size = array_length(right_keys);
+  left_keys	 = root_keys_from_pointer(_left);
+  right_keys = root_keys_from_pointer(_right);
 
-  if (left_size > right_size)
+  if (left_keys.length > right_keys.length)
 	return THICC_LEFT_GREATER;
-  if (right_size > left_size)
+  if (right_keys.length > left_keys.length)
 	return THICC_RIGHT_GREATER;
 
-  for (; index < left_size; ++index) {
-	Comparison key_comparison	= compare(left_keys[index], right_keys[index]);
-	Comparison value_comparison = compare(((Root) _left)->members.value.array_type[1].value.array_type[index],
-										  ((Root) _right)->members.value.array_type[1].value.array_type[index]);
+  for (; index < left_keys.length; ++index) {
+	Comparison key_comparison = compare(left_keys.array[index], right_keys.array[index]);
+	Comparison value_comparison =
+		compare(root_values_from_pointer(_left).array[index], root_values_from_pointer(_right).array[index]);
 	if (key_comparison)
 	  return key_comparison;
 	if (value_comparison)
@@ -114,17 +112,19 @@ THICC_NODISCARD MutableObject object_compose_list(Size _size, va_list _list) {
   value = array_allocate(length);
 
   for (; index < length; ++index) {
-	key[index]	 = let_copy(*va_arg(_list, Let*));
-	value[index] = let_copy(*va_arg(_list, Let*));
+	key.array[index]   = let_copy(*va_arg(_list, Let*));
+	value.array[index] = let_copy(*va_arg(_list, Let*));
   }
 
+  key.length = length;
+  value.length = length;
   let_key	= move_array(key);
   let_value = move_array(value);
 
-  buffer	= array_allocate(3);
-  buffer[0] = let_key;
-  buffer[1] = let_value;
-  buffer[2] = let_empty();
+  buffer		  = array_allocate(2);
+  buffer.array[0] = let_key;
+  buffer.array[1] = let_value;
+  buffer.length   = 2;
 
   root->members = move_array(buffer);
   return root;

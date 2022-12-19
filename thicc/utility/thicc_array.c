@@ -38,36 +38,24 @@ extern "C" {
 #include "thicc_array.h"
 #include "../core/thicc_interface.h"
 #include "../core/thicc_memory.h"
+#include "../core/thicc_struct_array.h"
 #include "../core/thicc_struct_var.h"
-#include "thicc_comparison.h"
 #include "thicc_math.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-THICC_NODISCARD MutableSize array_length(ImmutableArray _array) {
+THICC_NODISCARD MutableComparison array_compare(Array _left, Array _right) {
   MutableSize index = 0;
-  if (array_is_empty(_array))
-	return 0;
-  for (;; ++index)
-	if (let_is_empty(_array[index]))
-	  return index;
-}
-
-THICC_NODISCARD MutableComparison array_compare(ImmutableArray _left, ImmutableArray _right) {
-  Size		  left_size	 = array_length(_left);
-  Size		  right_size = array_length(_right);
-  MutableSize index		 = 0;
 
   if (array_is_empty(_left) && array_is_empty(_right))
 	return THICC_EQUAL;
-  if (left_size > right_size)
+  if (_left.length > _right.length)
 	return THICC_LEFT_GREATER;
-  if (right_size > left_size)
+  if (_right.length > _left.length)
 	return THICC_RIGHT_GREATER;
 
-  for (; index < left_size; ++index) {
-	Comparison comparison = compare(_left[index], _right[index]);
+  for (; index < _left.length; ++index) {
+	Comparison comparison = compare(_left.array[index], _right.array[index]);
 	if (comparison != THICC_EQUAL)
 	  return comparison;
   }
@@ -75,21 +63,29 @@ THICC_NODISCARD MutableComparison array_compare(ImmutableArray _left, ImmutableA
   return THICC_EQUAL;
 }
 
-THICC_NODISCARD static MutableComparison array_compare_n(ImmutableArray _left, ImmutableArray _right, Size _n) {
-  Size		  left_size	 = array_length(_left);
-  Size		  right_size = array_length(_right);
-  MutableSize index		 = 0, limit;
+THICC_NODISCARD MutableArray array_copy(Array _original) {
+  MutableArray buffer = array_allocate(_original.length);
+  MutableSize  index  = 0;
+  for (; index < _original.length; ++index)
+	buffer.array[index] = let_copy(_original.array[index]);
+  buffer.length = _original.length;
+  return buffer;
+}
+
+THICC_NODISCARD static MutableComparison array_compare_n(Array _left, Size _left_offset, Array _right, Size _n) {
+  MutableSize index		  = 0, limit;
+  Size		  left_length = _left.length - _left_offset;
 
   if (array_is_empty(_left) && array_is_empty(_right))
 	return THICC_EQUAL;
-  if (left_size > right_size)
+  if (left_length > _right.length)
 	return THICC_LEFT_GREATER;
-  if (right_size > left_size)
+  if (_right.length > left_length)
 	return THICC_RIGHT_GREATER;
 
-  limit = THICC_MIN(_n, left_size);
+  limit = THICC_MIN(_n, left_length);
   for (; index < limit; ++index) {
-	Comparison comparison = compare(_left[index], _right[index]);
+	Comparison comparison = compare(_left.array[index], _right.array[index]);
 	if (comparison != THICC_EQUAL)
 	  return comparison;
   }
@@ -97,187 +93,173 @@ THICC_NODISCARD static MutableComparison array_compare_n(ImmutableArray _left, I
   return THICC_EQUAL;
 }
 
-THICC_NODISCARD MutableArray array_copy(ImmutableArray _original) {
-  MutableSize  original_length = array_length(_original);
-  MutableArray buffer		   = array_allocate(original_length);
-  MutableSize  index		   = 0;
-  for (; index < original_length; ++index)
-	buffer[index] = let_copy(_original[index]);
-  buffer[original_length] = let_empty();
-  return buffer;
-}
-
-THICC_NODISCARD MutableArray array_remove_subarray(ImmutableArray _original, ImmutableArray _subarray) {
-  Size		   size			   = array_length(_original);
-  Size		   subarray_length = array_length(_subarray);
-  MutableArray buffer		   = array_allocate(size);
-  MutableSize  index		   = 0;
-  MutableSize  jindex		   = 0;
-  for (; jindex < size; ++index, ++jindex) {
-	if (array_compare_n(_original + index, _subarray, subarray_length))
-	  jindex += subarray_length;
-	else
-	  buffer[index] = _original[jindex];
+THICC_NODISCARD MutableArray array_remove_subarray(Array _original, Array _subarray) {
+  MutableArray buffer = array_allocate(_original.length);
+  MutableSize  index  = 0;
+  MutableSize  jindex = 0;
+  MutableSize   kindex = 0;
+  for (; jindex < _original.length; ++index, ++jindex) {
+	if (array_compare_n(_original, index, _subarray, _subarray.length))
+	  jindex += _subarray.length;
+	else {
+	  buffer.array[index] = _original.array[jindex];
+	  ++kindex;
+	}
   }
-  buffer[index] = let_empty();
+  buffer.length = kindex;
   return buffer;
 }
 
-THICC_NODISCARD MutableArray array_filter_and(ImmutableArray _left, ImmutableArray _right) {
-  Size		   left_length	   = array_length(_left);
-  Size		   right_length	   = array_length(_right);
-  MutableArray buffer		   = array_allocate(left_length + right_length);
-  Size		   shortest_length = THICC_MIN(left_length, right_length);
+THICC_NODISCARD MutableArray array_filter_and(Array _left, Array _right) {
+  Size		   shortest_length = THICC_MIN(_left.length, _right.length);
+  MutableArray buffer		   = array_allocate(shortest_length);
   MutableSize  index		   = 0;
   for (; index < shortest_length; ++index)
-	if (equal(_left[index], _right[index]))
-	  buffer[index] = let_copy(_left[index]);
-  buffer[index] = let_empty();
+	if (equal(_left.array[index], _right.array[index]))
+	  buffer.array[index] = let_copy(_left.array[index]);
+  buffer.length = shortest_length;
   return buffer;
 }
 
-THICC_NODISCARD MutableArray array_filter_or(ImmutableArray _left, ImmutableArray _right) {
-  Size		   buffer_length = array_length(_left);
-  Size		   filter_length = array_length(_right);
-  MutableArray buffer		 = array_allocate(buffer_length);
+THICC_NODISCARD MutableArray array_filter_or(Array _left, Array _right) {
+  MutableArray buffer = array_allocate(_left.length);
+  MutableSize  index = 0, jindex = 0, kindex = 0;
+  for (; index < _left.length; ++index) {
+	for (; jindex < _right.length; ++jindex) {
+	  if (not_equal(_left.array[index], _right.array[jindex])) {
+		buffer.array[index] = let_copy(_left.array[index]);
+		++kindex;
+	  }
+	}
+  }
+  buffer.length = kindex;
+  return buffer;
+}
+
+THICC_NODISCARD MutableArray array_filter_xor(Array _left, Array _right) {
+  MutableArray buffer		   = array_allocate(_left.length + _right.length);
+  Size		   shortest_length = THICC_MIN(_left.length, _right.length);
+  Size		   longest_length  = THICC_MAX(_left.length, _right.length);
+  Var*		   longer_pointer  = THICC_LONGER_POINTER(_left.length, _left.array, _right.length, _right.array);
   MutableSize  index = 0, jindex = 0;
-  for (; index < buffer_length; ++index)
-	for (; jindex < filter_length; ++jindex)
-	  if (not_equal(_left[index], _right[jindex]))
-		buffer[index] = let_copy(_left[index]);
-  buffer[index] = let_empty();
-  return buffer;
-}
-
-THICC_NODISCARD MutableArray array_filter_xor(ImmutableArray _left, ImmutableArray _right) {
-  Size			 left_length	 = array_length(_left);
-  Size			 right_length	 = array_length(_right);
-  MutableArray	 buffer			 = array_allocate(left_length + right_length + 1);
-  Size			 shortest_length = THICC_MIN(left_length, right_length);
-  Size			 longest_length	 = THICC_MAX(left_length, right_length);
-  ImmutableArray longer_pointer	 = THICC_LONGER_POINTER(left_length, _left, right_length, _right);
-  MutableSize	 index = 0, jindex = 0;
   for (; index < longest_length; ++index) {
-	if (index < shortest_length && not_equal(_left[index], _right[jindex])) {
-	  buffer[jindex] = let_copy(_left[index]);
+	if (index < shortest_length && not_equal(_left.array[index], _right.array[jindex])) {
+	  buffer.array[jindex] = let_copy(_left.array[index]);
 	  ++jindex;
-	  buffer[jindex] = let_copy(_right[index]);
+	  buffer.array[jindex] = let_copy(_right.array[index]);
 	  ++jindex;
 	} else if (index >= shortest_length) {
-	  buffer[jindex] = let_copy(longer_pointer[index]);
+	  buffer.array[jindex] = let_copy(longer_pointer[index]);
 	  ++jindex;
 	}
   }
-  buffer[index] = let_empty();
+  buffer.length = jindex;
   return buffer;
 }
 
-THICC_NODISCARD MutableArray array_map_bit_not(ImmutableArray _array) {
-  Size		   length = array_length(_array);
-  MutableSize  index  = 0;
-  MutableArray copy	  = array_allocate(length + 1);
-  for (; index < length; ++index)
-	copy[index] = bit_not(_array[index]);
+THICC_NODISCARD MutableArray array_map_bit_not(Array _array) {
+  MutableSize  index = 0;
+  MutableArray copy	 = array_allocate(_array.length);
+  for (; index < _array.length; ++index)
+	copy.array[index] = bit_not(_array.array[index]);
+  copy.length = index;
   return copy;
 }
 
-THICC_NODISCARD MutableArray array_map_bit_complement(ImmutableArray _array) {
-  Size		   length = array_length(_array);
-  MutableSize  index  = 0;
-  MutableArray copy	  = array_allocate(length + 1);
-  for (; index < length; ++index)
-	copy[index] = bit_complement(_array[index]);
+THICC_NODISCARD MutableArray array_map_bit_complement(Array _array) {
+  MutableSize  index = 0;
+  MutableArray copy	 = array_allocate(_array.length);
+  for (; index < _array.length; ++index)
+	copy.array[index] = bit_complement(_array.array[index]);
+  copy.length = index;
   return copy;
 }
 
-THICC_NODISCARD MutableArray array_map_positive(ImmutableArray _array) {
-  Size		   length = array_length(_array);
-  MutableSize  index  = 0;
-  MutableArray copy	  = array_allocate(length + 1);
-  for (; index < length; ++index)
-	copy[index] = positive(_array[index]);
+THICC_NODISCARD MutableArray array_map_positive(Array _array) {
+  MutableSize  index = 0;
+  MutableArray copy	 = array_allocate(_array.length);
+  for (; index < _array.length; ++index)
+	copy.array[index] = positive(_array.array[index]);
+  copy.length = index;
   return copy;
 }
 
-THICC_NODISCARD MutableArray array_map_negative(ImmutableArray _array) {
-  Size		   length = array_length(_array);
-  MutableSize  index  = 0;
-  MutableArray copy	  = array_allocate(length + 1);
-  for (; index < length; ++index)
-	copy[index] = negative(_array[index]);
+THICC_NODISCARD MutableArray array_map_negative(Array _array) {
+  MutableSize  index = 0;
+  MutableArray copy	 = array_allocate(_array.length);
+  for (; index < _array.length; ++index)
+	copy.array[index] = negative(_array.array[index]);
+  copy.length = index;
   return copy;
 }
 
-THICC_NODISCARD MutableArray array_zip(ImmutableArray _left, ImmutableArray _right) {
-  Size			 left_length  = array_length(_left);
-  Size			 right_length = array_length(_right);
-  MutableSize	 max, min, index = 0;
-  MutableArray	 result;
-  ImmutableArray longer_pointer = THICC_LONGER_POINTER(left_length, _left, right_length, _right);
+THICC_NODISCARD MutableArray array_zip(Array _left, Array _right) {
+  MutableSize  max, min, index = 0;
+  MutableArray result;
+  Var*		   longer_pointer = THICC_LONGER_POINTER(_left.length, _left.array, _right.length, _right.array);
 
-  if (left_length > right_length) {
-	max = left_length;
-	min = right_length;
-  } else if (left_length < right_length) {
-	max = right_length;
-	min = left_length;
+  if (_left.length > _right.length) {
+	max = _left.length;
+	min = _right.length;
+  } else if (_left.length < _right.length) {
+	max = _right.length;
+	min = _left.length;
   } else {
-	max = left_length;
-	min = left_length;
+	max = _left.length;
+	min = _left.length;
   }
 
   result = array_allocate(max + 1);
 
   for (; index < max; ++index) {
 	if (index < min) {
-	  result[index] = array_of(2, &_left[index], &_right[index]);
+	  result.array[index] = array_of(2, &_left.array[index], &_right.array[index]);
 	} else {
-	  result[index] = array_of(1, &longer_pointer[index]);
+	  result.array[index] = array_of(1, &longer_pointer[index]);
 	}
   }
-
-  result[max] = let_empty();
+  result.length = max;
   return result;
 }
 
-THICC_NODISCARD Var array_element_at(ImmutableArray _array, Integer _index) {
-  Integer size = (Integer) array_length(_array);
-  if (_index >= 0l && _index < size)
-	return _array[_index];
-  if (_index >= size)
-	return _array[size];
-  return _array[labs(_index) > size ? 0l : size + _index];
+THICC_NODISCARD Var array_element_at(Array _array, Integer _index) {
+  Integer array_length = (Integer) _array.length - 1;
+
+  if (_index >= 0l && _index < array_length)
+	return _array.array[_index];
+  if (_index >= array_length)
+	return _array.array[array_length];
+  return _array.array[THICC_ABS(_index) > array_length ? 0l : array_length + _index];
 }
 
-THICC_NODISCARD MutableArray array_concatenate(ImmutableArray _left, ImmutableArray _right) {
-  Size		   left_length	= array_length(_left);
-  Size		   right_length = array_length(_right);
-  MutableArray buffer		= array_allocate(left_length + right_length + 1);
+THICC_NODISCARD MutableArray array_concatenate(Array _left, Array _right) {
+  Size length = _left.length + _right.length;
   MutableSize  index = 0, jindex = 0;
-  for (; index < left_length; ++index)
-	buffer[index] = let_copy(_left[index]);
-  for (; jindex < right_length; ++index, ++jindex)
-	buffer[index] = let_copy(_right[jindex]);
-  buffer[left_length + right_length + 1] = let_empty();
+  MutableArray buffer = array_allocate(length);
+  for (; index < _left.length; ++index)
+	buffer.array[index] = let_copy(_left.array[index]);
+  for (; jindex < _right.length; ++index, ++jindex)
+	buffer.array[index] = let_copy(_right.array[jindex]);
+  buffer.length = length;
   return buffer;
 }
 
 THICC_NODISCARD MutableArray array_with_self_reference_from_list(Let _self, Size _size, va_list _list) {
-  MutableArray buffer = array_allocate(_size + 2);
+  MutableArray buffer = array_allocate(_size + 1);
   MutableSize  index  = 1;
-  buffer[0]			  = let_copy(_self);
+  buffer.array[0]	  = let_copy(_self);
   for (; index < _size; ++index)
-	buffer[index] = let_copy(*va_arg(_list, Let*));
-  buffer[index] = let_empty();
+	buffer.array[index] = let_copy(*va_arg(_list, Let*));
+  buffer.length = _size + 1;
   return buffer;
 }
 
 THICC_NODISCARD MutableArray array_from_list(Size _size, va_list _list) {
-  MutableArray buffer = array_allocate(_size + 1);
+  MutableArray buffer = array_allocate(_size);
   MutableSize  index  = 0;
   for (; index < _size; ++index)
-	buffer[index] = let_copy(*va_arg(_list, Let*));
-  buffer[index] = let_empty();
+	buffer.array[index] = let_copy(*va_arg(_list, Let*));
+  buffer.length = _size;
   return buffer;
 }
 
@@ -288,14 +270,6 @@ THICC_NODISCARD MutableArray array_from_elements(Size _size, ...) {
   buffer = array_from_list(_size, list);
   va_end(list);
   return buffer;
-}
-
-THICC_NODISCARD MutableArray array_empty(void) {
-  return THICC_NAUGHT;
-}
-
-THICC_NODISCARD MutableBoolean array_is_empty(ImmutableArray _array) {
-  return _array == THICC_NAUGHT || let_is_empty(*_array);
 }
 
 #ifdef __cplusplus

@@ -69,7 +69,7 @@ THICC_NODISCARD Var complex_sum(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var string_sum(Let _left, Let _right) {
-  return move_string(string_concatenate(string_view(_left), string_view(_right)));
+  return move_string(string_concatenate(_left.value.string_type, _right.value.string_type));
 }
 
 THICC_NODISCARD Var function_sum(Let _left, Let _right) {
@@ -82,11 +82,11 @@ THICC_NODISCARD Var function_sum(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var array_sum(Let _left, Let _right) {
-  return move_array(array_concatenate(array_view(_left), array_view(_right)));
+  return move_array(array_concatenate(_left.value.array_type, _right.value.array_type));
 }
 
 THICC_NODISCARD Var object_sum(Let _left, Let _right) {
-  Let property_name = move_string("+");
+  Let property_name = move_string(string_literal("+"));
   Let property		= member(_left, property_name);
   Var result;
 

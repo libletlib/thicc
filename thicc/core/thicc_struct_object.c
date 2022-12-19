@@ -43,32 +43,32 @@ THICC_NODISCARD Root root(Let _object) {
   return (Root) _object.value.object_type;
 }
 
-THICC_NODISCARD Array root_members(Let _object) {
-  return array_view(root(_object)->members);
+THICC_NODISCARD MutableArray root_members(Let _object) {
+  return root(_object)->members.value.array_type;
 }
 
-THICC_NODISCARD Array root_keys(Let _object) {
-  return array_view(root_members(_object)[0]);
+THICC_NODISCARD MutableArray root_keys(Let _object) {
+  return root_members(_object).array[0].value.array_type;
 }
 
-THICC_NODISCARD Array root_values(Let _object) {
-  return array_view(root_members(_object)[1]);
+THICC_NODISCARD MutableArray root_values(Let _object) {
+  return root_members(_object).array[1].value.array_type;
 }
 
 THICC_NODISCARD Root root_from_pointer(ImmutableObject _object) {
   return (Root) _object;
 }
 
-THICC_NODISCARD Array root_members_from_pointer(ImmutableObject _object) {
-  return array_view(root_from_pointer(_object)->members);
+THICC_NODISCARD MutableArray root_members_from_pointer(ImmutableObject _object) {
+  return root_from_pointer(_object)->members.value.array_type;
 }
 
-THICC_NODISCARD Array root_keys_from_pointer(ImmutableObject _object) {
-  return array_view(root_members_from_pointer(_object)[0]);
+THICC_NODISCARD MutableArray root_keys_from_pointer(ImmutableObject _object) {
+  return root_members_from_pointer(_object).array[0].value.array_type;
 }
 
-THICC_NODISCARD Array root_values_from_pointer(ImmutableObject _object) {
-  return array_view(root_members_from_pointer(_object)[1]);
+THICC_NODISCARD MutableArray root_values_from_pointer(ImmutableObject _object) {
+  return root_members_from_pointer(_object).array[1].value.array_type;
 }
 
 #ifdef __cplusplus

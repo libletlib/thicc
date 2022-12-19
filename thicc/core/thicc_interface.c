@@ -42,6 +42,7 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_rank.h"
 #include "../utility/thicc_string.h"
+#include "thicc_struct_array.h"
 #include "thicc_struct_behaviour.h"
 #include "thicc_struct_object.h"
 #include "thicc_struct_var.h"
@@ -122,7 +123,7 @@ THICC_NODISCARD Var member(Let _object, Let _member) {
 
   keys	 = let_array(root_keys(_object));
   values = let_array(root_values(_object));
-  size	 = array_length(array_view(keys));
+  size	 = length(keys);
 
   for (; index < size; ++index) {
 	Let key = index_of(keys, let_natural(index));
@@ -191,12 +192,12 @@ void unlet_if_required(Let _let) {
 	unlet(_let);
 }
 
-THICC_NODISCARD String string_view(Let _let) {
-  return _let.value.string_type;
+THICC_NODISCARD Character* string_view(Let _let) {
+  return _let.value.string_type.string;
 }
 
-THICC_NODISCARD Array array_view(Let _let) {
-  return _let.value.array_type;
+THICC_NODISCARD Var* array_view(Let _let) {
+  return _let.value.array_type.array;
 }
 
 THICC_NODISCARD Object object_view(Let _let) {
@@ -479,9 +480,9 @@ THICC_NODISCARD MutableSize length(Let _let) {
 	case complex_rank:
 	  return 2;
 	case string_rank:
-	  return string_length(string_view(_let));
+	  return string_length(_let.value.string_type);
 	case array_rank:
-	  return array_length(array_view(_let));
+	  return _let.value.array_type.length;
 	case object_rank:
 	  return object_size(object_view(_let));
 	default:

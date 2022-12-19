@@ -99,16 +99,16 @@ THICC_NODISCARD MutableComparison complex_comparison(Let _left, Let _right) {
 THICC_NODISCARD MutableComparison string_comparison(Let _left, Let _right) {
   if (!is_string(_left)) {
 	MutableString	  string = as_string(_left);
-	MutableComparison result = string_compare(string, string_view(_right));
-	free(string);
+	MutableComparison result = string_compare(string, _right.value.string_type);
+	free(string.string);
 	return result;
   } else if (!is_string(_right)) {
 	MutableString	  string = as_string(_right);
-	MutableComparison result = string_compare(string_view(_left), string);
-	free(string);
+	MutableComparison result = string_compare(_left.value.string_type, string);
+	free(string.string);
 	return result;
   } else {
-	return string_compare(string_view(_left), string_view(_right));
+	return string_compare(_left.value.string_type, _right.value.string_type);
   }
 }
 
@@ -119,11 +119,11 @@ THICC_NODISCARD MutableComparison function_comparison(Let _left, Let _right) {
 }
 
 THICC_NODISCARD MutableComparison array_comparison(Let _left, Let _right) {
-  return array_compare(array_view(_left), array_view(_right));
+  return array_compare(_left.value.array_type, _right.value.array_type);
 }
 
 THICC_NODISCARD MutableComparison object_comparison(Let _left, Let _right) {
-  Let property_name = move_string("<=>");
+  Let property_name = move_string(string_literal("<=>"));
   Let property		= member(_left, property_name);
   Var result;
 

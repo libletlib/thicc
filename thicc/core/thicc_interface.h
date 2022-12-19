@@ -48,8 +48,8 @@ void		   unlet(Let);
 void		   unlet_if_required(Let);
 Var			   empty_function(Let, Let);
 
-String string_view(Let);
-Array  array_view(Let);
+Character* string_view(Let);
+Var*   array_view(Let);
 Object object_view(Let);
 
 MutableBoolean	 as_boolean(Let);

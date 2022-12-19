@@ -75,11 +75,11 @@ THICC_NODISCARD MutableArray function_as_array(Let _let) {
 }
 
 THICC_NODISCARD MutableArray array_as_array(Let _let) {
-  return array_copy(array_view(_let));
+  return array_copy(_let.value.array_type);
 }
 
 THICC_NODISCARD MutableArray object_as_array(Let _let) {
-  Let conversion_value = member(_let, move_string("array_type"));
+  Let conversion_value = member(_let, move_string(string_literal("array")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let		   temporary = object_method_invoke(_let, conversion_value, 2, &_let);
@@ -102,7 +102,7 @@ THICC_NODISCARD MutableArray object_as_array(Let _let) {
   if (object_size(object_view(_let)) > 0)
 	return array_copy(root_values(_let));
 
-  return 0;
+  return array_empty();
 }
 
 #ifdef __cplusplus

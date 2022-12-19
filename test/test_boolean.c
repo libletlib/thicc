@@ -58,7 +58,7 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(value, let_integer(1)));
   assert(equal(value, let_real(1.0)));
   assert(equal(value, let_complex(cmplx(1.0, 0.0))));
-  assert(equal(string, move_string("true")));
+  assert(equal(string, move_string(string_literal("true"))));
   assert(equal(value, let_function(foo)));
   assert(equal(array, comparison_array));
   assert(equal(object, comparison_object));

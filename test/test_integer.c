@@ -58,7 +58,7 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(value, let_integer(1)));
   assert(equal(value, let_real(1)));
   assert(equal(value, let_complex(cmplx(1, 0))));
-  assert(equal(string, move_string("1")));
+  assert(equal(string, move_string(string_literal("1"))));
   assert(equal(value, let_function(foo)));
   assert(equal(array, comparison_array));
   assert(equal(object, comparison_object));
@@ -88,7 +88,7 @@ THICC_NODISCARD static int operations(void) {
   assert(equal(modulo(left, right), let_integer(0)));
   assert(equal(negative(left), let_integer(-1)));
   assert(equal(positive(left), let_integer(1)));
-  assert(equal(product(left, right), move_string("1")));
+  assert(equal(product(left, right), move_string(string_literal("1"))));
   assert(equal(quotient(left, right), let_integer(1)));
   assert(equal(sum(left, right), let_integer(2)));
 

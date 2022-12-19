@@ -40,27 +40,23 @@ extern "C" {
 
 #include "thicc_math_prelude.h"
 
-MutableSize		  string_length(ImmutableString);
-MutableString	  string_copy(ImmutableString);
-MutableString	  string_copy_slice(ImmutableString, Size, Size);
-MutableComparison string_compare(ImmutableString, String);
-MutableArray	  string_tokenise(MutableString, ImmutableString);
-MutableString	  string_filter_and(ImmutableString, ImmutableString);
-MutableString	  string_filter_or(ImmutableString, ImmutableString);
-MutableString	  string_filter_xor(ImmutableString, ImmutableString);
-MutableString	  string_map_bit_not(ImmutableString);
-MutableString	  string_map_bit_complement(ImmutableString);
-MutableString	  string_map_positive(ImmutableString);
-MutableString	  string_map_negative(ImmutableString);
+MutableString	  string_copy(String);
+MutableString	  string_copy_slice(String, Size, Size);
+MutableComparison string_compare(String, String);
+MutableArray	  string_tokenise(MutableString, String);
+MutableString	  string_filter_and(String, String);
+MutableString	  string_filter_or(String, String);
+MutableString	  string_filter_xor(String, String);
+MutableString	  string_map_bit_not(String);
+MutableString	  string_map_bit_complement(String);
+MutableString	  string_map_positive(String);
+MutableString	  string_map_negative(String);
 MutableString	  string_map_increment(MutableString);
 MutableString	  string_map_decrement(MutableString);
-MutableCharacter  string_character_at(ImmutableString, Integer);
-Var				  string_to_number(ImmutableString);
-MutableString	  string_concatenate(ImmutableString, ImmutableString);
-String			  string_find_substring(ImmutableString, ImmutableString);
-MutableString	  string_remove_substring(ImmutableString, ImmutableString);
-MutableString	  string_empty(void);
-MutableBoolean	  string_is_empty(String);
+MutableCharacter  string_character_at(String, Integer);
+Var				  string_to_number(String);
+MutableString	  string_concatenate(String, String);
+MutableString	  string_remove_substring(String, String);
 MutableString	  string_from_characters(Size, ...);
 MutableString	  string_from_signed_characters(Size, ...);
 MutableString	  string_from_unsigned_characters(Size, ...);
@@ -72,12 +68,12 @@ MutableString	  string_from_natural(Natural);
 MutableString	  string_from_integer(Integer);
 MutableString	  string_from_real(Real);
 MutableString	  string_from_complex(Complex);
-MutableString	  string_from_array(ImmutableArray);
+MutableString	  string_from_array(Array);
 MutableString	  string_from_object(ImmutableObject);
-MutableNatural	  string_to_natural(ImmutableString);
-MutableInteger	  string_to_integer(ImmutableString);
-MutableReal		  string_to_real(ImmutableString);
-MutableComplex	  string_to_complex(ImmutableString);
+MutableNatural	  string_to_natural(String);
+MutableInteger	  string_to_integer(String);
+MutableReal		  string_to_real(String);
+MutableComplex	  string_to_complex(String);
 
 #ifdef __cplusplus
 }
