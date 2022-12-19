@@ -34,7 +34,7 @@
 #ifndef THICC_THICC_RANK_H
 #define THICC_THICC_RANK_H
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableBoolean rank_is_character(Let);
 MutableBoolean rank_is_numeric(Let);

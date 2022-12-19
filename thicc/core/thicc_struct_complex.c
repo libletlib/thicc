@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-#include "thicc_struct_complex.h"
+#include <thicc_struct_complex.h>
 
 THICC_NODISCARD MutableComplex cmplx(Real _real, Real _imaginary) {
   MutableComplex result;

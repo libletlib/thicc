@@ -32,8 +32,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include "thicc_rank.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 
 THICC_NODISCARD MutableBoolean rank_is_character(Let _let) {
   switch (rank(_let)) {

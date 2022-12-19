@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_as_object.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 #include "../utility/thicc_object.h"
 
 THICC_NODISCARD MutableObject boolean_as_object(THICC_MAYBE_UNUSED Let _let) {

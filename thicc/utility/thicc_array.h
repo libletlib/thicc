@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 #include <stdarg.h>
 
 MutableComparison array_compare(Array, Array);

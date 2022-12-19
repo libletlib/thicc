@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 #include "thicc_object.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
 #include "../core/thicc_memory.h"
 #include "../core/thicc_struct_object.h"
 #include "thicc_array.h"

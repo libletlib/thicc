@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "thicc_struct_var.h"
+#include <thicc_struct_var.h>
 
 struct thicc_struct_object {
   Var members;

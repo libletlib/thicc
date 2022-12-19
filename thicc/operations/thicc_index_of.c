@@ -36,14 +36,14 @@ extern "C" {
 #endif
 
 #include "thicc_index_of.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
+#include <stdlib.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_character.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
-#include <stdlib.h>
 
 THICC_NODISCARD Var boolean_index_of(Let _let, THICC_MAYBE_UNUSED Let _index) {
   return let_boolean(_let.value.boolean_type);

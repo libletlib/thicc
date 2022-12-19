@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableString string_allocate(Size);
 MutableArray  array_allocate(Size);

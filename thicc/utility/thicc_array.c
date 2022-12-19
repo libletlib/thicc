@@ -36,13 +36,13 @@ extern "C" {
 #endif
 
 #include "thicc_array.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_memory.h"
-#include "../core/thicc_struct_array.h"
-#include "../core/thicc_struct_var.h"
-#include "thicc_math.h"
+#include <thicc_interface.h>
+#include <thicc_struct_array.h>
+#include <thicc_struct_var.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../core/thicc_memory.h"
+#include "thicc_math.h"
 
 THICC_NODISCARD MutableComparison array_compare(Array _left, Array _right) {
   MutableSize index = 0;

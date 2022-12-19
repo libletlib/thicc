@@ -36,8 +36,8 @@
 extern "C" {
 #endif
 
+#include <thicc_interface.h>
 #include "thicc_struct_object.h"
-#include "thicc_interface.h"
 
 THICC_NODISCARD Root root(Let _object) {
   return (Root) _object.value.object_type;

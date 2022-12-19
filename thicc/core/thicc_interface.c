@@ -35,17 +35,15 @@
 extern "C" {
 #endif
 
-#include "thicc_interface.h"
+#include <thicc_interface.h>
+#include <thicc_struct_array.h>
+#include <thicc_struct_var.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_comparison.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_rank.h"
-#include "../utility/thicc_string.h"
-#include "thicc_struct_array.h"
-#include "thicc_struct_behaviour.h"
 #include "thicc_struct_object.h"
-#include "thicc_struct_var.h"
 #include <stdarg.h>
 
 #define select_operator(_left, _left_rank, _operator, _right, _right_rank)                       \

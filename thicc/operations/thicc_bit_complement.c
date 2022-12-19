@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_bit_complement.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_complex.h"
 #include "../utility/thicc_function.h"

@@ -38,8 +38,8 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
-#include "../core/thicc_struct_complex.h"
+#include <thicc_prelude.h>
+#include <thicc_struct_complex.h>
 #include <math.h>
 
 #undef THICC_ABS

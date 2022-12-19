@@ -85,11 +85,6 @@ Var indirection(Let);
 Var negative(Let);
 Var positive(Let);
 
-Var pre_increment(Let);
-Var pre_decrement(Let);
-Var post_increment(Let);
-Var post_decrement(Let);
-
 MutableComparison compare(Let, Let);
 MutableBoolean	  equal(Let, Let);
 MutableBoolean	  greater_than(Let, Let);

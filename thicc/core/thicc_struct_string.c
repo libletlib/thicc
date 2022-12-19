@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-#include "thicc_struct_string.h"
+#include <thicc_struct_string.h>
 #include <string.h>
 
 THICC_NODISCARD MutableString string_empty(void) {

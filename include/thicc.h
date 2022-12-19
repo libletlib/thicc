@@ -34,8 +34,8 @@
 #ifndef THICC_THICC_H
 #define THICC_THICC_H
 
-#include "../thicc/core/thicc_interface.h"
-#include "../thicc/core/thicc_struct_var.h"
+#include "thicc_interface.h"
+#include "thicc_struct_var.h"
 
 #undef st
 #undef nd

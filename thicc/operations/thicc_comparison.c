@@ -36,14 +36,13 @@ extern "C" {
 #endif
 
 #include "thicc_comparison.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
+#include <stdlib.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_math.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 THICC_NODISCARD MutableComparison boolean_comparison(Let _left, Let _right) {
   if (_left.value.boolean_type && !_right.value.boolean_type)

@@ -37,7 +37,7 @@ extern "C" {
 #endif
 
 #include "thicc_character.h"
-#include "../core/thicc_struct_string.h"
+#include <thicc_struct_string.h>
 
 THICC_NODISCARD MutableCharacterPromotedType character_to_number(Character _character) {
   switch (_character) {

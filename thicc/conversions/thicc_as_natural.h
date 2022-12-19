@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableNatural boolean_as_natural(Let);
 MutableNatural character_as_natural(Let);

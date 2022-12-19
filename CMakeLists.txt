@@ -29,6 +29,7 @@ add_custom_target(npm_install ALL
 
 add_library(thicc STATIC ${THICC_HEADERS} ${THICC_SOURCES})
 add_dependencies(thicc npm_install)
+target_include_directories(thicc PRIVATE include)
 IF(NOT WIN32)
     target_link_libraries(thicc PRIVATE m)
 ENDIF()

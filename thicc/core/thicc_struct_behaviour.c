@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-#include "thicc_struct_behaviour.h"
+#include <thicc_struct_behaviour.h>
 #include "../conversions/thicc_as_array.h"
 #include "../conversions/thicc_as_boolean.h"
 #include "../conversions/thicc_as_character.h"

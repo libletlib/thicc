@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-#include "thicc_struct_array.h"
+#include <thicc_struct_array.h>
 
 MutableArray array_empty(void) {
   MutableArray array;

@@ -37,13 +37,11 @@ extern "C" {
 #endif
 
 #include "thicc_memory.h"
-#include "../utility/thicc_array.h"
-#include "thicc_interface.h"
-#include "thicc_struct_array.h"
-#include "thicc_struct_object.h"
-#include "thicc_struct_string.h"
-#include "thicc_struct_var.h"
+#include <thicc_struct_array.h>
+#include <thicc_struct_string.h>
+#include <thicc_interface.h>
 #include <stdlib.h>
+#include "thicc_struct_object.h"
 
 THICC_NODISCARD static void* allocate(Size _size) {
   return calloc(_size, 1);

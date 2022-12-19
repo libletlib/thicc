@@ -32,12 +32,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "thicc_struct_var.h"
+#include <thicc_struct_var.h>
+#include <string.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
-#include "thicc_struct_behaviour.h"
-#include <string.h>
 
 THICC_NODISCARD Var let_init(void) {
   Var let;

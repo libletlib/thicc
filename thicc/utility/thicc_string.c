@@ -37,10 +37,10 @@ extern "C" {
 #endif
 
 #include "thicc_string.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
+#include <thicc_struct_string.h>
 #include "../core/thicc_memory.h"
 #include "../core/thicc_struct_object.h"
-#include "../core/thicc_struct_string.h"
 #include "thicc_array.h"
 #include "thicc_comparison.h"
 #include "thicc_math.h"

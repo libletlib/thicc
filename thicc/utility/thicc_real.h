@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableReal real_byte_and(Real, Real);
 MutableReal real_byte_or(Real, Real);

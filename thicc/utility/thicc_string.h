@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "thicc_math_prelude.h"
+#include <thicc_prelude.h>
 
 MutableString	  string_copy(String);
 MutableString	  string_copy_slice(String, Size, Size);
