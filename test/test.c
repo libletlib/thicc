@@ -50,6 +50,7 @@ int string_test(void);
 int function_test(void);
 int array_test(void);
 int object_test(void);
+int test(void);
 
 THICC_NODISCARD int test(void) {
   assert(boolean_test());
