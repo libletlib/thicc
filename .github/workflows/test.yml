@@ -16,8 +16,6 @@ jobs:
         include:
           - compiler: gcc
             os: ubuntu-latest
-          - compiler: clang
-            os: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
 
