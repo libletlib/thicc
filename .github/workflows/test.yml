@@ -23,6 +23,8 @@ jobs:
             compiler: msvc
           - os: ubuntu-latest
             compiler: msvc
+          - os: macos-latest
+            compiler: gcc
 
     runs-on: ${{ matrix.os }}
 
