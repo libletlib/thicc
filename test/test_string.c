@@ -35,8 +35,7 @@
 extern "C" {
 #endif
 
-#include "../include/thicc.h"
-#include <assert.h>
+#include "test.h"
 
 THICC_NODISCARD static function(foo) {
   return move_string(string_literal("1"));

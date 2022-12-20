@@ -31,10 +31,14 @@ jobs:
                 -DCMAKE_C_STANDARD=${{ matrix.standard }} \
                 $GITHUB_WORKSPACE
 
-      - name: Test
+      - name: Build
         shell: bash
         working-directory: ${{runner.workspace}}/build
         run: |
           cmake --build . --config Debug
-          ./Debug/thicc_test.exe
+
+      - name: Test
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: |
           ctest -VV --output-on-failure -C Debug

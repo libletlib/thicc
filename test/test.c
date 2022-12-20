@@ -36,25 +36,11 @@
 extern "C" {
 #endif
 
-#include <thicc.h>
-#include <assert.h>
-#include <stdlib.h>
+#include "test.h"
 #include <stdio.h>
-
-int boolean_test(void);
-int character_test(void);
-int natural_test(void);
-int integer_test(void);
-int real_test(void);
-int complex_test(void);
-int string_test(void);
-int function_test(void);
-int array_test(void);
-int object_test(void);
-int test(void);
+#include <stdlib.h>
 
 THICC_NODISCARD int test(void) {
-  puts("Starting tests...");
   puts("I: Boolean tests...");
   assert(boolean_test());
   puts("I: Boolean tests OK!");
@@ -85,12 +71,13 @@ THICC_NODISCARD int test(void) {
   puts("X: Object tests...");
   assert(object_test());
   puts("X: Object tests OK!");
-  puts("Tests OK!");
   return 1;
 }
 
 int main(void) {
+  puts("Starting tests...");
   assert(test());
+  puts("Tests OK!");
   return EXIT_SUCCESS;
 }
 

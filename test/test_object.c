@@ -35,9 +35,9 @@
 extern "C" {
 #endif
 
-#include "../include/thicc.h"
-#include "../thicc/core/thicc_struct_object.h"
-#include <assert.h>
+#include "test.h"
+
+MutableArray root_values(Let);
 
 THICC_NODISCARD static int conversions(void) {
   Let value_element = let_integer(1);
