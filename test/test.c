@@ -44,7 +44,7 @@ THICC_NODISCARD int test(void) {
   puts("I: Boolean tests...");
   assert(boolean_test());
   puts("I: Boolean tests OK!");
-  /*puts("II: Character tests...");
+  puts("II: Character tests...");
   assert(character_test());
   puts("II: Character tests OK!");
   puts("III: Natural tests...");
@@ -56,7 +56,7 @@ THICC_NODISCARD int test(void) {
   puts("V: Real tests...");
   assert(real_test());
   puts("V: Real tests OK!");
-  puts("VI: Complex tests...");
+  /*puts("VI: Complex tests...");
   assert(complex_test());
   puts("VI: Complex tests OK!");
   puts("VII: String tests...");
