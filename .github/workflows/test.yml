@@ -11,11 +11,18 @@ jobs:
   test:
     strategy:
       matrix:
+        compiler: [ gcc, msvc, clang ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         standard: [ 90, 99, 11, 17 ]
-        include:
-          - compiler: gcc
-            os: ubuntu-latest
+        exclude:
+          - os: windows-latest
+            compiler: gcc
+          - os: windows-latest
+            compiler: clang
+          - os: macos-latest
+            compiler: msvc
+          - os: ubuntu-latest
+            compiler: msvc
 
     runs-on: ${{ matrix.os }}
 
