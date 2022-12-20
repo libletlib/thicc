@@ -36,4 +36,4 @@ jobs:
         working-directory: ${{runner.workspace}}/build
         run: |
           cmake --build . --config Debug
-          ctest --extra-verbose -C Debug
+          ctest -VV --output-on-failure -C Debug
