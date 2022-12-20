@@ -1,5 +1,7 @@
 # ThicC
 
+[![Tests](https://github.com/libletlib/thicc/actions/workflows/tests.yml/badge.svg)](https://github.com/libletlib/thicc/actions/workflows/tests.yml)
+
 Simple ducktyping in ANSI C/ISO C89. Adheres strictly to the standard
 
 ## Types
