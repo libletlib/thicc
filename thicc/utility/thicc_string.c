@@ -338,6 +338,8 @@ THICC_NODISCARD MutableString string_from_complex(Complex _number) {
   MutableString result;
   sprintf(real_buffer.string, THICC_STRINGIFY(THICC_REAL_FORMAT), _number.real);
   sprintf(imaginary_buffer.string, THICC_STRINGIFY(THICC_IMAGINARY_FORMAT), _number.imaginary);
+  real_buffer.length = string_length(real_buffer);
+  imaginary_buffer.length = string_length(imaginary_buffer);
   result = string_concatenate(real_buffer, imaginary_buffer);
   free(real_buffer.string);
   free(imaginary_buffer.string);
