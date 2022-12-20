@@ -39,7 +39,7 @@ jobs:
                 -DCMAKE_C_STANDARD=${{ matrix.standard }} \
                 $GITHUB_WORKSPACE
 
-      - if: matrix.compiler != clang || matrix.compiler != gcc
+      - if: (matrix.compiler != 'clang') || (matrix.compiler != 'gcc')
         shell: bash
         working-directory: ${{runner.workspace}}/build
         run: |
