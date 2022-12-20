@@ -56,7 +56,7 @@ target_include_directories(thicc_demo PRIVATE include)
 enable_testing()
 add_test(NAME thicc_functionality_test
          COMMAND $<TARGET_FILE:thicc_test>)
-set_tests_properties(thicc_functionality_test PROPERTIES TIMEOUT 30)
+set_tests_properties(thicc_functionality_test PROPERTIES TIMEOUT 10)
 add_test(NAME thicc_demo_test
          COMMAND $<TARGET_FILE:thicc_demo>)
-set_tests_properties(thicc_demo_test PROPERTIES TIMEOUT 30)
+set_tests_properties(thicc_demo_test PROPERTIES TIMEOUT 10)
