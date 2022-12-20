@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_modulo.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_math_prelude.h"
@@ -70,7 +70,7 @@ THICC_NODISCARD Var complex_modulo(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var string_modulo(THICC_MAYBE_UNUSED Let _left, THICC_MAYBE_UNUSED Let _right) {
-  return move_array(string_tokenise(_left.value.string_type, string_view(_right)));
+  return move_array(string_tokenise(_left.value.string_type, _right.value.string_type));
 }
 
 THICC_NODISCARD Var function_modulo(Let _left, Let _right) {
@@ -83,11 +83,11 @@ THICC_NODISCARD Var function_modulo(Let _left, Let _right) {
 }
 
 THICC_NODISCARD Var array_modulo(Let _left, Let _right) {
-  return move_array(array_zip(array_view(_left), array_view(_right)));
+  return move_array(array_zip(_left.value.array_type, _right.value.array_type));
 }
 
 THICC_NODISCARD Var object_modulo(Let _left, Let _right) {
-  Let property_name = move_string("%");
+  Let property_name = move_string(string_literal("%"));
   Let property		= member(_left, property_name);
   Var result;
 

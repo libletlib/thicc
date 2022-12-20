@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableBoolean	  comparison_left_greater(Comparison);
 MutableBoolean	  comparison_right_greater(Comparison);

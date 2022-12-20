@@ -30,19 +30,30 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef THICC_THICC_TEST_H
+#define THICC_THICC_TEST_H
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <thicc_struct_complex.h>
+#include <thicc.h>
+#include <assert.h>
 
-THICC_NODISCARD MutableComplex cmplx(Real _real, Real _imaginary) {
-  MutableComplex result;
-  result.real	   = _real;
-  result.imaginary = _imaginary;
-  return result;
-}
+int boolean_test(void);
+int character_test(void);
+int natural_test(void);
+int integer_test(void);
+int real_test(void);
+int complex_test(void);
+int string_test(void);
+int function_test(void);
+int array_test(void);
+int object_test(void);
+int test(void);
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* THICC_THICC_TEST_H */

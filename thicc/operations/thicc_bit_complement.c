@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_bit_complement.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_complex.h"
 #include "../utility/thicc_function.h"
@@ -85,7 +85,7 @@ THICC_NODISCARD Var array_bit_complement(Let _let) {
 }
 
 THICC_NODISCARD Var object_bit_complement(Let _let) {
-  Let property_name = move_string("~");
+  Let property_name = move_string(string_literal("~"));
   Let property		= member(_let, property_name);
   Var result;
 

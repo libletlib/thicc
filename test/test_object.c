@@ -35,13 +35,13 @@
 extern "C" {
 #endif
 
-#include "../include/thicc.h"
-#include "../thicc/core/thicc_struct_object.h"
-#include <assert.h>
+#include "test.h"
+
+MutableArray root_values(Let);
 
 THICC_NODISCARD static int conversions(void) {
   Let value_element = let_integer(1);
-  Let value_name	= move_string("integer_type");
+  Let value_name	= move_string(string_literal("integer"));
   Let value			= object_of(2, &value_name, &value_element);
   Let comparable	= object_of(2, &value_name, &value_element);
 
@@ -55,7 +55,7 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(cast(value, integer_rank), let_integer(1)));
   assert(equal(cast(value, real_rank), let_real(1)));
   assert(equal(cast(value, complex_rank), let_complex(cmplx(1, 0))));
-  assert(equal(string, move_string("{\n\t\"integer_type\": 1\n}")));
+  assert(equal(string, move_string(string_literal("{\n\t\"integer\": 1\n}"))));
   assert(equal(cast(value, function_rank), let_function(empty_function)));
   assert(equal(array, array_comparable));
   assert(equal(value, comparable));
@@ -92,22 +92,22 @@ THICC_NODISCARD static int operations(void) {
   Let bi_op	  = let_function(bi_operator);
   Let mono_op = let_function(mono_operator);
 
-  Let value_key			 = move_string("integer_type");
-  Let bit_and_key		 = move_string("&");
-  Let bit_complement_key = move_string("~");
-  Let bit_not_key		 = move_string("!");
-  Let bit_or_key		 = move_string("|");
-  Let bit_xor_key		 = move_string("^");
-  Let comparison_key	 = move_string("<=>");
-  Let difference_key	 = move_string("-");
-  Let index_of_key		 = move_string("[]");
-  Let indirection_key	 = move_string("indirection");
-  Let modulo_key		 = move_string("%");
-  Let negative_key		 = move_string("negative");
-  Let positive_key		 = move_string("positive");
-  Let product_key		 = move_string("*");
-  Let quotient_key		 = move_string("+");
-  Let sum_key			 = move_string("/");
+  Let value_key			 = move_string(string_literal("integer"));
+  Let bit_and_key		 = move_string(string_literal("&"));
+  Let bit_complement_key = move_string(string_literal("~"));
+  Let bit_not_key		 = move_string(string_literal("!"));
+  Let bit_or_key		 = move_string(string_literal("|"));
+  Let bit_xor_key		 = move_string(string_literal("^"));
+  Let comparison_key	 = move_string(string_literal("<=>"));
+  Let difference_key	 = move_string(string_literal("-"));
+  Let index_of_key		 = move_string(string_literal("[]"));
+  Let indirection_key	 = move_string(string_literal("indirection"));
+  Let modulo_key		 = move_string(string_literal("%"));
+  Let negative_key		 = move_string(string_literal("negative"));
+  Let positive_key		 = move_string(string_literal("positive"));
+  Let product_key		 = move_string(string_literal("*"));
+  Let quotient_key		 = move_string(string_literal("+"));
+  Let sum_key			 = move_string(string_literal("/"));
 
   Let object = object_of(32,
 						 &value_key,

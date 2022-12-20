@@ -34,13 +34,19 @@
 extern "C" {
 #endif
 
-#include <thicc_struct_complex.h>
+#include <thicc_struct_array.h>
 
-THICC_NODISCARD MutableComplex cmplx(Real _real, Real _imaginary) {
-  MutableComplex result;
-  result.real	   = _real;
-  result.imaginary = _imaginary;
-  return result;
+MutableArray array_empty(void) {
+  MutableArray array;
+  array.array  = THICC_NAUGHT;
+  array.length = 0;
+  return array;
+}
+
+THICC_NODISCARD MutableBoolean array_is_empty(Array _array) {
+  if (_array.array == THICC_NAUGHT || _array.length == 0)
+	return THICC_YES;
+  return THICC_NO;
 }
 
 #ifdef __cplusplus

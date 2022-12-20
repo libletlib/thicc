@@ -30,17 +30,36 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <thicc_struct_complex.h>
+#include <thicc_struct_string.h>
+#include <string.h>
 
-THICC_NODISCARD MutableComplex cmplx(Real _real, Real _imaginary) {
-  MutableComplex result;
-  result.real	   = _real;
-  result.imaginary = _imaginary;
+THICC_NODISCARD MutableString string_empty(void) {
+  MutableString string;
+  string.string = THICC_NAUGHT;
+  string.length = 0;
+  return string;
+}
+
+MutableSize string_length(String _string) {
+  return strlen(_string.string);
+}
+
+MutableString string_literal(MutableCharacter* _literal) {
+  MutableString result;
+  result.string = _literal;
+  result.length = string_length(result);
   return result;
+}
+
+THICC_NODISCARD MutableBoolean string_is_empty(String _string) {
+  if(_string.string == THICC_NAUGHT || _string.length == 0)
+	return THICC_YES;
+  return THICC_NO;
 }
 
 #ifdef __cplusplus

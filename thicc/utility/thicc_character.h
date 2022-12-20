@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 #define THICC_NONNUMERIC ((CharacterPromotedType) 10)
 MutableCharacterPromotedType character_to_number(Character);

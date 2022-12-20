@@ -1,0 +1,65 @@
+name: Test
+
+on:
+  push:
+    branches: [ senpai ]
+  pull_request:
+    branches: [ senpai ]
+
+  workflow_dispatch:
+jobs:
+  test:
+    strategy:
+      matrix:
+        compiler: [ gcc, msvc, clang ]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        standard: [ 90, 99, 11, 17 ]
+        exclude:
+          - os: windows-latest
+            compiler: gcc
+          - os: windows-latest
+            compiler: clang
+          - os: macos-latest
+            compiler: msvc
+          - os: ubuntu-latest
+            compiler: msvc
+          - os: macos-latest
+            compiler: gcc
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Environment
+        run: |
+          cmake -E make_directory ${{runner.workspace}}/build
+
+      - if: matrix.compiler
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          cmake -DCMAKE_BUILD_TYPE=Debug \
+                -DCMAKE_C_COMPILER=${{ matrix.compiler }} \
+                -DCMAKE_C_STANDARD=${{ matrix.standard }} \
+                $GITHUB_WORKSPACE
+
+      - if: (matrix.compiler != 'clang') || (matrix.compiler != 'gcc')
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          cmake -DCMAKE_BUILD_TYPE=Debug \
+                -DCMAKE_C_STANDARD=${{ matrix.standard }} \
+                $GITHUB_WORKSPACE
+
+      - name: Build
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          cmake --build . --config Debug
+
+      - name: Test
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: |
+          ctest --extra-verbose --output-on-failure --build-config Debug

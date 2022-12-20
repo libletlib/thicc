@@ -38,28 +38,25 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 #include <stdarg.h>
 
-MutableSize		  array_length(ImmutableArray);
-MutableComparison array_compare(ImmutableArray, ImmutableArray);
-MutableArray	  array_copy(ImmutableArray);
-MutableArray	  array_remove_subarray(ImmutableArray, ImmutableArray);
+MutableComparison array_compare(Array, Array);
+MutableArray	  array_copy(Array);
+MutableArray	  array_remove_subarray(Array, Array);
 MutableArray	  array_from_elements(size_t, ...);
 MutableArray	  array_with_self_reference_from_list(Let, Size, va_list);
 MutableArray	  array_from_list(Size, va_list);
-MutableArray	  array_concatenate(ImmutableArray, ImmutableArray);
-MutableArray	  array_filter_and(ImmutableArray, ImmutableArray);
-MutableArray	  array_filter_or(ImmutableArray, ImmutableArray);
-MutableArray	  array_filter_xor(ImmutableArray, ImmutableArray);
-MutableArray	  array_map_bit_not(ImmutableArray);
-MutableArray	  array_map_bit_complement(ImmutableArray);
-MutableArray	  array_map_positive(ImmutableArray);
-MutableArray	  array_map_negative(ImmutableArray);
-MutableArray	  array_zip(ImmutableArray, ImmutableArray);
-Var				  array_element_at(ImmutableArray, Integer);
-MutableArray	  array_empty(void);
-MutableBoolean	  array_is_empty(ImmutableArray);
+MutableArray	  array_concatenate(Array, Array);
+MutableArray	  array_filter_and(Array, Array);
+MutableArray	  array_filter_or(Array, Array);
+MutableArray	  array_filter_xor(Array, Array);
+MutableArray	  array_map_bit_not(Array);
+MutableArray	  array_map_bit_complement(Array);
+MutableArray	  array_map_positive(Array);
+MutableArray	  array_map_negative(Array);
+MutableArray	  array_zip(Array, Array);
+Var				  array_element_at(Array, Integer);
 
 #ifdef __cplusplus
 }

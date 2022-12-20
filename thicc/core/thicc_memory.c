@@ -37,11 +37,11 @@ extern "C" {
 #endif
 
 #include "thicc_memory.h"
-#include "../utility/thicc_array.h"
-#include "thicc_interface.h"
-#include "thicc_struct_object.h"
-#include "thicc_struct_var.h"
+#include <thicc_struct_array.h>
+#include <thicc_struct_string.h>
+#include <thicc_interface.h>
 #include <stdlib.h>
+#include "thicc_struct_object.h"
 
 THICC_NODISCARD static void* allocate(Size _size) {
   return calloc(_size, 1);
@@ -51,12 +51,16 @@ static void deallocate(void* const _pointer) {
   free(_pointer);
 }
 
-THICC_NODISCARD MutableString string_allocate(Size _size) {
-  return (MutableString) allocate(_size + 1);
+THICC_NODISCARD MutableString string_allocate(Size _length) {
+  MutableString string = string_empty();
+  string.string = allocate(_length);
+  return string;
 }
 
-THICC_NODISCARD MutableArray array_allocate(Size _size) {
-  return (MutableArray) allocate((_size + 1) * sizeof(Var));
+THICC_NODISCARD MutableArray array_allocate(Size _length) {
+  MutableArray array = array_empty();
+  array.array		 = allocate(_length * sizeof(Var));
+  return array;
 }
 
 THICC_NODISCARD MutableObject object_allocate(void) {
@@ -68,18 +72,17 @@ void stack_deallocate(THICC_MAYBE_UNUSED Let _let) { /* No-Op */
 
 void string_deallocate(Let _let) {
   if (string_view(_let))
-	deallocate((void*) _let.value.string_type);
+	deallocate((void*) _let.value.string_type.string);
 }
 
 void array_deallocate(Let _let) {
   if (array_view(_let)) {
-	Size		length = array_length(array_view(_let));
-	MutableSize index  = 0;
+	MutableSize index = 0;
 
-	for (; index < length; ++index)
+	for (; index < _let.value.array_type.length; ++index)
 	  unlet(array_view(_let)[index]);
 
-	deallocate((void*) _let.value.array_type);
+	deallocate((void*) _let.value.array_type.array);
   }
 }
 

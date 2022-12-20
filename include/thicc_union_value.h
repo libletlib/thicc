@@ -39,7 +39,9 @@ extern "C" {
 #endif
 
 #include "thicc_prelude.h"
+#include "thicc_struct_array.h"
 #include "thicc_struct_complex.h"
+#include "thicc_struct_string.h"
 
 union thicc_union_value {
   MutableBoolean   boolean_type;

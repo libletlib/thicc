@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 Var boolean_bit_not(Let);
 Var character_bit_not(Let);

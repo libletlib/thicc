@@ -36,9 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_as_boolean.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
-#include "../core/thicc_struct_var.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_math.h"
 #include "../utility/thicc_object.h"
@@ -70,7 +69,7 @@ THICC_NODISCARD MutableBoolean complex_as_boolean(Let _let) {
 }
 
 THICC_NODISCARD MutableBoolean string_as_boolean(Let _let) {
-  return _let.value.string_type ? THICC_YES : THICC_NO;
+  return string_view(_let) ? THICC_YES : THICC_NO;
 }
 
 THICC_NODISCARD MutableBoolean function_as_boolean(Let _let) {
@@ -85,7 +84,7 @@ THICC_NODISCARD MutableBoolean array_as_boolean(Let _let) {
 }
 
 THICC_NODISCARD MutableBoolean object_as_boolean(Let _let) {
-  Let conversion_value = member(_let, move_string("boolean_type"));
+  Let conversion_value = member(_let, move_string(string_literal("boolean")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);

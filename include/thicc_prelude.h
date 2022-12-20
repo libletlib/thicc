@@ -197,8 +197,10 @@ typedef MutableSize const Size;
 union thicc_union_value;
 struct thicc_struct_behaviour;
 struct thicc_struct_var;
-struct thicc_struct_object;
 struct thicc_struct_complex;
+struct thicc_struct_string;
+struct thicc_struct_array;
+struct thicc_struct_object;
 
 typedef enum thicc_enum_rank			  MutableRank;
 typedef MutableRank const				  Rank;
@@ -226,8 +228,8 @@ typedef long		  MutableInteger;
 #define THICC_INTEGER_FORMAT %li
 /* clang-format on */
 #else
-typedef unsigned long long	 MutableNatural;
-typedef long long			 MutableInteger;
+typedef unsigned long long						   MutableNatural;
+typedef long long								   MutableInteger;
 /* clang-format off */
 #define THICC_NATURAL_FORMAT %llu
 #define THICC_INTEGER_FORMAT %lli
@@ -243,15 +245,13 @@ typedef MutableReal const	 Real;
 /* clang-format on */
 
 typedef struct thicc_struct_complex MutableComplex;
-typedef MutableComplex const Complex;
+typedef MutableComplex const		Complex;
 typedef Var (*MutableFunction)(Let, Let);
 typedef MutableFunction const	   Function;
-typedef char* THICC_RESTRICT	   MutableString;
-typedef char const* THICC_RESTRICT String;
-typedef String const			   ImmutableString;
-typedef Var* THICC_RESTRICT		   MutableArray;
-typedef Let* THICC_RESTRICT		   Array;
-typedef Array const				   ImmutableArray;
+typedef struct thicc_struct_string MutableString;
+typedef MutableString const        String;
+typedef struct thicc_struct_array  MutableArray;
+typedef MutableArray const		   Array;
 typedef void* THICC_RESTRICT	   MutableObject;
 typedef void const* THICC_RESTRICT Object;
 typedef Object const			   ImmutableObject;

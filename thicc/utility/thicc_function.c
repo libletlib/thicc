@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_function.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 
 THICC_NODISCARD Var empty_function(THICC_MAYBE_UNUSED Let _function, THICC_MAYBE_UNUSED Let _array) {
   return let_empty();

@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 Var				function_invoke(Let, Let);
 MutableFunction function_empty(void);

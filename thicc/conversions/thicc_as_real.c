@@ -36,9 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_as_real.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
-#include "../core/thicc_struct_var.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
@@ -68,7 +67,7 @@ THICC_NODISCARD MutableReal complex_as_real(Let _let) {
 }
 
 THICC_NODISCARD MutableReal string_as_real(Let _let) {
-  return string_to_real(string_view(_let));
+  return string_to_real(_let.value.string_type);
 }
 
 THICC_NODISCARD MutableReal function_as_real(Let _let) {
@@ -83,7 +82,7 @@ THICC_NODISCARD MutableReal array_as_real(Let _let) {
 }
 
 THICC_NODISCARD MutableReal object_as_real(Let _let) {
-  Let conversion_value = member(_let, move_string("real_type"));
+  Let conversion_value = member(_let, move_string(string_literal("real")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let  temporary = object_method_invoke(_let, conversion_value, 2, &_let);

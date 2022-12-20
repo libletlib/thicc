@@ -29,6 +29,7 @@ add_custom_target(npm_install ALL
 
 add_library(thicc STATIC ${THICC_HEADERS} ${THICC_SOURCES})
 add_dependencies(thicc npm_install)
+target_include_directories(thicc PRIVATE include)
 IF(NOT WIN32)
     target_link_libraries(thicc PRIVATE m)
 ENDIF()
@@ -53,7 +54,9 @@ target_link_libraries(thicc_demo PRIVATE thicc)
 target_include_directories(thicc_demo PRIVATE include)
 
 enable_testing()
-add_test(NAME thicc_test
+add_test(NAME thicc_functionality_test
          COMMAND $<TARGET_FILE:thicc_test>)
+set_tests_properties(thicc_functionality_test PROPERTIES TIMEOUT 20)
 add_test(NAME thicc_demo_test
          COMMAND $<TARGET_FILE:thicc_demo>)
+set_tests_properties(thicc_demo_test PROPERTIES TIMEOUT 20)

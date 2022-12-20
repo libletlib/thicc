@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableComparison boolean_comparison(Let, Let);
 MutableComparison character_comparison(Let, Let);

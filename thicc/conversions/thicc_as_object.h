@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableObject boolean_as_object(Let);
 MutableObject character_as_object(Let);

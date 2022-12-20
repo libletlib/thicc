@@ -36,9 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_as_integer.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
-#include "../core/thicc_struct_var.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
@@ -72,7 +71,7 @@ THICC_NODISCARD MutableInteger complex_as_integer(Let _let) {
 }
 
 THICC_NODISCARD MutableInteger string_as_integer(Let _let) {
-  return string_to_integer(string_view(_let));
+  return string_to_integer(_let.value.string_type);
 }
 
 THICC_NODISCARD MutableInteger function_as_integer(Let _let) {
@@ -87,7 +86,7 @@ THICC_NODISCARD MutableInteger array_as_integer(Let _let) {
 }
 
 THICC_NODISCARD MutableInteger object_as_integer(Let _let) {
-  Let conversion_value = member(_let, move_string("integer_type"));
+  Let conversion_value = member(_let, move_string(string_literal("integer")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);

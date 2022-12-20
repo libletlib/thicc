@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 MutableComplex boolean_as_complex(Let);
 MutableComplex character_as_complex(Let);

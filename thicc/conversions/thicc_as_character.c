@@ -36,9 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_as_character.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
-#include "../core/thicc_struct_var.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 
@@ -82,7 +81,7 @@ THICC_NODISCARD MutableCharacter array_as_character(Let _let) {
 }
 
 THICC_NODISCARD MutableCharacter object_as_character(Let _let) {
-  Let conversion_value = member(_let, move_string("character_type"));
+  Let conversion_value = member(_let, move_string(string_literal("character")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let		temporary = object_method_invoke(_let, conversion_value, 2, &_let);

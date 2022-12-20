@@ -36,37 +36,48 @@
 extern "C" {
 #endif
 
-#include <thicc.h>
-#include <assert.h>
+#include "test.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-int boolean_test(void);
-int character_test(void);
-int natural_test(void);
-int integer_test(void);
-int real_test(void);
-int complex_test(void);
-int string_test(void);
-int function_test(void);
-int array_test(void);
-int object_test(void);
-
 THICC_NODISCARD int test(void) {
+  puts("I: Boolean tests...");
   assert(boolean_test());
+  puts("I: Boolean tests OK!");
+  puts("II: Character tests...");
   assert(character_test());
+  puts("II: Character tests OK!");
+  puts("III: Natural tests...");
   assert(natural_test());
+  puts("III: Natural tests OK!");
+  puts("IV: Integer tests...");
   assert(integer_test());
+  puts("IV: Integer tests OK!");
+  puts("V: Real tests...");
   assert(real_test());
+  puts("V: Real tests OK!");
+  puts("VI: Complex tests...");
   assert(complex_test());
+  puts("VI: Complex tests OK!");
+  puts("VII: String tests...");
   assert(string_test());
+  puts("VII: String tests OK!");
+  puts("VIII: Function tests...");
   assert(function_test());
+  puts("VIII: Function tests OK!");
+  puts("IX: Array tests...");
   assert(array_test());
+  puts("IX: Array tests OK!");
+  puts("X: Object tests...");
   assert(object_test());
+  puts("X: Object tests OK!");
   return 1;
 }
 
 int main(void) {
+  puts("Starting tests...");
   assert(test());
+  puts("Tests OK!");
   return EXIT_SUCCESS;
 }
 

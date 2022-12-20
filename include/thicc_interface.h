@@ -48,8 +48,8 @@ void		   unlet(Let);
 void		   unlet_if_required(Let);
 Var			   empty_function(Let, Let);
 
-String string_view(Let);
-Array  array_view(Let);
+Character* string_view(Let);
+Var*   array_view(Let);
 Object object_view(Let);
 
 MutableBoolean	 as_boolean(Let);
@@ -85,11 +85,6 @@ Var indirection(Let);
 Var negative(Let);
 Var positive(Let);
 
-Var pre_increment(Let);
-Var pre_decrement(Let);
-Var post_increment(Let);
-Var post_decrement(Let);
-
 MutableComparison compare(Let, Let);
 MutableBoolean	  equal(Let, Let);
 MutableBoolean	  greater_than(Let, Let);
@@ -109,8 +104,6 @@ MutableBoolean is_invokable(Let);
 MutableBoolean is_array(Let);
 MutableBoolean is_object(Let);
 MutableBoolean is_indexable(Let);
-
-MutableComplex cmplx(Real, Real);
 
 #ifdef __cplusplus
 }

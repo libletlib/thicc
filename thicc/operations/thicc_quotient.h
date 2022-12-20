@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#include "../core/thicc_prelude.h"
+#include <thicc_prelude.h>
 
 Var boolean_quotient(Let, Let);
 Var character_quotient(Let, Let);

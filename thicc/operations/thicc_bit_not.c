@@ -36,8 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_bit_not.h"
-#include "../core/thicc_interface.h"
-#include "../core/thicc_struct_var.h"
+#include <thicc_struct_var.h>
+#include <thicc_interface.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_math.h"
@@ -91,11 +91,11 @@ THICC_NODISCARD Var function_bit_not(Let _let) {
 }
 
 THICC_NODISCARD Var array_bit_not(Let _let) {
-  return move_array(array_map_bit_not(array_view(_let)));
+  return move_array(array_map_bit_not(_let.value.array_type));
 }
 
 THICC_NODISCARD Var object_bit_not(Let _let) {
-  Let property_name = move_string("!");
+  Let property_name = move_string(string_literal("!"));
   Let property		= member(_let, property_name);
   Var result;
 

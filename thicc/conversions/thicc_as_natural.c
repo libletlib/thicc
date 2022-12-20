@@ -36,9 +36,8 @@ extern "C" {
 #endif
 
 #include "thicc_as_natural.h"
-#include "../core/thicc_interface.h"
+#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
-#include "../core/thicc_struct_var.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
@@ -72,7 +71,7 @@ THICC_NODISCARD MutableNatural complex_as_natural(Let _let) {
 }
 
 THICC_NODISCARD MutableNatural string_as_natural(Let _let) {
-  return string_to_natural(string_view(_let));
+  return string_to_natural(_let.value.string_type);
 }
 
 THICC_NODISCARD MutableNatural function_as_natural(Let _let) {
@@ -87,7 +86,7 @@ THICC_NODISCARD MutableNatural array_as_natural(Let _let) {
 }
 
 THICC_NODISCARD MutableNatural object_as_natural(Let _let) {
-  Let conversion_value = member(_let, move_string("natural_type"));
+  Let conversion_value = member(_let, move_string(string_literal("natural")));
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
 	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);

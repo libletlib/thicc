@@ -24,9 +24,9 @@ static function(println) {
 }
 
 static void playground(void) {
-  Let foo_key		   = move_string("real_type");
+  Let foo_key		   = move_string(string_literal("real"));
   Let foo_value		   = let_real(2.5);
-  Let foo_sum_key	   = move_string("+");
+  Let foo_sum_key	   = move_string(string_literal("+"));
   Let foo_sum_function = let_function(foo_sum);
   Let object1		   = object_of(4, &foo_key, &foo_value, &foo_sum_key, &foo_sum_function);
   Let object2		   = let_copy(object1);

@@ -35,8 +35,7 @@
 extern "C" {
 #endif
 
-#include "../include/thicc.h"
-#include <assert.h>
+#include "test.h"
 
 THICC_NODISCARD static function(foo) {
   Let foo_element = let_integer(1);
@@ -59,7 +58,7 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(cast(value, integer_rank), let_integer(1)));
   assert(equal(cast(value, real_rank), let_real(1)));
   assert(equal(cast(value, complex_rank), let_complex(cmplx(1, 0))));
-  assert(equal(string, move_string("[1]")));
+  assert(equal(string, move_string(string_literal("[1]"))));
   assert(equal(value, function_return));
   assert(equal(value, comparable));
   assert(equal(object, comparison_object));
@@ -76,7 +75,7 @@ THICC_NODISCARD static int conversions(void) {
 
 THICC_NODISCARD static int operations(void) {
   Let left_element	= let_integer(1);
-  Let right_element = move_string("1");
+  Let right_element = move_string(string_literal("1"));
   Let left			= array_of(1, &left_element);
   Let right			= array_of(1, &right_element);
 

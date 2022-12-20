@@ -38,20 +38,20 @@
 extern "C" {
 #endif
 
-#include "thicc_struct_var.h"
+#include <thicc_struct_var.h>
 
 struct thicc_struct_object {
   Var members;
 };
 
-Root  root(Let);
-Array root_members(Let);
-Array root_keys(Let);
-Array root_values(Let);
-Root  root_from_pointer(ImmutableObject);
-Array root_members_from_pointer(ImmutableObject);
-Array root_keys_from_pointer(ImmutableObject);
-Array root_values_from_pointer(ImmutableObject);
+Root		 root(Let);
+MutableArray root_members(Let);
+MutableArray root_keys(Let);
+MutableArray root_values(Let);
+Root		 root_from_pointer(ImmutableObject);
+MutableArray root_members_from_pointer(ImmutableObject);
+MutableArray root_keys_from_pointer(ImmutableObject);
+MutableArray root_values_from_pointer(ImmutableObject);
 
 #ifdef __cplusplus
 }

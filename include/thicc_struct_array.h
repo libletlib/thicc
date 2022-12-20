@@ -30,19 +30,25 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef THICC_THICC_STRUCT_ARRAY_H
+#define THICC_THICC_STRUCT_ARRAY_H
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <thicc_struct_complex.h>
+#include "thicc_prelude.h"
 
-THICC_NODISCARD MutableComplex cmplx(Real _real, Real _imaginary) {
-  MutableComplex result;
-  result.real	   = _real;
-  result.imaginary = _imaginary;
-  return result;
-}
+struct thicc_struct_array {
+  Var*			 array;
+  MutableNatural length;
+};
+
+MutableArray   array_empty(void);
+MutableBoolean array_is_empty(Array);
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* THICC_THICC_STRUCT_ARRAY_H */
