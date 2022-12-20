@@ -36,5 +36,5 @@ jobs:
         working-directory: ${{runner.workspace}}/build
         run: |
           cmake --build . --config Debug
-          ./thicc_test
+          ./thicc_test.exe
           ctest -VV --output-on-failure -C Debug
