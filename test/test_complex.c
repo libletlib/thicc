@@ -45,8 +45,8 @@ THICC_NODISCARD static int conversions(void) {
   Let value		 = let_complex(cmplx(1, 0));
   Let comparable = let_complex(cmplx(1, 0));
 
-  /*Let string			= move_string(as_string(value));
-  Let comparison_array	= array_of(1, &comparable);
+  Let string			= move_string(as_string(value));
+  /*Let comparison_array	= array_of(1, &comparable);
   Let array				= array_of(1, &value);
   Let object			= let_object(as_object(value));
   Let comparison_object = let_object(THICC_NAUGHT);
@@ -62,10 +62,10 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(array, comparison_array));
   assert(equal(object, comparison_object));
 
-  unlet(string);
   unlet(array);
   unlet(comparison_array);
   unlet(object);*/
+  unlet(string);
 
   return 1;
 }

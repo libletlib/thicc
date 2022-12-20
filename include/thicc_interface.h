@@ -105,8 +105,6 @@ MutableBoolean is_array(Let);
 MutableBoolean is_object(Let);
 MutableBoolean is_indexable(Let);
 
-MutableComplex cmplx(Real, Real);
-
 #ifdef __cplusplus
 }
 #endif
