@@ -96,7 +96,7 @@ assert(equal(bit_xor(left, right), let_integer(1 ^ 1)));*/
 
 THICC_NODISCARD int complex_test(void) {
   assert(conversions());
-  assert(operations());
+  /*assert(operations());*/
   return 1;
 }
 

@@ -56,9 +56,9 @@ THICC_NODISCARD int test(void) {
   puts("V: Real tests...");
   assert(real_test());
   puts("V: Real tests OK!");
-  /*puts("VI: Complex tests...");
+  puts("VI: Complex tests...");
   assert(complex_test());
-  puts("VI: Complex tests OK!");*/
+  puts("VI: Complex tests OK!");
   puts("VII: String tests...");
   assert(string_test());
   puts("VII: String tests OK!");
