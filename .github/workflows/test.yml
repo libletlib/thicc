@@ -30,7 +30,7 @@ jobs:
         run: |
           cmake -E make_directory ${{runner.workspace}}/build
 
-      - if: matrix.compiler
+      - if: ${{ matrix.compiler }}
         shell: bash
         working-directory: ${{runner.workspace}}/build
         run: |
@@ -39,14 +39,14 @@ jobs:
                 -DCMAKE_C_STANDARD=${{ matrix.standard }} \
                 $GITHUB_WORKSPACE
 
-      - if: !matrix.compiler
+      - if: !(${{ matrix.compiler }})
         shell: bash
         working-directory: ${{runner.workspace}}/build
         run: |
           cmake -DCMAKE_BUILD_TYPE=Debug \
                 -DCMAKE_C_STANDARD=${{ matrix.standard }} \
                 $GITHUB_WORKSPACE
-          
+
       - name: Build
         shell: bash
         working-directory: ${{runner.workspace}}/build
