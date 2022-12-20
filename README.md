@@ -1,5 +1,7 @@
 # ThicC
 
+[![Tests](https://github.com/libletlib/thicc/actions/workflows/tests.yml/badge.svg)](https://github.com/libletlib/thicc/actions/workflows/tests.yml)
+
 Simple ducktyping in ANSI C/ISO C89. Adheres strictly to the standard
 
 ## Types
@@ -11,9 +13,9 @@ In order of ascending priority:
 * integer -> `long/long long`
 * real -> `long double`
 * complex -> `struct { Real real; Real imaginary };`
-* string -> `char*`
+* string -> `struct { char* string; MutableNatural length; }`
 * function -> `Var (*function)(Var self, Var args)`
-* array -> `Var*`
+* array -> `struct { Var* array; MutableNatural length; }`
 * object -> `void*`
 
 ## Typedefs and macros
@@ -34,9 +36,7 @@ Every instance of the below typedefs has a mutable variant with the `Mutable` pr
 * Array
 * Object
 
-For the pointer types, there is also a more `const`-qualified type with the `Immutable` prefix.
-* ImmutableString -> `char const* const`
-* ImmutableArray -> `Var const* const`
+For the object type, there is also a more `const`-qualified type with the `Immutable` prefix.
 * ImmutableObject -> `void const* const`
 
 ### Macros
@@ -78,7 +78,7 @@ Arrays are merely pointers to C arrays of Vars. Arrays are
 #include <stdlib.h>
 #include <stdio.h>
 
-function(factorial) {
+static function(factorial) {
     if (less_than(st, let_integer(2))) {
         return let_integer(1);
     } else {
@@ -87,7 +87,7 @@ function(factorial) {
     }
 }
 
-function(println) {
+static function(println) {
     Let string_type = move_string(as_string(st));
     printf("%s", string_view(string_type));
     unlet(string_type);
