@@ -37,7 +37,7 @@ extern "C" {
 
 #include "test.h"
 
-THICC_NODISCARD static function(foo) {
+THICC_NODISCARD static THICC_FUNCTION(foo) {
   return let_boolean(THICC_YES);
 }
 
@@ -48,8 +48,9 @@ THICC_NODISCARD static int conversions(void) {
   Let character			= let_character('1');
   Let comparison_array	= array_of(1, &character);
   Let array				= array_of(1, &value);
-  Let object			= let_object(as_object(value));
-  Let comparison_object = let_object(THICC_NAUGHT);
+  Let object			= move_object(as_object(value));
+  Let key = weak_string("boolean");
+  Let comparison_object = object_of(2, &key, &value);
 
   assert(equal(value, let_boolean(THICC_YES)));
   assert(equal(value, let_character('1')));
@@ -57,7 +58,7 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(value, let_integer(1)));
   assert(equal(value, let_real(1.0)));
   assert(equal(value, let_complex(cmplx(1.0, 0.0))));
-  assert(equal(string, move_string(string_literal("true"))));
+  assert(equal(string, weak_string("true")));
   assert(equal(value, let_function(foo)));
   assert(equal(array, comparison_array));
   assert(equal(object, comparison_object));

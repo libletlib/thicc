@@ -30,27 +30,39 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef THICC_THICC_STRUCT_STRING_H
-#define THICC_THICC_STRUCT_STRING_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "thicc_prelude.h"
+#include <thicc_struct_string.h>
+#include <thicc_interface.h>
+#include <string.h>
 
-struct thicc_struct_string {
-  MutableCharacter* string;
-  MutableNatural length;
-};
+THICC_NODISCARD MutableString string_empty(void) {
+  MutableString string;
+  string.string = THICC_NAUGHT;
+  string.length = 0;
+  return string;
+}
 
-MutableString	  string_empty(void);
-MutableSize       string_length(String);
-MutableString	  string_from_pointer(MutableCharacter* _literal);
-MutableBoolean	  string_is_empty(String);
+THICC_NODISCARD MutableSize string_length(String _string) {
+  return strlen(_string.string);
+}
+
+THICC_NODISCARD MutableString string_from_pointer(MutableCharacter* _string) {
+  MutableString result;
+  result.string = _string;
+  result.length = string_length(result);
+  return result;
+}
+
+THICC_NODISCARD MutableBoolean string_is_empty(String _string) {
+  if(_string.string == THICC_NAUGHT || _string.length == 0)
+	return THICC_YES;
+  return THICC_NO;
+}
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* THICC_THICC_STRUCT_STRING_H */

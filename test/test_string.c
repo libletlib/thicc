@@ -37,26 +37,27 @@ extern "C" {
 
 #include "test.h"
 
-THICC_NODISCARD static function(foo) {
-  return move_string(string_literal("1"));
+THICC_NODISCARD static THICC_FUNCTION(foo) {
+  return weak_string("1");
 }
 
 THICC_NODISCARD static int conversions(void) {
-  Let value		 = move_string(string_literal("1"));
-  Let comparable = move_string(string_literal("1"));
+  Let value		 = weak_string("1");
+  Let comparable = weak_string("1");
 
   Let string			= move_string(as_string(value));
   Let comparison_array	= array_of(1, &comparable);
   Let array				= array_of(1, &value);
-  Let object			= let_object(as_object(value));
-  Let comparison_object = let_object(THICC_NAUGHT);
+  Let object			= move_object(as_object(value));
+  Let key = weak_string("string");
+  Let comparison_object = object_of(2, &key, &value);
 
   assert(equal(cast(value, character_rank), let_character('1')));
   assert(equal(cast(value, natural_rank), let_natural(1)));
   assert(equal(cast(value, integer_rank), let_integer(1)));
   assert(equal(cast(value, real_rank), let_real(1)));
   assert(equal(cast(value, complex_rank), let_complex(cmplx(1, 0))));
-  assert(equal(value, move_string(string_literal("1"))));
+  assert(equal(value, weak_string("1")));
   assert(equal(value, let_function(foo)));
   assert(equal(array, comparison_array));
   assert(equal(object, comparison_object));
@@ -71,8 +72,8 @@ THICC_NODISCARD static int conversions(void) {
 }
 
 THICC_NODISCARD static int operations(void) {
-  Let left	= move_string(string_literal("1"));
-  Let right = move_string(string_literal("1"));
+  Let left	= weak_string("1");
+  Let right = weak_string("1");
 
   Let bit_and_string	= bit_and(left, right);
   Let bit_or_string		= bit_or(left, right);
@@ -85,21 +86,21 @@ THICC_NODISCARD static int operations(void) {
   Let quotient_string	= quotient(left, right);
   Let sum_string		= sum(left, right);
 
-  assert(equal(bit_and_string, move_string(string_literal("1"))));
+  assert(equal(bit_and_string, weak_string("1")));
   /*assert(equal(bit_complement(left), let_integer(~'1')));*/
   assert(equal(bit_not(left), let_boolean(THICC_NO)));
-  assert(equal(bit_or_string, move_string(string_literal(""))));
-  assert(equal(bit_xor_string, move_string(string_literal(""))));
+  assert(equal(bit_or_string, weak_string("")));
+  assert(equal(bit_xor_string, weak_string("")));
   assert(compare(left, right) == THICC_EQUAL);
-  assert(equal(difference_string, move_string(string_literal(""))));
+  assert(equal(difference_string, weak_string("")));
   assert(equal(index_of(left, let_integer(0)), let_character('1')));
   assert(equal(indirection(left), let_character('1')));
   assert(equal(modulo_string, token_array));
   /*assert(equal(negative(left), let_integer(-1)));*/
-  assert(equal(positive_string, move_string(string_literal("1"))));
-  assert(equal(product_string, move_string(string_literal("11"))));
-  assert(equal(quotient_string, move_string(string_literal(""))));
-  assert(equal(sum_string, move_string(string_literal("11"))));
+  assert(equal(positive_string, weak_string("1")));
+  assert(equal(product_string, weak_string("11")));
+  assert(equal(quotient_string, weak_string("")));
+  assert(equal(sum_string, weak_string("11")));
 
   unlet(bit_and_string);
   unlet(bit_or_string);

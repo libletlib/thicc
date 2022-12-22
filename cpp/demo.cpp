@@ -30,27 +30,15 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef THICC_THICC_STRUCT_STRING_H
-#define THICC_THICC_STRUCT_STRING_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <cstdlib>
+#include <thicc_cpp.hpp>
+#include <iostream>
 
-#include "thicc_prelude.h"
-
-struct thicc_struct_string {
-  MutableCharacter* string;
-  MutableNatural length;
-};
-
-MutableString	  string_empty(void);
-MutableSize       string_length(String);
-MutableString	  string_from_pointer(MutableCharacter* _literal);
-MutableBoolean	  string_is_empty(String);
-
-#ifdef __cplusplus
+int main() {
+  var x = 5;
+  var y = 5;
+  std::cout << x + y << std::endl;
+  std::cout << x[0] << std::endl;
+  return EXIT_SUCCESS;
 }
-#endif
-
-#endif /* THICC_THICC_STRUCT_STRING_H */

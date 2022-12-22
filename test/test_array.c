@@ -37,7 +37,7 @@ extern "C" {
 
 #include "test.h"
 
-THICC_NODISCARD static function(foo) {
+THICC_NODISCARD static THICC_FUNCTION(foo) {
   Let foo_element = let_integer(1);
   return array_of(1, &foo_element);
 }
@@ -49,8 +49,9 @@ THICC_NODISCARD static int conversions(void) {
 
   Let string			= move_string(as_string(value));
   Let function_return	= call(let_function(foo));
-  Let object			= let_object(as_object(value));
-  Let comparison_object = let_object(THICC_NAUGHT);
+  Let object			= move_object(as_object(value));
+  Let key = weak_string("array");
+  Let comparison_object = object_of(2, &key, &value);
 
   assert(equal(cast(value, boolean_rank), let_boolean(THICC_YES)));
   assert(equal(cast(value, character_rank), let_character(1)));
@@ -58,7 +59,7 @@ THICC_NODISCARD static int conversions(void) {
   assert(equal(cast(value, integer_rank), let_integer(1)));
   assert(equal(cast(value, real_rank), let_real(1)));
   assert(equal(cast(value, complex_rank), let_complex(cmplx(1, 0))));
-  assert(equal(string, move_string(string_literal("[1]"))));
+  assert(equal(string, weak_string("[1]")));
   assert(equal(value, function_return));
   assert(equal(value, comparable));
   assert(equal(object, comparison_object));
@@ -75,7 +76,7 @@ THICC_NODISCARD static int conversions(void) {
 
 THICC_NODISCARD static int operations(void) {
   Let left_element	= let_integer(1);
-  Let right_element = move_string(string_literal("1"));
+  Let right_element = weak_string("1");
   Let left			= array_of(1, &left_element);
   Let right			= array_of(1, &right_element);
 

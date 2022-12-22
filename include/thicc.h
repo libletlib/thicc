@@ -35,20 +35,17 @@
 #define THICC_THICC_H
 
 #include "thicc_interface.h"
-#include "thicc_struct_var.h"
 
-#undef st
-#undef nd
-#undef rd
-#undef th
-#define st (array_view(args)[0])
-#define nd (array_view(args)[1])
-#define rd (array_view(args)[2])
-#define th (array_view(args)[3])
+#undef THICC_1ST
+#undef THICC_2ND
+#undef THICC_3RD
+#undef THICC_4TH
+#define THICC_1ST (array_view(args)[0])
+#define THICC_2ND (array_view(args)[1])
+#define THICC_3RD (array_view(args)[2])
+#define THICC_4TH (array_view(args)[3])
 
-#undef function
-#define function(_name) Var _name(THICC_MAYBE_UNUSED Let self, THICC_MAYBE_UNUSED Let args)
-
-#define unit let_empty()
+#undef THICC_FUNCTION
+#define THICC_FUNCTION(_name) Var _name(THICC_MAYBE_UNUSED Let self, THICC_MAYBE_UNUSED Let args)
 
 #endif /* THICC_THICC_H */

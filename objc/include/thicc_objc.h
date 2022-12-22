@@ -30,27 +30,14 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef THICC_THICC_STRUCT_STRING_H
-#define THICC_THICC_STRUCT_STRING_H
+#ifndef THICC_THICC_OBJC_H
+#define THICC_THICC_OBJC_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <thicc.h>
 
-#include "thicc_prelude.h"
+@interface mut
+	- (mut*) alloc;
+	- (mut*) init;
+@end
 
-struct thicc_struct_string {
-  MutableCharacter* string;
-  MutableNatural length;
-};
-
-MutableString	  string_empty(void);
-MutableSize       string_length(String);
-MutableString	  string_from_pointer(MutableCharacter* _literal);
-MutableBoolean	  string_is_empty(String);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* THICC_THICC_STRUCT_STRING_H */
+#endif /* THICC_THICC_OBJC_H */

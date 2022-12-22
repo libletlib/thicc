@@ -31,35 +31,73 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef THICC_THICC_STRUCT_VAR_H
-#define THICC_THICC_STRUCT_VAR_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#include "thicc_struct_behaviour.h"
-#include "thicc_union_value.h"
+#include "thicc_indirection.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
+#include "../utility/thicc_function.h"
+#include "../utility/thicc_object.h"
 
-struct thicc_struct_var {
-  MutableValue value;
-  Behaviour*   behaviour;
-};
+THICC_NODISCARD Var boolean_indirection(Let _let) {
+  return let_boolean(_let.value.boolean_type);
+}
 
-Var let_init(void);
-Var let_boolean(Boolean);
-Var let_character(Character);
-Var let_natural(Natural);
-Var let_integer(Integer);
-Var let_real(Real);
-Var let_complex(Complex);
-Var let_string(MutableCharacter*);
-Var move_string(MutableString);
-Var let_function(Function);
-Var let_array(Array);
-Var move_array(MutableArray);
-Var let_object(ImmutableObject);
-Var move_object(MutableObject);
-Var let_copy(Let);
-Var let_move(Var);
+THICC_NODISCARD Var character_indirection(Let _let) {
+  return let_character(_let.value.character_type);
+}
 
-Var			   let_empty(void);
-MutableBoolean let_is_empty(Let);
+THICC_NODISCARD Var natural_indirection(Let _let) {
+  return let_natural(_let.value.natural_type);
+}
 
-#endif /* THICC_THICC_STRUCT_VAR_H */
+THICC_NODISCARD Var integer_indirection(Let _let) {
+  return let_integer(_let.value.integer_type);
+}
+
+THICC_NODISCARD Var real_indirection(Let _let) {
+  return let_real(_let.value.real_type);
+}
+
+THICC_NODISCARD Var complex_indirection(Let _let) {
+  return let_complex(_let.value.complex_type);
+}
+
+THICC_NODISCARD Var string_indirection(Let _let) {
+  return let_character(*string_view(_let));
+}
+
+THICC_NODISCARD Var function_indirection(Let _let) {
+  Let let_result = function_invoke(_let, let_empty());
+  Let result	 = indirection(let_result);
+  unlet_if_required(let_result);
+  return result;
+}
+
+THICC_NODISCARD Var array_indirection(Let _let) {
+  return let_copy(*_let.value.array_type.array);
+}
+
+THICC_NODISCARD Var object_indirection(Let _let) {
+  Let property_name = move_string(string_from_pointer("indirection"));
+  Let property		= member(_let, property_name);
+  Var result;
+
+  if (let_is_empty(property) || !is_invokable(property)) {
+	unlet_if_required(property);
+
+	return let_empty();
+  }
+
+  result = object_method_invoke(_let, property, 0);
+
+  unlet_if_required(property);
+
+  return result;
+}
+
+#ifdef __cplusplus
+}
+#endif

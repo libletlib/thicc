@@ -39,6 +39,7 @@ extern "C" {
 #endif
 
 #include "thicc_prelude.h"
+#include "thicc_struct_var.h"
 #include <stdarg.h>
 
 MutableRank	   rank(Let);
@@ -65,6 +66,7 @@ MutableObject	 as_object(Let);
 
 Var array_of(Size, ...);
 Var object_of(Size, ...);
+Var weak_string(MutableCharacter*);
 Var call(Let);
 Var invoke(Let, Size, ...);
 Var invoke_from_list(Let, Size, va_list);

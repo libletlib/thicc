@@ -3,30 +3,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static function(foo_sum) {
-  return let_real(as_real(st) + as_real(nd));
+static THICC_FUNCTION(foo_sum) {
+  return let_real(as_real(THICC_1ST) + as_real(THICC_2ND));
 }
 
-static function(factorial) {
-  if (less_than(st, let_integer(2))) {
+static THICC_FUNCTION(factorial) {
+  if (less_than(THICC_1ST, let_integer(2))) {
 	return let_integer(1);
   } else {
-	Let minus = difference(st, let_integer(1));
-	return product(st, invoke(self, 1, &minus));
+	Let minus = difference(THICC_1ST, let_integer(1));
+	return product(THICC_1ST, invoke(self, 1, &minus));
   }
 }
 
-static function(println) {
-  Let string = move_string(as_string(st));
+static THICC_FUNCTION(println) {
+  Let string = move_string(as_string(THICC_1ST));
   printf("%s", string_view(string));
   unlet(string);
-  return unit;
+  return let_empty();
 }
 
 static void playground(void) {
-  Let foo_key		   = move_string(string_literal("real"));
+  Let foo_key		   = weak_string("real");
   Let foo_value		   = let_real(2.5);
-  Let foo_sum_key	   = move_string(string_literal("+"));
+  Let foo_sum_key	   = weak_string("+");
   Let foo_sum_function = let_function(foo_sum);
   Let object1		   = object_of(4, &foo_key, &foo_value, &foo_sum_key, &foo_sum_function);
   Let object2		   = let_copy(object1);

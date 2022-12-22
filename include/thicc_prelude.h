@@ -111,7 +111,7 @@ typedef MutableBoolean const Boolean;
 #undef THICC_MAYBE_UNUSED
 #undef THICC_NODISCARD
 #undef THICC_NORETURN
-#if THICC_C_VERSION >= 2023
+#if THICC_C_AT_LEAST(2023)
 #define THICC_DEPRECATED [[deprecated]]
 #define THICC_FALLTHROUGH [[fallthrough]]
 #define THICC_MAYBE_UNUSED [[maybe_unused]]
