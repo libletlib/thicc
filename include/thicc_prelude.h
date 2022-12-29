@@ -50,7 +50,7 @@ typedef unsigned int MutableBoolean;
 #define THICC_NO 0u
 #else
 #include <stdbool.h>
-typedef _Bool									   MutableBoolean;
+typedef _Bool MutableBoolean;
 #define THICC_YES true
 #define THICC_NO false
 #endif

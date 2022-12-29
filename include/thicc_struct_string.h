@@ -41,7 +41,7 @@ extern "C" {
 
 struct thicc_struct_string {
   MutableCharacter* string;
-  MutableNatural length;
+  MutableSize       length;
 };
 
 MutableString	  string_empty(void);

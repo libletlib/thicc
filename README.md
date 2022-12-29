@@ -17,7 +17,7 @@ In order of ascending priority:
 * string -> `struct { char* string; MutableNatural length; }`
 * function -> `Var (*function)(Var self, Var args)`
 * array -> `struct { Var* array; MutableNatural length; }`
-* object -> `void*`
+* object -> `void*` (can be `NULL`)
 
 ## Typedefs and macros
 

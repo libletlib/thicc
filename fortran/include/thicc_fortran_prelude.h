@@ -30,25 +30,47 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef THICC_THICC_STRUCT_ARRAY_H
-#define THICC_THICC_STRUCT_ARRAY_H
+#ifndef THICC_THICC_FORTRAN_PRELUDE_H
+#define THICC_THICC_FORTRAN_PRELUDE_H
 
-#ifdef __cplusplus
-extern "C" {
+#ifndef THICC_FORTRAN_VERSION
+#define THICC_FORTRAN_VERSION 2003
 #endif
 
-#include "thicc_prelude.h"
-
-struct thicc_struct_array {
-  Var*			 array;
-  MutableSize    length;
-};
-
-MutableArray   array_empty(void);
-MutableBoolean array_is_empty(Array);
-
-#ifdef __cplusplus
-}
+#if THICC_FORTRAN_VERSION == 2003
+#elif THICC_FORTRAN_VERSION == 2008
+#elif THICC_FORTRAN_VERSION == 2018
 #endif
 
-#endif /* THICC_THICC_STRUCT_ARRAY_H */
+#undef THICC_FORTRAN_AT_LEAST
+#define THICC_FORTRAN_AT_LEAST(_version_year) (THICC_FORTRAN_VERSION >= (_version_year) ? 1 : 0)
+
+#undef THICC_FORTRAN_IMPURE_ELEMENTAL
+#if THICC_FORTRAN_AT_LEAST(2008)
+#define THICC_FORTRAN_IMPURE_ELEMENTAL impure elemental
+#else
+#define THICC_FORTRAN_IMPURE_ELEMENTAL
+#endif
+
+#ifndef THICC_FORTRAN_C_VERSION
+#define THICC_FORTRAN_C_VERSION 90
+#endif
+
+#if THICC_FORTRAN_C_VERSION == 90
+#elif THICC_FORTRAN_C_VERSION == 99
+#elif THICC_FORTRAN_C_VERSION == 11
+#elif THICC_FORTRAN_C_VERSION == 17
+#elif TTHICC_FORTRAN_C_VERSION == 23
+#endif
+
+#undef THICC_FORTRAN_C_AT_LEAST
+#define THICC_FORTRAN_C_AT_LEAST(_version_year) (THICC_FORTRAN_C_VERSION >= (_version_year) ? 1 : 0)
+
+#undef THICC_FORTRAN_INTEGER
+#if THICC_FORTRAN_C_VERSION == 90
+  #define THICC_FORTRAN_INTEGER c_long
+#else
+  #define THICC_FORTRAN_INTEGER c_long_long
+#endif
+
+#endif /* THICC_THICC_FORTRAN_PRELUDE_H */

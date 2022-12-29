@@ -54,16 +54,16 @@ class var THICC_CPP_FINAL {
 	var() : variable(let_empty()) {}
 	explicit var(bool _value) : variable(let_boolean(_value)) {}
 	explicit var(char _value) : variable(let_character(_value)) {}
-	explicit var(signed char _value) : variable(let_character((Character) _value)) {}
-	explicit var(unsigned char _value) : variable(let_character((Character) _value)) {}
-	explicit var(short _value) : variable(let_integer(_value)) {}
-	explicit var(unsigned short _value) : variable(let_natural(_value)) {}
-	explicit var(int _value) : variable(let_integer(_value)) {}
-	explicit var(unsigned int _value) : variable(let_natural(_value)) {}
-	explicit var(long _value) : variable(let_integer(_value)) {}
-	explicit var(unsigned long _value) : variable(let_natural(_value)) {}
-	explicit var(float _value) : variable(let_real(_value)) {}
-	explicit var(double _value) : variable(let_real(_value)) {}
+	explicit var(signed char _value) : variable(let_character(static_cast<Character>(_value))) {}
+	explicit var(unsigned char _value) : variable(let_character(static_cast<Character>(_value))) {}
+	explicit var(short _value) : variable(let_integer(static_cast<Integer>(_value))) {}
+	explicit var(unsigned short _value) : variable(let_natural(static_cast<Natural>(_value))) {}
+	explicit var(int _value) : variable(let_integer(static_cast<Integer>(_value))) {}
+	explicit var(unsigned int _value) : variable(let_natural(static_cast<Natural>(_value))) {}
+	explicit var(long _value) : variable(let_integer(static_cast<Integer>(_value))) {}
+	explicit var(unsigned long _value) : variable(let_natural(static_cast<Natural>(_value))) {}
+	explicit var(float _value) : variable(let_real(static_cast<Real>(_value))) {}
+	explicit var(double _value) : variable(let_real(static_cast<Real>(_value))) {}
 	explicit var(long double _value) : variable(let_real(_value)) {}
 	explicit var(char* _value) : variable(let_string(_value)) {}
 	explicit var(MutableString _value) : variable(let_string(_value.string)) {}
