@@ -40,6 +40,8 @@ extern "C" {
 
 #include "thicc_prelude.h"
 #include "thicc_struct_var.h"
+#include "thicc_struct_string.h"
+#include "thicc_struct_array.h"
 #include <stdarg.h>
 
 MutableRank	   rank(Let);

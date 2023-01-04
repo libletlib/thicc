@@ -42,7 +42,6 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_rank.h"
 #include "thicc_struct_object.h"
-#include <stdarg.h>
 
 #define select_operator(_left, _left_rank, _operator, _right, _right_rank)                       \
   (_left_rank) == (_right_rank)	 ? (_left).behaviour->_operator(_left, _right)                   \
@@ -172,7 +171,7 @@ THICC_NODISCARD MutableBoolean requires_free(Let _let) {
   if (let_is_empty(_let))
 	return THICC_NO;
 
-  switch (rank(_let)) {
+  switch (_let.behaviour->rank) {
 	case string_rank:
 	case array_rank:
 	case object_rank:
@@ -189,7 +188,7 @@ void unlet(Let _let) {
 
 void unlet_if_required(Let _let) {
   if (requires_free(_let))
-	unlet(_let);
+	_let.behaviour->deallocate(_let);
 }
 
 THICC_NODISCARD Character* string_view(Let _let) {

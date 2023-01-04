@@ -45,9 +45,9 @@ MutableArray  array_allocate(Size);
 MutableObject object_allocate(void);
 
 void stack_deallocate(Let);
-void string_deallocate(Let);
-void array_deallocate(Let);
-void object_deallocate(Let);
+void string_deallocate(Var);
+void array_deallocate(Var);
+void object_deallocate(Var);
 
 #ifdef __cplusplus
 }

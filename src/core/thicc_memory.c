@@ -47,8 +47,9 @@ THICC_NODISCARD static void* allocate(Size _size) {
   return calloc(_size, 1);
 }
 
-static void deallocate(void* const _pointer) {
+static void deallocate(void* _pointer) {
   free(_pointer);
+  _pointer = THICC_NAUGHT;
 }
 
 THICC_NODISCARD MutableString string_allocate(Size _length) {
@@ -70,12 +71,14 @@ THICC_NODISCARD MutableObject object_allocate(void) {
 void stack_deallocate(THICC_MAYBE_UNUSED Let _let) { /* No-Op */
 }
 
-void string_deallocate(Let _let) {
-  if (string_view(_let))
+void string_deallocate(Var _let) {
+  if (string_view(_let)) {
 	deallocate((void*) _let.value.string_type.string);
+    _let.behaviour = THICC_NAUGHT;
+  }
 }
 
-void array_deallocate(Let _let) {
+void array_deallocate(Var _let) {
   if (array_view(_let)) {
 	MutableSize index = 0;
 
@@ -83,13 +86,15 @@ void array_deallocate(Let _let) {
 	  unlet(array_view(_let)[index]);
 
 	deallocate((void*) _let.value.array_type.array);
+	_let.behaviour = THICC_NAUGHT;
   }
 }
 
-void object_deallocate(Let _let) {
+void object_deallocate(Var _let) {
   if (object_view(_let)) {
 	array_deallocate(((Root) _let.value.object_type)->members);
 	deallocate(_let.value.object_type);
+	_let.behaviour = THICC_NAUGHT;
   }
 }
 

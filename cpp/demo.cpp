@@ -35,10 +35,20 @@
 #include <thicc_cpp.hpp>
 #include <iostream>
 
+using namespace thicc;
+
+auto func fn(
+	return args[0];
+)
+
 int main() {
+  let zz = func;
+
   var x = 5;
   var y = 5;
   std::cout << x + y << std::endl;
   std::cout << x[0] << std::endl;
+
+  std::cout << zz(1) << std::endl;
   return EXIT_SUCCESS;
 }

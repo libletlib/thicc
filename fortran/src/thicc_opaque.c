@@ -34,18 +34,19 @@
 extern "C" {
 #endif
 
-#include <thicc_opaque.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <thicc_opaque.h>
 
 THICC_NODISCARD static MutableOpaque var_to_opaque(Var _var) {
   MutableOpaque opaque;
-  opaque.variable = calloc(1, sizeof(Opaque));
-  *opaque.variable = _var;
+  opaque = calloc(1, sizeof(Opaque));
+  *opaque = _var;
   return opaque;
 }
 
 THICC_NODISCARD static Var opaque_to_var(Opaque _opaque) {
-  return *_opaque.variable;
+  return *_opaque;
 }
 
 THICC_NODISCARD MutableRank opaque_rank(Opaque _opaque) {
@@ -62,12 +63,12 @@ THICC_NODISCARD MutableBoolean opaque_requires_free(Opaque _opaque) {
 
 void opaque_unlet(Opaque _opaque) {
   unlet(opaque_to_var(_opaque));
-  free(_opaque.variable);
+  free(_opaque);
 }
 
 void opaque_unlet_if_required(Opaque _opaque) {
   unlet_if_required(opaque_to_var(_opaque));
-  free(_opaque.variable);
+  free(_opaque);
 }
 
 THICC_NODISCARD Character* opaque_string_view(Opaque _opaque) {
@@ -328,6 +329,10 @@ MutableOpaque opaque_let_empty(void) {
 
 MutableBoolean opaque_let_is_empty(Opaque _opaque) {
 	return let_is_empty(opaque_to_var(_opaque));
+}
+
+void print(char const* _printable) {
+	puts(_printable);
 }
 
 #ifdef __cplusplus

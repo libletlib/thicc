@@ -38,60 +38,70 @@
 #include "thicc_cpp_prelude.hpp"
 #include <ostream>
 
-template<class Type>
-inline Type* address_of(Type& _type) THICC_CPP_NOEXCEPT {
-  return reinterpret_cast<Type*>(&const_cast<char&>(reinterpret_cast<const char&>(_type)));
-}
+namespace thicc {
+  namespace backing {
 
-class var THICC_CPP_FINAL {
+	template<class Type>
+	inline THICC_CPP_CONSTEXPR Type* address_of(Type& _type) THICC_CPP_NOEXCEPT {
+	  return reinterpret_cast<Type*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(_type)));
+	}
+  }
+
+  class var;
+  typedef var const let;
+
+  class var THICC_CPP_FINAL {
 	Var variable;
 
   public:
-	virtual ~var() {
-	  unlet_if_required(this->variable);
+	~var() THICC_CPP_NOEXCEPT {
+	  unlet(this->variable);
 	}
 
-	var() : variable(let_empty()) {}
-	explicit var(bool _value) : variable(let_boolean(_value)) {}
-	explicit var(char _value) : variable(let_character(_value)) {}
-	explicit var(signed char _value) : variable(let_character(static_cast<Character>(_value))) {}
-	explicit var(unsigned char _value) : variable(let_character(static_cast<Character>(_value))) {}
-	explicit var(short _value) : variable(let_integer(static_cast<Integer>(_value))) {}
-	explicit var(unsigned short _value) : variable(let_natural(static_cast<Natural>(_value))) {}
-	explicit var(int _value) : variable(let_integer(static_cast<Integer>(_value))) {}
-	explicit var(unsigned int _value) : variable(let_natural(static_cast<Natural>(_value))) {}
-	explicit var(long _value) : variable(let_integer(static_cast<Integer>(_value))) {}
-	explicit var(unsigned long _value) : variable(let_natural(static_cast<Natural>(_value))) {}
-	explicit var(float _value) : variable(let_real(static_cast<Real>(_value))) {}
-	explicit var(double _value) : variable(let_real(static_cast<Real>(_value))) {}
-	explicit var(long double _value) : variable(let_real(_value)) {}
-	explicit var(char* _value) : variable(let_string(_value)) {}
-	explicit var(MutableString _value) : variable(let_string(_value.string)) {}
-	explicit var(MutableArray _value) : variable(let_array(_value)) {}
-	explicit var(MutableFunction _value) : variable(let_function(_value)) {}
-	explicit var(MutableObject _value) : variable(let_object(_value)) {}
-	explicit var(Var _var) : variable(_var) {}
-
-	template<typename Value>
-	var(Value const& _value) {
-	  *this = var(_value);
+	var() THICC_CPP_NOEXCEPT : variable(let_empty()) {}
+	var(bool _value) THICC_CPP_NOEXCEPT : variable(let_boolean(_value)) {}
+	var(char _value) THICC_CPP_NOEXCEPT : variable(let_character(_value)) {}
+	var(signed char _value) THICC_CPP_NOEXCEPT : variable(let_character(static_cast<Character>(_value))) {}
+	var(unsigned char _value) THICC_CPP_NOEXCEPT : variable(let_character(static_cast<Character>(_value))) {}
+	var(short _value) THICC_CPP_NOEXCEPT : variable(let_integer(static_cast<Integer>(_value))) {}
+	var(unsigned short _value) THICC_CPP_NOEXCEPT : variable(let_natural(static_cast<Natural>(_value))) {}
+	var(int _value) THICC_CPP_NOEXCEPT : variable(let_integer(static_cast<Integer>(_value))) {}
+	var(unsigned int _value) THICC_CPP_NOEXCEPT : variable(let_natural(static_cast<Natural>(_value))) {}
+	var(long _value) THICC_CPP_NOEXCEPT : variable(let_integer(static_cast<Integer>(_value))) {}
+	var(unsigned long _value) THICC_CPP_NOEXCEPT : variable(let_natural(static_cast<Natural>(_value))) {}
+	var(float _value) THICC_CPP_NOEXCEPT : variable(let_real(static_cast<Real>(_value))) {}
+	var(double _value) THICC_CPP_NOEXCEPT : variable(let_real(static_cast<Real>(_value))) {}
+	var(long double _value) THICC_CPP_NOEXCEPT : variable(let_real(_value)) {}
+	var(char* _value) THICC_CPP_NOEXCEPT : variable(let_string(_value)) {}
+	var(MutableString const& _value) THICC_CPP_NOEXCEPT : variable(let_string(_value.string)) {}
+	var(MutableArray const& _value) THICC_CPP_NOEXCEPT : variable(let_array(_value)) {}
+	var(MutableFunction _value) THICC_CPP_NOEXCEPT : variable(let_function(_value)) {}
+	var(MutableObject _value) THICC_CPP_NOEXCEPT : variable(let_object(_value)) {}
+	var(Var const& _var) THICC_CPP_NOEXCEPT {
+	  this->variable = let_copy(_var);
 	}
 
-	var(var const& _other) : variable(let_copy(_other.variable)) {}
+	var(var const& _other) THICC_CPP_NOEXCEPT : variable(let_copy(_other.variable)) {}
 
-	var& operator=(var const& _other) {
+	var& operator=(var const& _other) THICC_CPP_NOEXCEPT {
 	  this->variable = let_copy(_other.variable);
 	  return *this;
 	}
 
 	template<typename Value>
-	var& operator=(Value const& _other) {
+	var& operator=(Value const& _other) THICC_CPP_NOEXCEPT {
 	  return *this = var(_other);
 	}
 
 	template<>
-	var& operator=(var const& _other) {
+	var& operator=(var const& _other) THICC_CPP_NOEXCEPT {
 	  this->variable = let_copy(_other.variable);
+	  return *this;
+	}
+
+	template<>
+	var& operator=(Var const& _other) THICC_CPP_NOEXCEPT {
+	  this->variable = let_copy(_other);
 	  return *this;
 	}
 
@@ -101,44 +111,54 @@ class var THICC_CPP_FINAL {
 
 	var(var&& _other) noexcept : variable(let_move(_other.variable)) {}
 	var& operator=(var&& _other) noexcept {
-	  if(this != address_of(_other)) {
+	  if(this != backing::address_of(_other))
 		this->variable = let_move(_other.variable);
-	  }
+	  return *this;
+	}
+
+	var(Var&& _other) noexcept : variable(let_move(_other)) {}
+	var& operator=(Var&& _other) noexcept {
+	  if(backing::address_of(this->variable) != backing::address_of(_other))
+		this->variable = let_move(_other);
 	  return *this;
 	}
 #endif
 
-	var operator~() {
-	  return var(bit_complement(this->variable));
+	var operator~() const THICC_CPP_NOEXCEPT {
+	  return bit_complement(this->variable);
 	}
 
-	var operator!() {
-	  return var(bit_not(this->variable));
+	var operator!() const THICC_CPP_NOEXCEPT {
+	  return bit_not(this->variable);
 	}
 
-	var operator*() {
-	  return var(indirection(this->variable));
+	var operator*() const THICC_CPP_NOEXCEPT {
+	  return indirection(this->variable);
 	}
 
-	var operator-() {
-	  return var(negative(this->variable));
+	var operator-() const THICC_CPP_NOEXCEPT {
+	  return negative(this->variable);
 	}
 
-	var operator+() {
-	  return var(positive(this->variable));
+	var operator+() const THICC_CPP_NOEXCEPT {
+	  return positive(this->variable);
 	}
 
-	var operator[](var const& _value) {
+	var operator[](var const& _value) const THICC_CPP_NOEXCEPT {
 	  return index_of(this->variable, _value.variable);
 	}
 
 	template<typename Value>
-	var operator[](Value THICC_CPP_UREF _value) {
-	  return this->operator[](var(_value));
+	var operator[](Value THICC_CPP_UREF _value) const THICC_CPP_NOEXCEPT {
+	  return index_of(this->variable, var(_value).variable);
 	}
 
-	var operator[](var& _value) {
-	  return this->operator[](const_cast<var const&>(_value));
+	var operator[](var& _value) const THICC_CPP_NOEXCEPT {
+	  return index_of(this->variable, _value.variable);
+	}
+
+	operator Var() const {
+	  return this->variable;
 	}
 
 	THICC_STANDARD_BI_OPERATOR(+, sum)
@@ -151,19 +171,36 @@ class var THICC_CPP_FINAL {
 	THICC_STANDARD_BI_OPERATOR(%, modulo)
 
 	friend std::ostream& operator<<(std::ostream& _out, var const& _item) THICC_CPP_NOEXCEPT {
-		Var printable = move_string(as_string(_item.variable));
-		_out << string_view(printable);
-		unlet(printable);
-		return _out;
+	  MutableString printable = as_string(_item.variable);
+	  _out << printable.string;
+	  free(printable.string);
+	  return _out;
 	}
 
-	var operator()() {
-		if(is_invokable(this->variable))
-			return call(this->variable);
-		return var();
+	var operator()() const {
+	  if(is_invokable(this->variable))
+		return call(this->variable);
+	  return let();
 	}
-};
 
-typedef var const let;
+	template<typename Type1>
+	var operator()(Type1 THICC_CPP_UREF _type1) const {
+	  if(is_invokable(this->variable)) {
+		let temporary = let(_type1);
+		return invoke(this->variable, 1, &temporary.variable);
+	  }
+	  return var();
+	}
+
+	template<>
+	var operator()(var const& _type1) const {
+	  if(is_invokable(this->variable))
+		return invoke(this->variable, 1, &_type1.variable);
+	  return var();
+	}
+  };
+}
+
+
 
 #endif // THICC_THICC_CPP_HPP

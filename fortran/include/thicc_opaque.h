@@ -39,15 +39,11 @@ extern "C" {
 
 #include <thicc.h>
 
-struct thicc_struct_opaque {
-  Var* variable;
-};
-
-typedef struct thicc_struct_opaque MutableOpaque;
+typedef Var* MutableOpaque;
 typedef MutableOpaque const Opaque;
 
 MutableRank	   opaque_rank(Opaque);
-MutableOpaque		   opaque_cast(Opaque, Rank);
+MutableOpaque  opaque_cast(Opaque, Rank);
 MutableBoolean opaque_requires_free(Opaque);
 void		   opaque_unlet(Opaque);
 void		   opaque_unlet_if_required(Opaque);
@@ -125,6 +121,7 @@ MutableOpaque opaque_let_move(Opaque);
 
 MutableOpaque opaque_let_empty(void);
 MutableBoolean opaque_let_is_empty(Opaque);
+void print(char const*);
 
 #ifdef __cplusplus
 }

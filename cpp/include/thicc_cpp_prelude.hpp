@@ -84,51 +84,61 @@
 #undef THICC_CPP_UREF
 #undef THICC_CPP_NOEXCEPT
 #undef THICC_CPP_FINAL
+#undef THICC_CPP_CONSTEXPR
 #if THICC_CPP_AT_LEAST(2011)
 #define THICC_CPP_UREF &&
 #define THICC_CPP_NOEXCEPT noexcept
 #define THICC_CPP_FINAL final
+#define THICC_CPP_CONSTEXPR constexpr
 #else
-#define THICC_CPP_UREF
+#define THICC_CPP_UREF const&
 #define THICC_CPP_NOEXCEPT
 #define THICC_CPP_FINAL
+#define THICC_CPP_CONSTEXPR
 #endif
 
 #undef THICC_CPP_NODISCARD
+#undef THICC_CPP_MAYBE_UNUSED
 #if THICC_CPP_AT_LEAST(2017)
+#define THICC_CPP_MAYBE_UNUSED [[maybe_unused]]
 #define THICC_CPP_NODISCARD [[nodiscard]]
 #else
+#define THICC_CPP_MAYBE_UNUSED
 #define THICC_CPP_NODISCARD
 #endif
 
 #undef THICC_STANDARD_BI_OPERATOR
 #define THICC_STANDARD_BI_OPERATOR(_op, _op_name) \
 THICC_CPP_NODISCARD var& operator _op##=(var const& _right) THICC_CPP_NOEXCEPT {\
-  return *this = *this _op _right;\
+  return *this = _op_name(this->variable, _right.variable);\
 }\
 \
 template<typename Type>\
 THICC_CPP_NODISCARD var& operator _op##=(Type THICC_CPP_UREF _right) THICC_CPP_NOEXCEPT {\
-  return *this _op##= var(_right);\
+  return *this = _op_name(this->variable, var(_right).variable);\
 }                                                 \
 \
 template<typename Type>\
 THICC_CPP_NODISCARD friend var operator _op(var const& _left, Type THICC_CPP_UREF _right) THICC_CPP_NOEXCEPT {\
-  return _left _op var(_right);\
+  return _op_name(_left.variable, var(_right).variable);\
 }\
 \
 template<typename Type>\
 THICC_CPP_NODISCARD friend var operator _op(Type THICC_CPP_UREF _left, var const& _right) THICC_CPP_NOEXCEPT {\
-  return var(_left) _op _right;\
+  return _op_name(var(_left).variable, _right.variable);\
 }\
 \
 THICC_CPP_NODISCARD var operator _op(var const& _right) const THICC_CPP_NOEXCEPT {\
   return _op_name(this->variable, _right.variable);\
 }                                                 \
 THICC_CPP_NODISCARD var operator _op(var& _right) THICC_CPP_NOEXCEPT {\
-  return *this _op const_cast<var const&>(_right);\
+  return _op_name(this->variable, _right.variable);\
 }
 
-#define lambda(_code) [](var const& self, var const& args) -> var { _code }
+#define lambda(_code) [](THICC_CPP_MAYBE_UNUSED Let _self, THICC_CPP_MAYBE_UNUSED Let _args) -> Var \
+{ let self = _self, args = _args;  _code }
+
+#define fn(_code) (THICC_CPP_MAYBE_UNUSED Let _self, THICC_CPP_MAYBE_UNUSED Let _args) -> Var \
+                        { let self = _self, args = _args; _code}
 
 #endif // THICC_THICC_CPP_PRELUDE_HPP
