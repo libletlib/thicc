@@ -39,11 +39,11 @@ extern "C" {
 #include <thicc_interface.h>
 #include <thicc_struct_var.h>
 
-THICC_NODISCARD Var empty_function(THICC_MAYBE_UNUSED Let _function, THICC_MAYBE_UNUSED Let _array) {
+THICC_NODISCARD Let* empty_function(THICC_MAYBE_UNUSED Let* _function, THICC_MAYBE_UNUSED Let* _array) {
   return let_empty();
 }
 
-THICC_NODISCARD Var function_invoke(Let _function, Let _array) {
+THICC_NODISCARD Let* function_invoke(Let* _function, Let* _array) {
   return as_function(_function)(_function, _array);
 }
 

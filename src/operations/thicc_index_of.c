@@ -45,89 +45,90 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD Var boolean_index_of(Let _let, THICC_MAYBE_UNUSED Let _index) {
-  return let_boolean(_let.value.boolean_type);
+THICC_NODISCARD Let* boolean_index_of(Let* _let, THICC_MAYBE_UNUSED Let* _index) {
+  return let_boolean(_let->value.boolean_type);
 }
 
-THICC_NODISCARD Var character_index_of(Let _let, THICC_MAYBE_UNUSED Let _index) {
-  return let_character(_let.value.character_type);
+THICC_NODISCARD Let* character_index_of(Let* _let, THICC_MAYBE_UNUSED Let* _index) {
+  return let_character(_let->value.character_type);
 }
 
-THICC_NODISCARD Var natural_index_of(Let _let, Let _index) {
-  MutableString string = string_from_natural(_let.value.natural_type);
-  Let			result = let_natural((Natural) character_to_number(string_character_at(string, as_integer(_index))));
+THICC_NODISCARD Let* natural_index_of(Let* _let, Let* _index) {
+  MutableString string = string_from_natural(_let->value.natural_type);
+  Let*			result = let_natural((Natural) character_to_number(string_character_at(string, as_integer(_index))));
   free((void*) string.string);
   return result;
 }
 
-THICC_NODISCARD Var integer_index_of(Let _let, Let _index) {
-  MutableString			string	= string_from_integer(_let.value.integer_type);
+THICC_NODISCARD Let* integer_index_of(Let* _let, Let* _index) {
+  MutableString			string	= string_from_integer(_let->value.integer_type);
   CharacterPromotedType numeric = character_to_number(string_character_at(string, as_integer(_index)));
 
   if (numeric == THICC_NONNUMERIC) {
-	Let result = let_character((Character) numeric);
+	Let* result = let_character((Character) numeric);
 	free((void*) string.string);
 	return result;
   } else {
-	Let result = let_natural((Natural) numeric);
+	Let* result = let_natural((Natural) numeric);
 	free((void*) string.string);
 	return result;
   }
 }
 
-THICC_NODISCARD Var real_index_of(Let _let, Let _index) {
-  MutableString			string	= string_from_real(_let.value.real_type);
+THICC_NODISCARD Let* real_index_of(Let* _let, Let* _index) {
+  MutableString			string	= string_from_real(_let->value.real_type);
   CharacterPromotedType numeric = character_to_number(string_character_at(string, as_integer(_index)));
 
   if (numeric == THICC_NONNUMERIC) {
-	Let result = let_character((Character) numeric);
+	Let* result = let_character((Character) numeric);
 	free((void*) string.string);
 	return result;
   } else {
-	Let result = let_natural((Natural) numeric);
+	Let* result = let_natural((Natural) numeric);
 	free((void*) string.string);
 	return result;
   }
 }
 
-THICC_NODISCARD Var complex_index_of(Let _let, Let _index) {
-  if (_index.value.integer_type == 0 || _index.value.integer_type < -1)
-	return let_real(_let.value.complex_type.real);
+THICC_NODISCARD Let* complex_index_of(Let* _let, Let* _index) {
+  if (_index->value.integer_type == 0 || _index->value.integer_type < -1)
+	return let_real(_let->value.complex_type.real);
   else
-	return let_real(_let.value.complex_type.imaginary);
+	return let_real(_let->value.complex_type.imaginary);
 }
 
-THICC_NODISCARD Var string_index_of(Let _let, Let _index) {
-  return let_character(string_character_at(_let.value.string_type, as_integer(_index)));
+THICC_NODISCARD Let* string_index_of(Let* _let, Let* _index) {
+  return let_character(string_character_at(_let->value.string_type, as_integer(_index)));
 }
 
-THICC_NODISCARD Var function_index_of(Let _let, Let _index) {
-  Let let_result   = function_invoke(_let, let_empty());
-  Let index_result = function_invoke(_index, let_empty());
-  Let result	   = index_of(let_result, index_result);
-  unlet_if_required(index_result);
-  unlet_if_required(let_result);
+THICC_NODISCARD Let* function_index_of(Let* _let, Let* _index) {
+  Let* let_result   = function_invoke(_let, let_empty());
+  Let* index_result = function_invoke(_index, let_empty());
+  Let* result	   = index_of(let_result, index_result);
+  unlet(index_result);
+  unlet(let_result);
   return result;
 }
 
-THICC_NODISCARD Var array_index_of(Let _let, Let _index) {
-  return let_copy(array_element_at(_let.value.array_type, as_integer(_index)));
+THICC_NODISCARD Let* array_index_of(Let* _let, Let* _index) {
+  return let_copy(array_element_at(_let->value.array_type, as_integer(_index)));
 }
 
-THICC_NODISCARD Var object_index_of(Let _let, Let _index) {
-  Let property_name = weak_string("[]");
-  Let property		= member(_let, property_name);
-  Var result;
+THICC_NODISCARD Let* object_index_of(Let* _let, Let* _index) {
+  Let* property_name = let_string("[]");
+  Let* property		= member(_let, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 
 	return let_empty();
   }
 
-  result = object_method_invoke(_let, property, 2, &_index);
+  result = object_method_invoke(_let, property, 2, _index);
 
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

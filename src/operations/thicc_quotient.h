@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_quotient(Let, Let);
-Var character_quotient(Let, Let);
-Var natural_quotient(Let, Let);
-Var integer_quotient(Let, Let);
-Var real_quotient(Let, Let);
-Var complex_quotient(Let, Let);
-Var string_quotient(Let, Let);
-Var function_quotient(Let, Let);
-Var array_quotient(Let, Let);
-Var object_quotient(Let, Let);
+Let* boolean_quotient(Let*, Let*);
+Let* character_quotient(Let*, Let*);
+Let* natural_quotient(Let*, Let*);
+Let* integer_quotient(Let*, Let*);
+Let* real_quotient(Let*, Let*);
+Let* complex_quotient(Let*, Let*);
+Let* string_quotient(Let*, Let*);
+Let* function_quotient(Let*, Let*);
+Let* array_quotient(Let*, Let*);
+Let* object_quotient(Let*, Let*);
 
 #ifdef __cplusplus
 }

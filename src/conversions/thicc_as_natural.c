@@ -42,72 +42,74 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD MutableNatural boolean_as_natural(Let _let) {
+THICC_NODISCARD MutableNatural boolean_as_natural(Let* _let) {
 #if THICC_C89
-  return _let.value.boolean_type ? 1ul : 0ul;
+  return _let->value.boolean_type ? 1ul : 0ul;
 #else
   return _let.value.boolean_type ? 1ull : 0ull;
 #endif
 }
 
-THICC_NODISCARD MutableNatural character_as_natural(Let _let) {
-  return (Natural) _let.value.character_type;
+THICC_NODISCARD MutableNatural character_as_natural(Let* _let) {
+  return (Natural) _let->value.character_type;
 }
 
-THICC_NODISCARD MutableNatural natural_as_natural(Let _let) {
-  return _let.value.natural_type;
+THICC_NODISCARD MutableNatural natural_as_natural(Let* _let) {
+  return _let->value.natural_type;
 }
 
-THICC_NODISCARD MutableNatural integer_as_natural(Let _let) {
-  return (Natural) _let.value.integer_type;
+THICC_NODISCARD MutableNatural integer_as_natural(Let* _let) {
+  return (Natural) _let->value.integer_type;
 }
 
-THICC_NODISCARD MutableNatural real_as_natural(Let _let) {
-  return (Natural) _let.value.real_type;
+THICC_NODISCARD MutableNatural real_as_natural(Let* _let) {
+  return (Natural) _let->value.real_type;
 }
 
-THICC_NODISCARD MutableNatural complex_as_natural(Let _let) {
-  return (Natural) _let.value.complex_type.real;
+THICC_NODISCARD MutableNatural complex_as_natural(Let* _let) {
+  return (Natural) _let->value.complex_type.real;
 }
 
-THICC_NODISCARD MutableNatural string_as_natural(Let _let) {
-  return string_to_natural(_let.value.string_type);
+THICC_NODISCARD MutableNatural string_as_natural(Let* _let) {
+  return string_to_natural(_let->value.string_type);
 }
 
-THICC_NODISCARD MutableNatural function_as_natural(Let _let) {
-  Let	  temporary = function_invoke(_let, let_empty());
+THICC_NODISCARD MutableNatural function_as_natural(Let* _let) {
+  Let*	  temporary = function_invoke(_let, let_empty());
   Natural result	= as_natural(temporary);
-  unlet_if_required(temporary);
+  unlet(temporary);
   return result;
 }
 
-THICC_NODISCARD MutableNatural array_as_natural(Let _let) {
+THICC_NODISCARD MutableNatural array_as_natural(Let* _let) {
   return as_natural(*array_view(_let));
 }
 
-THICC_NODISCARD MutableNatural object_as_natural(Let _let) {
-  Let conversion_value = member(_let, move_string(string_from_pointer("natural")));
+THICC_NODISCARD MutableNatural object_as_natural(Let* _let) {
+  Let* key = let_string("natural");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*	  temporary = object_method_invoke(_let, conversion_value, 0);
 	  Natural result	= as_natural(temporary);
 
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  Natural result = as_natural(conversion_value);
 
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
 
   if (object_size(object_view(_let)) > 0)
-	return as_natural(array_view(array_view(((Root) object_view(_let))->members)[1])[0]);
+	return as_natural(*array_view(array_view(((Root) object_view(_let))->members)[1]));
 
   return 0;
 }

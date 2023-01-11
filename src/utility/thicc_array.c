@@ -102,7 +102,7 @@ THICC_NODISCARD MutableArray array_remove_subarray(Array _original, Array _subar
 	if (array_compare_n(_original, index, _subarray, _subarray.length))
 	  jindex += _subarray.length;
 	else {
-	  buffer.array[index] = _original.array[jindex];
+	  buffer.array[index] = let_copy(_original.array[jindex]);
 	  ++kindex;
 	}
   }
@@ -140,7 +140,7 @@ THICC_NODISCARD MutableArray array_filter_xor(Array _left, Array _right) {
   MutableArray buffer		   = array_allocate(_left.length + _right.length);
   Size		   shortest_length = THICC_MIN(_left.length, _right.length);
   Size		   longest_length  = THICC_MAX(_left.length, _right.length);
-  Var*		   longer_pointer  = THICC_LONGER_POINTER(_left.length, _left.array, _right.length, _right.array);
+  Let**		   longer_pointer  = THICC_LONGER_POINTER(_left.length, _left.array, _right.length, _right.array);
   MutableSize  index = 0, jindex = 0;
   for (; index < longest_length; ++index) {
 	if (index < shortest_length && not_equal(_left.array[index], _right.array[jindex])) {
@@ -196,7 +196,7 @@ THICC_NODISCARD MutableArray array_map_negative(Array _array) {
 THICC_NODISCARD MutableArray array_zip(Array _left, Array _right) {
   MutableSize  max, min, index = 0;
   MutableArray result;
-  Var*		   longer_pointer = THICC_LONGER_POINTER(_left.length, _left.array, _right.length, _right.array);
+  Let**		   longer_pointer = THICC_LONGER_POINTER(_left.length, _left.array, _right.length, _right.array);
 
   if (_left.length > _right.length) {
 	max = _left.length;
@@ -213,16 +213,16 @@ THICC_NODISCARD MutableArray array_zip(Array _left, Array _right) {
 
   for (; index < max; ++index) {
 	if (index < min) {
-	  result.array[index] = array_of(2, &_left.array[index], &_right.array[index]);
+	  result.array[index] = array_of(2, _left.array[index], _right.array[index]);
 	} else {
-	  result.array[index] = array_of(1, &longer_pointer[index]);
+	  result.array[index] = array_of(1, longer_pointer[index]);
 	}
   }
   result.length = max;
   return result;
 }
 
-THICC_NODISCARD Var array_element_at(Array _array, Integer _index) {
+THICC_NODISCARD Let* array_element_at(Array _array, Integer _index) {
   Integer array_length = (Integer) _array.length - 1;
 
   if (_index >= 0l && _index < array_length)
@@ -244,12 +244,12 @@ THICC_NODISCARD MutableArray array_concatenate(Array _left, Array _right) {
   return buffer;
 }
 
-THICC_NODISCARD MutableArray array_with_self_reference_from_list(Let _self, Size _size, va_list _list) {
+THICC_NODISCARD MutableArray array_with_self_reference_from_list(Let* _self, Size _size, va_list _list) {
   MutableArray buffer = array_allocate(_size + 1);
   MutableSize  index  = 1;
   buffer.array[0]	  = let_copy(_self);
   for (; index < _size; ++index)
-	buffer.array[index] = let_copy(*va_arg(_list, Let*));
+	buffer.array[index] = let_copy(va_arg(_list, Let*));
   buffer.length = _size + 1;
   return buffer;
 }
@@ -258,7 +258,7 @@ THICC_NODISCARD MutableArray array_from_list(Size _size, va_list _list) {
   MutableArray buffer = array_allocate(_size);
   MutableSize  index  = 0;
   for (; index < _size; ++index)
-	buffer.array[index] = let_copy(*va_arg(_list, Let*));
+	buffer.array[index] = let_copy(va_arg(_list, Let*));
   buffer.length = _size;
   return buffer;
 }

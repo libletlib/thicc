@@ -44,70 +44,67 @@ extern "C" {
 #include "thicc_struct_array.h"
 #include <stdarg.h>
 
-MutableRank	   rank(Let);
-Var			   cast(Let, Rank);
-MutableBoolean requires_free(Let);
-void		   unlet(Let);
-void		   unlet_if_required(Let);
-Var			   empty_function(Let, Let);
+MutableRank	   rank(Let*);
+Let*		   cast(Let*, Rank);
+void		   unlet(Let*);
+Let*		   empty_function(Let*, Let*);
 
-Character* string_view(Let);
-Var*   array_view(Let);
-Object object_view(Let);
+Character* string_view(Let*);
+Let* const*   array_view(Let*);
+Object object_view(Let*);
 
-MutableBoolean	 as_boolean(Let);
-MutableCharacter as_character(Let);
-MutableNatural	 as_natural(Let);
-MutableInteger	 as_integer(Let);
-MutableReal		 as_real(Let);
-MutableComplex	 as_complex(Let);
-MutableString	 as_string(Let);
-MutableFunction	 as_function(Let);
-MutableArray	 as_array(Let);
-MutableObject	 as_object(Let);
+MutableBoolean	 as_boolean(Let*);
+MutableCharacter as_character(Let*);
+MutableNatural	 as_natural(Let*);
+MutableInteger	 as_integer(Let*);
+MutableReal		 as_real(Let*);
+MutableComplex	 as_complex(Let*);
+MutableString	 as_string(Let*);
+MutableFunction	 as_function(Let*);
+MutableArray	 as_array(Let*);
+MutableObject	 as_object(Let*);
 
-Var array_of(Size, ...);
-Var object_of(Size, ...);
-Var weak_string(MutableCharacter*);
-Var call(Let);
-Var invoke(Let, Size, ...);
-Var invoke_from_list(Let, Size, va_list);
-Var member(Let, Let);
-Var sum(Let, Let);
-Var difference(Let, Let);
-Var quotient(Let, Let);
-Var modulo(Let, Let);
-Var product(Let, Let);
-Var bit_and(Let, Let);
-Var bit_or(Let, Let);
-Var bit_xor(Let, Let);
-Var index_of(Let, Let);
+Let* array_of(Size, ...);
+Let* object_of(Size, ...);
+Let* call(Let*);
+Let* invoke(Let*, Size, ...);
+Let* invoke_from_list(Let*, Size, va_list);
+Let* member(Let*, Let*);
+Let* sum(Let*, Let*);
+Let* difference(Let*, Let*);
+Let* quotient(Let*, Let*);
+Let* modulo(Let*, Let*);
+Let* product(Let*, Let*);
+Let* bit_and(Let*, Let*);
+Let* bit_or(Let*, Let*);
+Let* bit_xor(Let*, Let*);
+Let* index_of(Let*, Let*);
 
-Var bit_not(Let);
-Var bit_complement(Let);
-Var indirection(Let);
-Var negative(Let);
-Var positive(Let);
+Let* bit_not(Let*);
+Let* bit_complement(Let*);
+Let* indirection(Let*);
+Let* negative(Let*);
+Let* positive(Let*);
 
-MutableComparison compare(Let, Let);
-MutableBoolean	  equal(Let, Let);
-MutableBoolean	  greater_than(Let, Let);
-MutableBoolean	  less_than(Let, Let);
-MutableBoolean	  not_equal(Let, Let);
+MutableComparison compare(Let*, Let*);
+MutableBoolean	  equal(Let*, Let*);
+MutableBoolean	  greater_than(Let*, Let*);
+MutableBoolean	  less_than(Let*, Let*);
+MutableBoolean	  not_equal(Let*, Let*);
 
-MutableSize length(Let);
+MutableSize length(Let*);
 
-MutableBoolean is_character(Let);
-MutableBoolean is_numeric(Let);
-MutableBoolean is_integral(Let);
-MutableBoolean is_unsigned(Let);
-MutableBoolean is_signed(Let);
-MutableBoolean is_floating_point(Let);
-MutableBoolean is_string(Let);
-MutableBoolean is_invokable(Let);
-MutableBoolean is_array(Let);
-MutableBoolean is_object(Let);
-MutableBoolean is_indexable(Let);
+MutableBoolean is_character(Let*);
+MutableBoolean is_numeric(Let*);
+MutableBoolean is_integral(Let*);
+MutableBoolean is_unsigned(Let*);
+MutableBoolean is_signed(Let*);
+MutableBoolean is_floating_point(Let*);
+MutableBoolean is_string(Let*);
+MutableBoolean is_invokable(Let*);
+MutableBoolean is_array(Let*);
+MutableBoolean is_object(Let*);
+MutableBoolean is_indexable(Let*);
 
 #ifdef __cplusplus
 }

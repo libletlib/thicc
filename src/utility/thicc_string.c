@@ -113,8 +113,8 @@ THICC_NODISCARD MutableArray string_tokenise(MutableString _string, String _deli
   result = array_from_elements(0);
 
   while (token.string) {
-	Let token_string = let_string(token.string);
-	result			 = array_concatenate(result, array_from_elements(1, &token_string));
+	Let* token_string = let_string(token.string);
+	result			 = array_concatenate(result, array_from_elements(1, token_string));
 	token.string	 = string_tokenise_helper(THICC_NAUGHT, _delimiter.string, &state);
 	unlet(token_string);
   }
@@ -392,9 +392,9 @@ THICC_NODISCARD MutableString string_from_array(Array _array) {
 }
 
 THICC_NODISCARD static MutableString string_from_object_helper(Let* _let) {
-  if (rank(*_let) == function_rank)
+  if (rank(_let) == function_rank)
 	return string_copy(string_from_pointer("function"));
-  return as_string(*_let);
+  return as_string(_let);
 }
 
 THICC_NODISCARD MutableString string_from_object(ImmutableObject _object) {
@@ -408,14 +408,14 @@ THICC_NODISCARD MutableString string_from_object(ImmutableObject _object) {
   MutableSize	  index	 = 0;
 
   if (size != 0) {
-	MutableString tail = string_from_object_helper(&keys.array[index]);
+	MutableString tail = string_from_object_helper(keys.array[index]);
 
 	buffer = string_concatenate(buffer, tail);
 	old	   = buffer;
 	buffer = string_concatenate(buffer, key_value_delimiter);
 	free(old.string);
 	free(tail.string);
-	tail = string_from_object_helper(&values.array[index]);
+	tail = string_from_object_helper(values.array[index]);
 
 	old	   = buffer;
 	buffer = string_concatenate(buffer, tail);
@@ -430,7 +430,7 @@ THICC_NODISCARD MutableString string_from_object(ImmutableObject _object) {
 	}
 
 	for (; index < size; ++index) {
-	  tail = string_from_object_helper(&keys.array[index]);
+	  tail = string_from_object_helper(keys.array[index]);
 
 	  old	 = buffer;
 	  buffer = string_concatenate(buffer, tail);
@@ -441,7 +441,7 @@ THICC_NODISCARD MutableString string_from_object(ImmutableObject _object) {
 	  buffer = string_concatenate(buffer, key_value_delimiter);
 	  free(old.string);
 
-	  tail = string_from_object_helper(&values.array[index]);
+	  tail = string_from_object_helper(values.array[index]);
 
 	  old	 = buffer;
 	  buffer = string_concatenate(buffer, tail);

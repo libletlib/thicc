@@ -42,24 +42,23 @@ struct thicc_struct_var {
   Behaviour*   behaviour;
 };
 
-Var let_init(void);
-Var let_boolean(Boolean);
-Var let_character(Character);
-Var let_natural(Natural);
-Var let_integer(Integer);
-Var let_real(Real);
-Var let_complex(Complex);
-Var let_string(MutableCharacter*);
-Var move_string(MutableString);
-Var let_function(Function);
-Var let_array(Array);
-Var move_array(MutableArray);
-Var let_object(ImmutableObject);
-Var move_object(MutableObject);
-Var let_copy(Let);
-Var let_move(Var);
+Let* let_boolean(Boolean);
+Let* let_character(Character);
+Let* let_natural(Natural);
+Let* let_integer(Integer);
+Let* let_real(Real);
+Let* let_complex(Complex);
+Let* let_string(MutableCharacter*);
+Let* move_string(MutableString);
+Let* let_function(Function);
+Let* let_array(Array);
+Let* move_array(MutableArray);
+Let* let_object(ImmutableObject);
+Let* move_object(MutableObject);
+Let* let_copy(Let*);
+Let* let_move(Var*);
 
-Var			   let_empty(void);
-MutableBoolean let_is_empty(Let);
+Let*		   let_empty(void);
+MutableBoolean let_is_empty(Let*);
 
 #endif /* THICC_THICC_STRUCT_VAR_H */

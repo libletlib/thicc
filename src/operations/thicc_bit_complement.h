@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_bit_complement(Let);
-Var character_bit_complement(Let);
-Var natural_bit_complement(Let);
-Var integer_bit_complement(Let);
-Var real_bit_complement(Let);
-Var complex_bit_complement(Let);
-Var string_bit_complement(Let);
-Var function_bit_complement(Let);
-Var array_bit_complement(Let);
-Var object_bit_complement(Let);
+Let* boolean_bit_complement(Let*);
+Let* character_bit_complement(Let*);
+Let* natural_bit_complement(Let*);
+Let* integer_bit_complement(Let*);
+Let* real_bit_complement(Let*);
+Let* complex_bit_complement(Let*);
+Let* string_bit_complement(Let*);
+Let* function_bit_complement(Let*);
+Let* array_bit_complement(Let*);
+Let* object_bit_complement(Let*);
 
 #ifdef __cplusplus
 }

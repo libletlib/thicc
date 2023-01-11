@@ -43,62 +43,63 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD Var boolean_positive(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD Let* boolean_positive(THICC_MAYBE_UNUSED Let* _let) {
   return let_boolean(THICC_YES);
 }
 
-THICC_NODISCARD Var character_positive(Let _let) {
+THICC_NODISCARD Let* character_positive(Let* _let) {
 #if THICC_CHAR_SIGNED
-  if (((CharacterPromotedType) _let.value.character_type) < 0)
-	return let_character((Character) + (CharacterPromotedType) _let.value.character_type);
+  if (((CharacterPromotedType) _let->value.character_type) < 0)
+	return let_character((Character) + (CharacterPromotedType) _let->value.character_type);
 #endif
-  return let_character(_let.value.character_type);
+  return let_character(_let->value.character_type);
 }
 
-THICC_NODISCARD Var natural_positive(Let _let) {
-  return let_natural(_let.value.natural_type);
+THICC_NODISCARD Let* natural_positive(Let* _let) {
+  return let_natural(_let->value.natural_type);
 }
 
-THICC_NODISCARD Var integer_positive(Let _let) {
-  return let_integer(+_let.value.integer_type);
+THICC_NODISCARD Let* integer_positive(Let* _let) {
+  return let_integer(+_let->value.integer_type);
 }
 
-THICC_NODISCARD Var real_positive(Let _let) {
-  return let_real(+_let.value.real_type);
+THICC_NODISCARD Let* real_positive(Let* _let) {
+  return let_real(+_let->value.real_type);
 }
 
-THICC_NODISCARD Var complex_positive(Let _let) {
-  return let_complex(cmplx(+_let.value.complex_type.real, _let.value.complex_type.imaginary));
+THICC_NODISCARD Let* complex_positive(Let* _let) {
+  return let_complex(cmplx(+_let->value.complex_type.real, _let->value.complex_type.imaginary));
 }
 
-THICC_NODISCARD Var string_positive(Let _let) {
-  return move_string(string_map_positive(_let.value.string_type));
+THICC_NODISCARD Let* string_positive(Let* _let) {
+  return move_string(string_map_positive(_let->value.string_type));
 }
 
-THICC_NODISCARD Var function_positive(Let _let) {
-  Let let_result = function_invoke(_let, let_empty());
-  Let result	 = positive(let_result);
-  unlet_if_required(let_result);
+THICC_NODISCARD Let* function_positive(Let* _let) {
+  Let* let_result = function_invoke(_let, let_empty());
+  Let* result	 = positive(let_result);
+  unlet(let_result);
   return result;
 }
 
-THICC_NODISCARD Var array_positive(Let _let) {
-  return move_array(array_map_positive(_let.value.array_type));
+THICC_NODISCARD Let* array_positive(Let* _let) {
+  return move_array(array_map_positive(_let->value.array_type));
 }
 
-THICC_NODISCARD Var object_positive(Let _let) {
-  Let property_name = weak_string("positive");
-  Let property		= member(_let, property_name);
-  Var result;
+THICC_NODISCARD Let* object_positive(Let* _let) {
+  Let* property_name = let_string("positive");
+  Let* property		= member(_let, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 	return let_empty();
   }
 
   result = object_method_invoke(_let, property, 0);
 
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

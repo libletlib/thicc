@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_bit_xor(Let, Let);
-Var character_bit_xor(Let, Let);
-Var natural_bit_xor(Let, Let);
-Var integer_bit_xor(Let, Let);
-Var real_bit_xor(Let, Let);
-Var complex_bit_xor(Let, Let);
-Var string_bit_xor(Let, Let);
-Var function_bit_xor(Let, Let);
-Var array_bit_xor(Let, Let);
-Var object_bit_xor(Let, Let);
+Let* boolean_bit_xor(Let*, Let*);
+Let* character_bit_xor(Let*, Let*);
+Let* natural_bit_xor(Let*, Let*);
+Let* integer_bit_xor(Let*, Let*);
+Let* real_bit_xor(Let*, Let*);
+Let* complex_bit_xor(Let*, Let*);
+Let* string_bit_xor(Let*, Let*);
+Let* function_bit_xor(Let*, Let*);
+Let* array_bit_xor(Let*, Let*);
+Let* object_bit_xor(Let*, Let*);
 
 #ifdef __cplusplus
 }

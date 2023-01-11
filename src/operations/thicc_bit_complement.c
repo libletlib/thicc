@@ -45,59 +45,60 @@ extern "C" {
 #include "../utility/thicc_real.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD Var boolean_bit_complement(Let _let) {
-  return let_boolean(_let.value.boolean_type ? THICC_NO : THICC_YES);
+THICC_NODISCARD Let* boolean_bit_complement(Let* _let) {
+  return let_boolean(_let->value.boolean_type ? THICC_NO : THICC_YES);
 }
 
-THICC_NODISCARD Var character_bit_complement(Let _let) {
-  return let_character((Character) ~(CharacterPromotedType) _let.value.character_type);
+THICC_NODISCARD Let* character_bit_complement(Let* _let) {
+  return let_character((Character) ~(CharacterPromotedType) _let->value.character_type);
 }
 
-THICC_NODISCARD Var natural_bit_complement(Let _let) {
-  return let_natural(~_let.value.natural_type);
+THICC_NODISCARD Let* natural_bit_complement(Let* _let) {
+  return let_natural(~_let->value.natural_type);
 }
 
-THICC_NODISCARD Var integer_bit_complement(Let _let) {
-  return let_integer(~_let.value.integer_type);
+THICC_NODISCARD Let* integer_bit_complement(Let* _let) {
+  return let_integer(~_let->value.integer_type);
 }
 
-THICC_NODISCARD Var real_bit_complement(Let _let) {
-  return let_real(real_byte_complement(_let.value.real_type));
+THICC_NODISCARD Let* real_bit_complement(Let* _let) {
+  return let_real(real_byte_complement(_let->value.real_type));
 }
 
-THICC_NODISCARD Var complex_bit_complement(Let _let) {
-  return let_complex(complex_byte_complement(_let.value.complex_type));
+THICC_NODISCARD Let* complex_bit_complement(Let* _let) {
+  return let_complex(complex_byte_complement(_let->value.complex_type));
 }
 
-THICC_NODISCARD Var string_bit_complement(Let _let) {
-  return move_string(string_map_bit_complement(_let.value.string_type));
+THICC_NODISCARD Let* string_bit_complement(Let* _let) {
+  return move_string(string_map_bit_complement(_let->value.string_type));
 }
 
-THICC_NODISCARD Var function_bit_complement(Let _let) {
-  Let let_result = function_invoke(_let, let_empty());
-  Let result	 = bit_complement(let_result);
-  unlet_if_required(let_result);
+THICC_NODISCARD Let* function_bit_complement(Let* _let) {
+  Let* let_result = function_invoke(_let, let_empty());
+  Let* result	 = bit_complement(let_result);
+  unlet(let_result);
   return result;
 }
 
-THICC_NODISCARD Var array_bit_complement(Let _let) {
-  return move_array(array_map_bit_complement(_let.value.array_type));
+THICC_NODISCARD Let* array_bit_complement(Let* _let) {
+  return move_array(array_map_bit_complement(_let->value.array_type));
 }
 
-THICC_NODISCARD Var object_bit_complement(Let _let) {
-  Let property_name = move_string(string_from_pointer("~"));
-  Let property		= member(_let, property_name);
-  Var result;
+THICC_NODISCARD Let* object_bit_complement(Let* _let) {
+  Let* property_name = let_string("~");
+  Let* property		= member(_let, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 
 	return let_empty();
   }
 
   result = object_method_invoke(_let, property, 0);
 
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

@@ -36,16 +36,16 @@
 
 #include <thicc_prelude.h>
 
-MutableBoolean rank_is_character(Let);
-MutableBoolean rank_is_numeric(Let);
-MutableBoolean rank_is_integral(Let);
-MutableBoolean rank_is_signed(Let);
-MutableBoolean rank_is_unsigned(Let);
-MutableBoolean rank_is_floating_point(Let);
-MutableBoolean rank_is_string(Let);
-MutableBoolean rank_is_invokable(Let);
-MutableBoolean rank_is_array(Let);
-MutableBoolean rank_is_indexable(Let);
-MutableBoolean rank_is_object(Let);
+MutableBoolean rank_is_character(Let*);
+MutableBoolean rank_is_numeric(Let*);
+MutableBoolean rank_is_integral(Let*);
+MutableBoolean rank_is_signed(Let*);
+MutableBoolean rank_is_unsigned(Let*);
+MutableBoolean rank_is_floating_point(Let*);
+MutableBoolean rank_is_string(Let*);
+MutableBoolean rank_is_invokable(Let*);
+MutableBoolean rank_is_array(Let*);
+MutableBoolean rank_is_indexable(Let*);
+MutableBoolean rank_is_object(Let*);
 
 #endif /* THICC_THICC_RANK_H */

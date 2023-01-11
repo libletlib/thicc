@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_modulo(Let, Let);
-Var character_modulo(Let, Let);
-Var natural_modulo(Let, Let);
-Var integer_modulo(Let, Let);
-Var real_modulo(Let, Let);
-Var complex_modulo(Let, Let);
-Var string_modulo(Let, Let);
-Var function_modulo(Let, Let);
-Var array_modulo(Let, Let);
-Var object_modulo(Let, Let);
+Let* boolean_modulo(Let*, Let*);
+Let* character_modulo(Let*, Let*);
+Let* natural_modulo(Let*, Let*);
+Let* integer_modulo(Let*, Let*);
+Let* real_modulo(Let*, Let*);
+Let* complex_modulo(Let*, Let*);
+Let* string_modulo(Let*, Let*);
+Let* function_modulo(Let*, Let*);
+Let* array_modulo(Let*, Let*);
+Let* object_modulo(Let*, Let*);
 
 #ifdef __cplusplus
 }

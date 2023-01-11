@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableNatural boolean_as_natural(Let);
-MutableNatural character_as_natural(Let);
-MutableNatural natural_as_natural(Let);
-MutableNatural integer_as_natural(Let);
-MutableNatural real_as_natural(Let);
-MutableNatural complex_as_natural(Let);
-MutableNatural string_as_natural(Let);
-MutableNatural function_as_natural(Let);
-MutableNatural array_as_natural(Let);
-MutableNatural object_as_natural(Let);
+MutableNatural boolean_as_natural(Let*);
+MutableNatural character_as_natural(Let*);
+MutableNatural natural_as_natural(Let*);
+MutableNatural integer_as_natural(Let*);
+MutableNatural real_as_natural(Let*);
+MutableNatural complex_as_natural(Let*);
+MutableNatural string_as_natural(Let*);
+MutableNatural function_as_natural(Let*);
+MutableNatural array_as_natural(Let*);
+MutableNatural object_as_natural(Let*);
 
 #ifdef __cplusplus
 }

@@ -43,66 +43,67 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD Var boolean_quotient(Let _left, Let _right) {
-  return let_boolean((_left.value.boolean_type && _right.value.boolean_type ? THICC_YES : THICC_NO));
+THICC_NODISCARD Let* boolean_quotient(Let* _left, Let* _right) {
+  return let_boolean((_left->value.boolean_type && _right->value.boolean_type ? THICC_YES : THICC_NO));
 }
 
-THICC_NODISCARD Var character_quotient(Let _left, Let _right) {
-  if (_left.value.character_type % _right.value.character_type == 0)
-	return let_character((Character) (_left.value.character_type / _right.value.character_type));
+THICC_NODISCARD Let* character_quotient(Let* _left, Let* _right) {
+  if (_left->value.character_type % _right->value.character_type == 0)
+	return let_character((Character) (_left->value.character_type / _right->value.character_type));
   return real_quotient(let_real(as_real(_left)), let_real(as_real(_right)));
 }
 
-THICC_NODISCARD Var natural_quotient(Let _left, Let _right) {
-  if (_left.value.natural_type % _right.value.natural_type == 0)
-	return let_natural(_left.value.natural_type / _right.value.natural_type);
+THICC_NODISCARD Let* natural_quotient(Let* _left, Let* _right) {
+  if (_left->value.natural_type % _right->value.natural_type == 0)
+	return let_natural(_left->value.natural_type / _right->value.natural_type);
   return real_quotient(let_real(as_real(_left)), let_real(as_real(_right)));
 }
 
-THICC_NODISCARD Var integer_quotient(Let _left, Let _right) {
-  if (_left.value.integer_type % _right.value.integer_type == 0)
-	return let_integer(_left.value.integer_type / _right.value.integer_type);
+THICC_NODISCARD Let* integer_quotient(Let* _left, Let* _right) {
+  if (_left->value.integer_type % _right->value.integer_type == 0)
+	return let_integer(_left->value.integer_type / _right->value.integer_type);
   return real_quotient(let_real(as_real(_left)), let_real(as_real(_right)));
 }
 
-THICC_NODISCARD Var real_quotient(Let _left, Let _right) {
-  return let_real(_left.value.real_type / _right.value.real_type);
+THICC_NODISCARD Let* real_quotient(Let* _left, Let* _right) {
+  return let_real(_left->value.real_type / _right->value.real_type);
 }
 
-THICC_NODISCARD Var complex_quotient(Let _left, Let _right) {
-  return let_complex(cmplx(_left.value.complex_type.real / _right.value.complex_type.real,
-						   _left.value.complex_type.imaginary / _right.value.complex_type.imaginary));
+THICC_NODISCARD Let* complex_quotient(Let* _left, Let* _right) {
+  return let_complex(cmplx(_left->value.complex_type.real / _right->value.complex_type.real,
+						   _left->value.complex_type.imaginary / _right->value.complex_type.imaginary));
 }
 
-THICC_NODISCARD Var string_quotient(Let _left, Let _right) {
-  return move_string(string_filter_or(_left.value.string_type, _right.value.string_type));
+THICC_NODISCARD Let* string_quotient(Let* _left, Let* _right) {
+  return move_string(string_filter_or(_left->value.string_type, _right->value.string_type));
 }
 
-THICC_NODISCARD Var function_quotient(Let _left, Let _right) {
-  Let left_result  = function_invoke(_left, let_empty());
-  Let right_result = function_invoke(_right, let_empty());
-  Let result	   = quotient(left_result, right_result);
-  unlet_if_required(right_result);
-  unlet_if_required(left_result);
+THICC_NODISCARD Let* function_quotient(Let* _left, Let* _right) {
+  Let* left_result  = function_invoke(_left, let_empty());
+  Let* right_result = function_invoke(_right, let_empty());
+  Let* result	   = quotient(left_result, right_result);
+  unlet(right_result);
+  unlet(left_result);
   return result;
 }
 
-THICC_NODISCARD Var array_quotient(Let _left, Let _right) {
-  return move_array(array_filter_or(_left.value.array_type, _right.value.array_type));
+THICC_NODISCARD Let* array_quotient(Let* _left, Let* _right) {
+  return move_array(array_filter_or(_left->value.array_type, _right->value.array_type));
 }
 
-THICC_NODISCARD Var object_quotient(Let _left, Let _right) {
-  Let property_name = weak_string("/");
-  Let property		= member(_left, property_name);
-  Var result;
+THICC_NODISCARD Let* object_quotient(Let* _left, Let* _right) {
+  Let* property_name = let_string("/");
+  Let* property		= member(_left, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 	return let_empty();
   }
 
-  result = object_method_invoke(_left, property, 2, &_right);
-  unlet_if_required(property);
+  result = object_method_invoke(_left, property, 2, _right);
+  unlet(property);
 
   return result;
 }

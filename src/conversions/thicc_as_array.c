@@ -41,62 +41,64 @@ extern "C" {
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_object.h"
 
-THICC_NODISCARD MutableArray boolean_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray boolean_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray character_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray character_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray natural_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray natural_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray integer_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray integer_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray real_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray real_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray complex_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray complex_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray string_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray string_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray function_as_array(Let _let) {
-  return array_from_elements(1, &_let);
+THICC_NODISCARD MutableArray function_as_array(Let* _let) {
+  return array_from_elements(1, _let);
 }
 
-THICC_NODISCARD MutableArray array_as_array(Let _let) {
-  return array_copy(_let.value.array_type);
+THICC_NODISCARD MutableArray array_as_array(Let* _let) {
+  return array_copy(_let->value.array_type);
 }
 
-THICC_NODISCARD MutableArray object_as_array(Let _let) {
-  Let conversion_value = member(_let, weak_string("array"));
+THICC_NODISCARD MutableArray object_as_array(Let* _let) {
+  Let* key = let_string("array");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let		   temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*		   temporary = object_method_invoke(_let, conversion_value, 0);
 	  MutableArray result	 = as_array(temporary);
 
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  MutableArray result = as_array(conversion_value);
 
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
 
   if (object_size(object_view(_let)) > 0)
 	return array_copy(root_values(_let));

@@ -43,61 +43,62 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD Var boolean_difference(Let _left, Let _right) {
-  return let_boolean((_left.value.boolean_type && !_right.value.boolean_type) ? THICC_YES : THICC_NO);
+THICC_NODISCARD Let* boolean_difference(Let* _left, Let* _right) {
+  return let_boolean((_left->value.boolean_type && !_right->value.boolean_type) ? THICC_YES : THICC_NO);
 }
 
-THICC_NODISCARD Var character_difference(Let _left, Let _right) {
-  return let_character((Character) (CharacterPromotedType) (_left.value.character_type - _right.value.character_type));
+THICC_NODISCARD Let* character_difference(Let* _left, Let* _right) {
+  return let_character((Character) (CharacterPromotedType) (_left->value.character_type - _right->value.character_type));
 }
 
-THICC_NODISCARD Var natural_difference(Let _left, Let _right) {
-  return let_natural(_left.value.natural_type - _right.value.natural_type);
+THICC_NODISCARD Let* natural_difference(Let* _left, Let* _right) {
+  return let_natural(_left->value.natural_type - _right->value.natural_type);
 }
 
-THICC_NODISCARD Var integer_difference(Let _left, Let _right) {
-  return let_integer(_left.value.integer_type - _right.value.integer_type);
+THICC_NODISCARD Let* integer_difference(Let* _left, Let* _right) {
+  return let_integer(_left->value.integer_type - _right->value.integer_type);
 }
 
-THICC_NODISCARD Var real_difference(Let _left, Let _right) {
-  return let_real(_left.value.real_type - _right.value.real_type);
+THICC_NODISCARD Let* real_difference(Let* _left, Let* _right) {
+  return let_real(_left->value.real_type - _right->value.real_type);
 }
 
-THICC_NODISCARD Var complex_difference(Let _left, Let _right) {
-  return let_complex(cmplx(_left.value.complex_type.real - _right.value.complex_type.real,
-						   _left.value.complex_type.imaginary - _right.value.complex_type.imaginary));
+THICC_NODISCARD Let* complex_difference(Let* _left, Let* _right) {
+  return let_complex(cmplx(_left->value.complex_type.real - _right->value.complex_type.real,
+						   _left->value.complex_type.imaginary - _right->value.complex_type.imaginary));
 }
 
-THICC_NODISCARD Var string_difference(Let _left, Let _right) {
-  return move_string(string_remove_substring(_left.value.string_type, _right.value.string_type));
+THICC_NODISCARD Let* string_difference(Let* _left, Let* _right) {
+  return move_string(string_remove_substring(_left->value.string_type, _right->value.string_type));
 }
 
-THICC_NODISCARD Var function_difference(Let _left, Let _right) {
-  Let left_result  = function_invoke(_left, let_empty());
-  Let right_result = function_invoke(_right, let_empty());
-  Let result	   = difference(left_result, right_result);
-  unlet_if_required(right_result);
-  unlet_if_required(left_result);
+THICC_NODISCARD Let* function_difference(Let* _left, Let* _right) {
+  Let* left_result  = function_invoke(_left, let_empty());
+  Let* right_result = function_invoke(_right, let_empty());
+  Let* result	   = difference(left_result, right_result);
+  unlet(right_result);
+  unlet(left_result);
   return result;
 }
 
-THICC_NODISCARD Var array_difference(Let _left, Let _right) {
-  return move_array(array_remove_subarray(_left.value.array_type, _right.value.array_type));
+THICC_NODISCARD Let* array_difference(Let* _left, Let* _right) {
+  return move_array(array_remove_subarray(_left->value.array_type, _right->value.array_type));
 }
 
-THICC_NODISCARD Var object_difference(Let _left, Let _right) {
-  Let property_name = move_string(string_from_pointer("-"));
-  Let property		= member(_left, property_name);
-  Var result;
+THICC_NODISCARD Let* object_difference(Let* _left, Let* _right) {
+  Let* property_name = let_string("-");
+  Let* property		= member(_left, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 	return let_empty();
   }
 
-  result = object_method_invoke(_left, property, 2, &_right);
+  result = object_method_invoke(_left, property, 2, _right);
 
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

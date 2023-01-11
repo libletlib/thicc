@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableArray boolean_as_array(Let);
-MutableArray character_as_array(Let);
-MutableArray natural_as_array(Let);
-MutableArray integer_as_array(Let);
-MutableArray real_as_array(Let);
-MutableArray complex_as_array(Let);
-MutableArray string_as_array(Let);
-MutableArray function_as_array(Let);
-MutableArray array_as_array(Let);
-MutableArray object_as_array(Let);
+MutableArray boolean_as_array(Let*);
+MutableArray character_as_array(Let*);
+MutableArray natural_as_array(Let*);
+MutableArray integer_as_array(Let*);
+MutableArray real_as_array(Let*);
+MutableArray complex_as_array(Let*);
+MutableArray string_as_array(Let*);
+MutableArray function_as_array(Let*);
+MutableArray array_as_array(Let*);
+MutableArray object_as_array(Let*);
 
 #ifdef __cplusplus
 }

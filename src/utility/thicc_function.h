@@ -40,7 +40,7 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var				function_invoke(Let, Let);
+Let*			function_invoke(Let*, Let*);
 MutableFunction function_empty(void);
 MutableBoolean	function_is_empty(Function);
 

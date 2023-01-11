@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_bit_not(Let);
-Var character_bit_not(Let);
-Var natural_bit_not(Let);
-Var integer_bit_not(Let);
-Var real_bit_not(Let);
-Var complex_bit_not(Let);
-Var string_bit_not(Let);
-Var function_bit_not(Let);
-Var array_bit_not(Let);
-Var object_bit_not(Let);
+Let* boolean_bit_not(Let*);
+Let* character_bit_not(Let*);
+Let* natural_bit_not(Let*);
+Let* integer_bit_not(Let*);
+Let* real_bit_not(Let*);
+Let* complex_bit_not(Let*);
+Let* string_bit_not(Let*);
+Let* function_bit_not(Let*);
+Let* array_bit_not(Let*);
+Let* object_bit_not(Let*);
 
 #ifdef __cplusplus
 }

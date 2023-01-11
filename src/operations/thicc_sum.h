@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_sum(Let, Let);
-Var character_sum(Let, Let);
-Var natural_sum(Let, Let);
-Var integer_sum(Let, Let);
-Var real_sum(Let, Let);
-Var complex_sum(Let, Let);
-Var string_sum(Let, Let);
-Var function_sum(Let, Let);
-Var array_sum(Let, Let);
-Var object_sum(Let, Let);
+Let* boolean_sum(Let*, Let*);
+Let* character_sum(Let*, Let*);
+Let* natural_sum(Let*, Let*);
+Let* integer_sum(Let*, Let*);
+Let* real_sum(Let*, Let*);
+Let* complex_sum(Let*, Let*);
+Let* string_sum(Let*, Let*);
+Let* function_sum(Let*, Let*);
+Let* array_sum(Let*, Let*);
+Let* object_sum(Let*, Let*);
 
 #ifdef __cplusplus
 }

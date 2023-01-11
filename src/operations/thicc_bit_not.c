@@ -43,69 +43,70 @@ extern "C" {
 #include "../utility/thicc_math.h"
 #include "../utility/thicc_object.h"
 
-THICC_NODISCARD Var boolean_bit_not(Let _let) {
-  return let_boolean(_let.value.boolean_type ? THICC_NO : THICC_YES);
+THICC_NODISCARD Let* boolean_bit_not(Let* _let) {
+  return let_boolean(_let->value.boolean_type ? THICC_NO : THICC_YES);
 }
 
-THICC_NODISCARD Var character_bit_not(Let _let) {
-  if (_let.value.character_type)
+THICC_NODISCARD Let* character_bit_not(Let* _let) {
+  if (_let->value.character_type)
 	return let_boolean(THICC_NO);
   return let_boolean(THICC_YES);
 }
 
-THICC_NODISCARD Var natural_bit_not(Let _let) {
-  if (_let.value.natural_type)
+THICC_NODISCARD Let* natural_bit_not(Let* _let) {
+  if (_let->value.natural_type)
 	return let_boolean(THICC_NO);
   return let_boolean(THICC_YES);
 }
 
-THICC_NODISCARD Var integer_bit_not(Let _let) {
-  if (_let.value.integer_type)
+THICC_NODISCARD Let* integer_bit_not(Let* _let) {
+  if (_let->value.integer_type)
 	return let_boolean(THICC_NO);
   return let_boolean(THICC_YES);
 }
 
-THICC_NODISCARD Var real_bit_not(Let _let) {
-  if (math_real_equal(_let.value.real_type, 0.0))
+THICC_NODISCARD Let* real_bit_not(Let* _let) {
+  if (math_real_equal(_let->value.real_type, 0.0))
 	return let_boolean(THICC_YES);
   return let_boolean(THICC_NO);
 }
 
-THICC_NODISCARD Var complex_bit_not(Let _let) {
-  if (math_complex_equal(_let.value.complex_type, cmplx(0.0l, 0.0l)))
+THICC_NODISCARD Let* complex_bit_not(Let* _let) {
+  if (math_complex_equal(_let->value.complex_type, cmplx(0.0l, 0.0l)))
 	return let_boolean(THICC_YES);
   return let_boolean(THICC_NO);
 }
 
-THICC_NODISCARD Var string_bit_not(Let _let) {
+THICC_NODISCARD Let* string_bit_not(Let* _let) {
   if (string_view(_let))
 	return let_boolean(THICC_NO);
   return let_boolean(THICC_YES);
 }
 
-THICC_NODISCARD Var function_bit_not(Let _let) {
-  Let let_result = function_invoke(_let, let_empty());
-  Let result	 = bit_not(let_result);
-  unlet_if_required(let_result);
+THICC_NODISCARD Let* function_bit_not(Let* _let) {
+  Let* let_result = function_invoke(_let, let_empty());
+  Let* result	 = bit_not(let_result);
+  unlet(let_result);
   return result;
 }
 
-THICC_NODISCARD Var array_bit_not(Let _let) {
-  return move_array(array_map_bit_not(_let.value.array_type));
+THICC_NODISCARD Let* array_bit_not(Let* _let) {
+  return move_array(array_map_bit_not(_let->value.array_type));
 }
 
-THICC_NODISCARD Var object_bit_not(Let _let) {
-  Let property_name = weak_string("!");
-  Let property		= member(_let, property_name);
-  Var result;
+THICC_NODISCARD Let* object_bit_not(Let* _let) {
+  Let* property_name = let_string("!");
+  Let* property		= member(_let, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 	return let_empty();
   }
 
   result = object_method_invoke(_let, property, 0);
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

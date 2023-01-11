@@ -46,6 +46,6 @@
 #define THICC_4TH (array_view(args)[3])
 
 #undef THICC_FUNCTION
-#define THICC_FUNCTION(_name) Var _name(THICC_MAYBE_UNUSED Let self, THICC_MAYBE_UNUSED Let args)
+#define THICC_FUNCTION(_name) Let* _name(THICC_MAYBE_UNUSED Let* self, THICC_MAYBE_UNUSED Let* args)
 
 #endif /* THICC_THICC_H */

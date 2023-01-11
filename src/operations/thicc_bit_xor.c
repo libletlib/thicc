@@ -45,64 +45,65 @@ extern "C" {
 #include "../utility/thicc_real.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD Var boolean_bit_xor(Let _left, Let _right) {
-  if ((_left.value.boolean_type && !_right.value.boolean_type) ||
-	  (!_left.value.boolean_type && _right.value.boolean_type))
+THICC_NODISCARD Let* boolean_bit_xor(Let* _left, Let* _right) {
+  if ((_left->value.boolean_type && !_right->value.boolean_type) ||
+	  (!_left->value.boolean_type && _right->value.boolean_type))
 	return let_boolean(THICC_YES);
   return let_boolean(THICC_NO);
 }
 
-THICC_NODISCARD Var character_bit_xor(Let _left, Let _right) {
-  return let_character((Character) (CharacterPromotedType) (_left.value.character_type ^ _right.value.character_type));
+THICC_NODISCARD Let* character_bit_xor(Let* _left, Let* _right) {
+  return let_character((Character) (CharacterPromotedType) (_left->value.character_type ^ _right->value.character_type));
 }
 
-THICC_NODISCARD Var natural_bit_xor(Let _left, Let _right) {
-  return let_natural(_left.value.natural_type ^ _right.value.natural_type);
+THICC_NODISCARD Let* natural_bit_xor(Let* _left, Let* _right) {
+  return let_natural(_left->value.natural_type ^ _right->value.natural_type);
 }
 
-THICC_NODISCARD Var integer_bit_xor(Let _left, Let _right) {
-  return let_integer(_left.value.integer_type ^ _right.value.integer_type);
+THICC_NODISCARD Let* integer_bit_xor(Let* _left, Let* _right) {
+  return let_integer(_left->value.integer_type ^ _right->value.integer_type);
 }
 
-THICC_NODISCARD Var real_bit_xor(Let _left, Let _right) {
-  return let_real(real_byte_xor(_left.value.real_type, _right.value.real_type));
+THICC_NODISCARD Let* real_bit_xor(Let* _left, Let* _right) {
+  return let_real(real_byte_xor(_left->value.real_type, _right->value.real_type));
 }
 
-THICC_NODISCARD Var complex_bit_xor(Let _left, Let _right) {
-  return let_complex(complex_byte_xor(_left.value.complex_type, _right.value.complex_type));
+THICC_NODISCARD Let* complex_bit_xor(Let* _left, Let* _right) {
+  return let_complex(complex_byte_xor(_left->value.complex_type, _right->value.complex_type));
 }
 
-THICC_NODISCARD Var string_bit_xor(Let _left, Let _right) {
-  return move_string(string_filter_xor(_left.value.string_type, _right.value.string_type));
+THICC_NODISCARD Let* string_bit_xor(Let* _left, Let* _right) {
+  return move_string(string_filter_xor(_left->value.string_type, _right->value.string_type));
 }
 
-THICC_NODISCARD Var function_bit_xor(Let _left, Let _right) {
-  Let left_result  = function_invoke(_left, let_empty());
-  Let right_result = function_invoke(_right, let_empty());
-  Let result	   = bit_xor(left_result, right_result);
-  unlet_if_required(right_result);
-  unlet_if_required(left_result);
+THICC_NODISCARD Let* function_bit_xor(Let* _left, Let* _right) {
+  Let* left_result  = function_invoke(_left, let_empty());
+  Let* right_result = function_invoke(_right, let_empty());
+  Let* result	   = bit_xor(left_result, right_result);
+  unlet(right_result);
+  unlet(left_result);
   return result;
 }
 
-THICC_NODISCARD Var array_bit_xor(Let _left, Let _right) {
-  return move_array(array_filter_xor(_left.value.array_type, _right.value.array_type));
+THICC_NODISCARD Let* array_bit_xor(Let* _left, Let* _right) {
+  return move_array(array_filter_xor(_left->value.array_type, _right->value.array_type));
 }
 
-THICC_NODISCARD Var object_bit_xor(Let _left, Let _right) {
-  Let property_name = move_string(string_from_pointer("^"));
-  Let property		= member(_left, property_name);
-  Var result;
+THICC_NODISCARD Let* object_bit_xor(Let* _left, Let* _right) {
+  Let* property_name = let_string("^");
+  Let* property		= member(_left, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 
 	return let_empty();
   }
 
-  result = object_method_invoke(_left, property, 2, &_right);
+  result = object_method_invoke(_left, property, 2, _right);
 
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

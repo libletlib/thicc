@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableComparison boolean_comparison(Let, Let);
-MutableComparison character_comparison(Let, Let);
-MutableComparison natural_comparison(Let, Let);
-MutableComparison integer_comparison(Let, Let);
-MutableComparison real_comparison(Let, Let);
-MutableComparison complex_comparison(Let, Let);
-MutableComparison string_comparison(Let, Let);
-MutableComparison function_comparison(Let, Let);
-MutableComparison array_comparison(Let, Let);
-MutableComparison object_comparison(Let, Let);
+MutableComparison boolean_comparison(Let*, Let*);
+MutableComparison character_comparison(Let*, Let*);
+MutableComparison natural_comparison(Let*, Let*);
+MutableComparison integer_comparison(Let*, Let*);
+MutableComparison real_comparison(Let*, Let*);
+MutableComparison complex_comparison(Let*, Let*);
+MutableComparison string_comparison(Let*, Let*);
+MutableComparison function_comparison(Let*, Let*);
+MutableComparison array_comparison(Let*, Let*);
+MutableComparison object_comparison(Let*, Let*);
 
 #ifdef __cplusplus
 }

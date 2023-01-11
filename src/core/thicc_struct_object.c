@@ -39,20 +39,20 @@ extern "C" {
 #include <thicc_interface.h>
 #include "thicc_struct_object.h"
 
-THICC_NODISCARD Root root(Let _object) {
-  return (Root) _object.value.object_type;
+THICC_NODISCARD Root root(Let* _object) {
+  return (Root) _object->value.object_type;
 }
 
-THICC_NODISCARD MutableArray root_members(Let _object) {
-  return root(_object)->members.value.array_type;
+THICC_NODISCARD MutableArray root_members(Let* _object) {
+  return root(_object)->members->value.array_type;
 }
 
-THICC_NODISCARD MutableArray root_keys(Let _object) {
-  return root_members(_object).array[0].value.array_type;
+THICC_NODISCARD MutableArray root_keys(Let* _object) {
+  return root_members(_object).array[0]->value.array_type;
 }
 
-THICC_NODISCARD MutableArray root_values(Let _object) {
-  return root_members(_object).array[1].value.array_type;
+THICC_NODISCARD MutableArray root_values(Let* _object) {
+  return root_members(_object).array[1]->value.array_type;
 }
 
 THICC_NODISCARD Root root_from_pointer(ImmutableObject _object) {
@@ -60,15 +60,15 @@ THICC_NODISCARD Root root_from_pointer(ImmutableObject _object) {
 }
 
 THICC_NODISCARD MutableArray root_members_from_pointer(ImmutableObject _object) {
-  return root_from_pointer(_object)->members.value.array_type;
+  return root_from_pointer(_object)->members->value.array_type;
 }
 
 THICC_NODISCARD MutableArray root_keys_from_pointer(ImmutableObject _object) {
-  return root_members_from_pointer(_object).array[0].value.array_type;
+  return root_members_from_pointer(_object).array[0]->value.array_type;
 }
 
 THICC_NODISCARD MutableArray root_values_from_pointer(ImmutableObject _object) {
-  return root_members_from_pointer(_object).array[1].value.array_type;
+  return root_members_from_pointer(_object).array[1]->value.array_type;
 }
 
 #ifdef __cplusplus

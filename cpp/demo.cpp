@@ -37,8 +37,8 @@
 
 using namespace thicc;
 
-auto func fn(
-	return args[0];
+static auto func fn(
+	return let_copy(args[0]);
 )
 
 int main() {

@@ -42,69 +42,71 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD MutableInteger boolean_as_integer(Let _let) {
+THICC_NODISCARD MutableInteger boolean_as_integer(Let* _let) {
 #if THICC_C89
-  return _let.value.boolean_type ? 1l : 0l;
+  return _let->value.boolean_type ? 1l : 0l;
 #else
-  return _let.value.boolean_type ? 1ll : 0ll;
+  return _let->value.boolean_type ? 1ll : 0ll;
 #endif
 }
 
-THICC_NODISCARD MutableInteger character_as_integer(Let _let) {
-  return (Integer) _let.value.character_type;
+THICC_NODISCARD MutableInteger character_as_integer(Let* _let) {
+  return (Integer) _let->value.character_type;
 }
 
-THICC_NODISCARD MutableInteger natural_as_integer(Let _let) {
-  return (Integer) _let.value.natural_type;
+THICC_NODISCARD MutableInteger natural_as_integer(Let* _let) {
+  return (Integer) _let->value.natural_type;
 }
 
-THICC_NODISCARD MutableInteger integer_as_integer(Let _let) {
-  return _let.value.integer_type;
+THICC_NODISCARD MutableInteger integer_as_integer(Let* _let) {
+  return _let->value.integer_type;
 }
 
-THICC_NODISCARD MutableInteger real_as_integer(Let _let) {
-  return (Integer) _let.value.real_type;
+THICC_NODISCARD MutableInteger real_as_integer(Let* _let) {
+  return (Integer) _let->value.real_type;
 }
 
-THICC_NODISCARD MutableInteger complex_as_integer(Let _let) {
-  return (Integer) _let.value.complex_type.real;
+THICC_NODISCARD MutableInteger complex_as_integer(Let* _let) {
+  return (Integer) _let->value.complex_type.real;
 }
 
-THICC_NODISCARD MutableInteger string_as_integer(Let _let) {
-  return string_to_integer(_let.value.string_type);
+THICC_NODISCARD MutableInteger string_as_integer(Let* _let) {
+  return string_to_integer(_let->value.string_type);
 }
 
-THICC_NODISCARD MutableInteger function_as_integer(Let _let) {
-  Let	  temporary = function_invoke(_let, let_empty());
+THICC_NODISCARD MutableInteger function_as_integer(Let* _let) {
+  Let*	  temporary = function_invoke(_let, let_empty());
   Integer result	= as_integer(temporary);
-  unlet_if_required(temporary);
+  unlet(temporary);
   return result;
 }
 
-THICC_NODISCARD MutableInteger array_as_integer(Let _let) {
+THICC_NODISCARD MutableInteger array_as_integer(Let* _let) {
   return as_integer(*array_view(_let));
 }
 
-THICC_NODISCARD MutableInteger object_as_integer(Let _let) {
-  Let conversion_value = member(_let, move_string(string_from_pointer("integer")));
+THICC_NODISCARD MutableInteger object_as_integer(Let* _let) {
+  Let* key = let_string("integer");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*	  temporary = object_method_invoke(_let, conversion_value, 0);
 	  Integer result	= as_integer(temporary);
 
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  Integer result = as_integer(conversion_value);
 
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
 
   if (object_size(object_view(_let)) > 0)
 	return as_integer(array_view(array_view(((Root) object_view(_let))->members)[1])[0]);

@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_difference(Let, Let);
-Var character_difference(Let, Let);
-Var natural_difference(Let, Let);
-Var integer_difference(Let, Let);
-Var real_difference(Let, Let);
-Var complex_difference(Let, Let);
-Var string_difference(Let, Let);
-Var function_difference(Let, Let);
-Var array_difference(Let, Let);
-Var object_difference(Let, Let);
+Let* boolean_difference(Let*, Let*);
+Let* character_difference(Let*, Let*);
+Let* natural_difference(Let*, Let*);
+Let* integer_difference(Let*, Let*);
+Let* real_difference(Let*, Let*);
+Let* complex_difference(Let*, Let*);
+Let* string_difference(Let*, Let*);
+Let* function_difference(Let*, Let*);
+Let* array_difference(Let*, Let*);
+Let* object_difference(Let*, Let*);
 
 #ifdef __cplusplus
 }

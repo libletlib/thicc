@@ -48,7 +48,7 @@ MutableObject	  object_empty(void);
 MutableBoolean	  object_is_empty(ImmutableObject);
 MutableObject	  object_compose_list(Size, va_list);
 MutableObject	  object_compose(Size, ...);
-Var				  object_method_invoke(Let, Let, Size, ...);
+Let*			  object_method_invoke(Let*, Let*, Size, ...);
 
 #ifdef __cplusplus
 }

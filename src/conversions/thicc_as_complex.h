@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableComplex boolean_as_complex(Let);
-MutableComplex character_as_complex(Let);
-MutableComplex natural_as_complex(Let);
-MutableComplex integer_as_complex(Let);
-MutableComplex real_as_complex(Let);
-MutableComplex complex_as_complex(Let);
-MutableComplex string_as_complex(Let);
-MutableComplex function_as_complex(Let);
-MutableComplex array_as_complex(Let);
-MutableComplex object_as_complex(Let);
+MutableComplex boolean_as_complex(Let*);
+MutableComplex character_as_complex(Let*);
+MutableComplex natural_as_complex(Let*);
+MutableComplex integer_as_complex(Let*);
+MutableComplex real_as_complex(Let*);
+MutableComplex complex_as_complex(Let*);
+MutableComplex string_as_complex(Let*);
+MutableComplex function_as_complex(Let*);
+MutableComplex array_as_complex(Let*);
+MutableComplex object_as_complex(Let*);
 
 #ifdef __cplusplus
 }

@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_indirection(Let);
-Var character_indirection(Let);
-Var natural_indirection(Let);
-Var integer_indirection(Let);
-Var real_indirection(Let);
-Var complex_indirection(Let);
-Var string_indirection(Let);
-Var function_indirection(Let);
-Var array_indirection(Let);
-Var object_indirection(Let);
+Let* boolean_indirection(Let*);
+Let* character_indirection(Let*);
+Let* natural_indirection(Let*);
+Let* integer_indirection(Let*);
+Let* real_indirection(Let*);
+Let* complex_indirection(Let*);
+Let* string_indirection(Let*);
+Let* function_indirection(Let*);
+Let* array_indirection(Let*);
+Let* object_indirection(Let*);
 
 #ifdef __cplusplus
 }

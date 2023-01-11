@@ -42,67 +42,69 @@ extern "C" {
 #include "../utility/thicc_math.h"
 #include "../utility/thicc_object.h"
 
-THICC_NODISCARD MutableBoolean boolean_as_boolean(Let _let) {
-  return _let.value.boolean_type;
+THICC_NODISCARD MutableBoolean boolean_as_boolean(Let* _let) {
+  return _let->value.boolean_type;
 }
 
-THICC_NODISCARD MutableBoolean character_as_boolean(Let _let) {
-  return _let.value.character_type ? THICC_YES : THICC_NO;
+THICC_NODISCARD MutableBoolean character_as_boolean(Let* _let) {
+  return _let->value.character_type ? THICC_YES : THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean natural_as_boolean(Let _let) {
-  return _let.value.natural_type ? THICC_YES : THICC_NO;
+THICC_NODISCARD MutableBoolean natural_as_boolean(Let* _let) {
+  return _let->value.natural_type ? THICC_YES : THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean integer_as_boolean(Let _let) {
-  return _let.value.integer_type ? THICC_YES : THICC_NO;
+THICC_NODISCARD MutableBoolean integer_as_boolean(Let* _let) {
+  return _let->value.integer_type ? THICC_YES : THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean real_as_boolean(Let _let) {
-  return math_real_equal(_let.value.real_type, 0.0l) ? THICC_YES : THICC_NO;
+THICC_NODISCARD MutableBoolean real_as_boolean(Let* _let) {
+  return math_real_equal(_let->value.real_type, 0.0l) ? THICC_YES : THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean complex_as_boolean(Let _let) {
-  return math_real_equal(_let.value.complex_type.real, 0.0l) && math_real_equal(_let.value.complex_type.imaginary, 0.0l)
+THICC_NODISCARD MutableBoolean complex_as_boolean(Let* _let) {
+  return math_real_equal(_let->value.complex_type.real, 0.0l) && math_real_equal(_let->value.complex_type.imaginary, 0.0l)
 			 ? THICC_YES
 			 : THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean string_as_boolean(Let _let) {
+THICC_NODISCARD MutableBoolean string_as_boolean(Let* _let) {
   return string_view(_let) ? THICC_YES : THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean function_as_boolean(Let _let) {
-  Let	  temporary = function_invoke(_let, let_empty());
+THICC_NODISCARD MutableBoolean function_as_boolean(Let* _let) {
+  Let*	  temporary = function_invoke(_let, let_empty());
   Boolean result	= as_boolean(temporary);
-  unlet_if_required(temporary);
+  unlet(temporary);
   return result;
 }
 
-THICC_NODISCARD MutableBoolean array_as_boolean(Let _let) {
+THICC_NODISCARD MutableBoolean array_as_boolean(Let* _let) {
   return as_boolean(*array_view(_let));
 }
 
-THICC_NODISCARD MutableBoolean object_as_boolean(Let _let) {
-  Let conversion_value = member(_let, weak_string("boolean"));
+THICC_NODISCARD MutableBoolean object_as_boolean(Let* _let) {
+  Let* key = let_string("boolean");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let	  temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*	  temporary = object_method_invoke(_let, conversion_value, 0);
 	  Boolean result	= as_boolean(temporary);
 
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  Boolean result = as_boolean(conversion_value);
 
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
 
   if (object_size(object_view(_let)) > 0)
 	return as_boolean(array_view(array_view(((Root) object_view(_let))->members)[1])[0]);

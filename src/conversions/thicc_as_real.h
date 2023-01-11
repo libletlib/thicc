@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableReal boolean_as_real(Let);
-MutableReal character_as_real(Let);
-MutableReal natural_as_real(Let);
-MutableReal integer_as_real(Let);
-MutableReal real_as_real(Let);
-MutableReal complex_as_real(Let);
-MutableReal string_as_real(Let);
-MutableReal function_as_real(Let);
-MutableReal array_as_real(Let);
-MutableReal object_as_real(Let);
+MutableReal boolean_as_real(Let*);
+MutableReal character_as_real(Let*);
+MutableReal natural_as_real(Let*);
+MutableReal integer_as_real(Let*);
+MutableReal real_as_real(Let*);
+MutableReal complex_as_real(Let*);
+MutableReal string_as_real(Let*);
+MutableReal function_as_real(Let*);
+MutableReal array_as_real(Let*);
+MutableReal object_as_real(Let*);
 
 #ifdef __cplusplus
 }

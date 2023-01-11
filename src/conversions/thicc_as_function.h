@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableFunction boolean_as_function(Let);
-MutableFunction character_as_function(Let);
-MutableFunction natural_as_function(Let);
-MutableFunction integer_as_function(Let);
-MutableFunction real_as_function(Let);
-MutableFunction complex_as_function(Let);
-MutableFunction string_as_function(Let);
-MutableFunction function_as_function(Let);
-MutableFunction array_as_function(Let);
-MutableFunction object_as_function(Let);
+MutableFunction boolean_as_function(Let*);
+MutableFunction character_as_function(Let*);
+MutableFunction natural_as_function(Let*);
+MutableFunction integer_as_function(Let*);
+MutableFunction real_as_function(Let*);
+MutableFunction complex_as_function(Let*);
+MutableFunction string_as_function(Let*);
+MutableFunction function_as_function(Let*);
+MutableFunction array_as_function(Let*);
+MutableFunction object_as_function(Let*);
 
 #ifdef __cplusplus
 }

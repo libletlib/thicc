@@ -41,13 +41,13 @@ extern "C" {
 #include <thicc_struct_var.h>
 
 struct thicc_struct_object {
-  Var members;
+  Let* members;
 };
 
-Root		 root(Let);
-MutableArray root_members(Let);
-MutableArray root_keys(Let);
-MutableArray root_values(Let);
+Root		 root(Let*);
+MutableArray root_members(Let*);
+MutableArray root_keys(Let*);
+MutableArray root_values(Let*);
 Root		 root_from_pointer(ImmutableObject);
 MutableArray root_members_from_pointer(ImmutableObject);
 MutableArray root_keys_from_pointer(ImmutableObject);

@@ -40,7 +40,7 @@ extern "C" {
 #include "thicc_prelude.h"
 
 struct thicc_struct_array {
-  Var*			 array;
+  Let**	 array;
   MutableSize    length;
 };
 

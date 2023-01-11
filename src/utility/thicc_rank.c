@@ -35,7 +35,7 @@
 #include <thicc_interface.h>
 #include <thicc_struct_var.h>
 
-THICC_NODISCARD MutableBoolean rank_is_character(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_character(Let* _let) {
   switch (rank(_let)) {
 	case character_rank:
 	  return THICC_YES;
@@ -44,7 +44,7 @@ THICC_NODISCARD MutableBoolean rank_is_character(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_numeric(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_numeric(Let* _let) {
   switch (rank(_let)) {
 	case natural_rank:
 	  THICC_FALLTHROUGH
@@ -59,7 +59,7 @@ THICC_NODISCARD MutableBoolean rank_is_numeric(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_integral(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_integral(Let* _let) {
   switch (rank(_let)) {
 	case natural_rank:
 	  THICC_FALLTHROUGH
@@ -70,7 +70,7 @@ THICC_NODISCARD MutableBoolean rank_is_integral(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_signed(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_signed(Let* _let) {
   switch (rank(_let)) {
 #if (THICC_CHAR_SIGNED == THICC_YES)
 	case character_rank:
@@ -87,7 +87,7 @@ THICC_NODISCARD MutableBoolean rank_is_signed(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_unsigned(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_unsigned(Let* _let) {
   switch (rank(_let)) {
 #if (THICC_CHAR_UNSIGNED == THICC_YES)
 	case character_rank:
@@ -100,7 +100,7 @@ THICC_NODISCARD MutableBoolean rank_is_unsigned(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_floating_point(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_floating_point(Let* _let) {
   switch (rank(_let)) {
 	case real_rank:
 	  THICC_FALLTHROUGH
@@ -111,14 +111,14 @@ THICC_NODISCARD MutableBoolean rank_is_floating_point(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_string(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_string(Let* _let) {
   if (rank(_let) == string_rank)
 	return THICC_YES;
   else
 	return THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean rank_is_invokable(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_invokable(Let* _let) {
   switch (rank(_let)) {
 	case function_rank:
 	  return THICC_YES;
@@ -127,14 +127,14 @@ THICC_NODISCARD MutableBoolean rank_is_invokable(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_array(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_array(Let* _let) {
   if (rank(_let) == array_rank)
 	return THICC_YES;
   else
 	return THICC_NO;
 }
 
-THICC_NODISCARD MutableBoolean rank_is_indexable(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_indexable(Let* _let) {
   switch (rank(_let)) {
 	case string_rank:
 	  THICC_FALLTHROUGH
@@ -147,7 +147,7 @@ THICC_NODISCARD MutableBoolean rank_is_indexable(Let _let) {
   }
 }
 
-THICC_NODISCARD MutableBoolean rank_is_object(Let _let) {
+THICC_NODISCARD MutableBoolean rank_is_object(Let* _let) {
   if (rank(_let) == object_rank)
 	return THICC_YES;
   else

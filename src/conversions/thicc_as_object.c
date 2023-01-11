@@ -40,52 +40,70 @@ extern "C" {
 #include <thicc_struct_var.h>
 #include "../utility/thicc_object.h"
 
-THICC_NODISCARD MutableObject boolean_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("boolean");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject boolean_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("boolean");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject character_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("character");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject character_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("character");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject natural_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("natural");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject natural_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("natural");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject integer_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("integer");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject integer_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("integer");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject real_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("real");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject real_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("real");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject complex_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("complex");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject complex_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("complex");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject string_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("string");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject string_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("string");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject function_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("function");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject function_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("function");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject array_as_object(THICC_MAYBE_UNUSED Let _let) {
-  Var key = weak_string("array");
-  return object_compose(2, &key, &_let);
+THICC_NODISCARD MutableObject array_as_object(THICC_MAYBE_UNUSED Let* _let) {
+  Let* key = let_string("array");
+  MutableObject result = object_compose(2, key, _let);
+  unlet(key);
+  return result;
 }
 
-THICC_NODISCARD MutableObject object_as_object(Let _let) {
+THICC_NODISCARD MutableObject object_as_object(Let* _let) {
   return object_copy(object_view(_let));
 }
 

@@ -204,7 +204,7 @@ struct thicc_struct_object;
 
 typedef enum thicc_enum_rank			  MutableRank;
 typedef MutableRank const				  Rank;
-typedef struct thicc_struct_var			  Var;
+typedef struct thicc_struct_var 		  Var;
 typedef Var const						  Let;
 typedef struct thicc_struct_behaviour	  MutableBehaviour;
 typedef MutableBehaviour const			  Behaviour;
@@ -246,7 +246,7 @@ typedef MutableReal const	 Real;
 
 typedef struct thicc_struct_complex MutableComplex;
 typedef MutableComplex const		Complex;
-typedef Var (*MutableFunction)(Let, Let);
+typedef Let* (*MutableFunction)(Let*, Let*);
 typedef MutableFunction const	   Function;
 typedef struct thicc_struct_string MutableString;
 typedef MutableString const        String;

@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_index_of(Let, Let);
-Var character_index_of(Let, Let);
-Var natural_index_of(Let, Let);
-Var integer_index_of(Let, Let);
-Var real_index_of(Let, Let);
-Var complex_index_of(Let, Let);
-Var string_index_of(Let, Let);
-Var function_index_of(Let, Let);
-Var array_index_of(Let, Let);
-Var object_index_of(Let, Let);
+Let* boolean_index_of(Let*, Let*);
+Let* character_index_of(Let*, Let*);
+Let* natural_index_of(Let*, Let*);
+Let* integer_index_of(Let*, Let*);
+Let* real_index_of(Let*, Let*);
+Let* complex_index_of(Let*, Let*);
+Let* string_index_of(Let*, Let*);
+Let* function_index_of(Let*, Let*);
+Let* array_index_of(Let*, Let*);
+Let* object_index_of(Let*, Let*);
 
 #ifdef __cplusplus
 }

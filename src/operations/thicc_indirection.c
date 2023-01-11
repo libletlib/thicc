@@ -41,59 +41,61 @@ extern "C" {
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 
-THICC_NODISCARD Var boolean_indirection(Let _let) {
-  return let_boolean(_let.value.boolean_type);
+THICC_NODISCARD Let* boolean_indirection(Let* _let) {
+  return let_boolean(_let->value.boolean_type);
 }
 
-THICC_NODISCARD Var character_indirection(Let _let) {
-  return let_character(_let.value.character_type);
+THICC_NODISCARD Let* character_indirection(Let* _let) {
+  return let_character(_let->value.character_type);
 }
 
-THICC_NODISCARD Var natural_indirection(Let _let) {
-  return let_natural(_let.value.natural_type);
+THICC_NODISCARD Let* natural_indirection(Let* _let) {
+  return let_natural(_let->value.natural_type);
 }
 
-THICC_NODISCARD Var integer_indirection(Let _let) {
-  return let_integer(_let.value.integer_type);
+THICC_NODISCARD Let* integer_indirection(Let* _let) {
+  return let_integer(_let->value.integer_type);
 }
 
-THICC_NODISCARD Var real_indirection(Let _let) {
-  return let_real(_let.value.real_type);
+THICC_NODISCARD Let* real_indirection(Let* _let) {
+  return let_real(_let->value.real_type);
 }
 
-THICC_NODISCARD Var complex_indirection(Let _let) {
-  return let_complex(_let.value.complex_type);
+THICC_NODISCARD Let* complex_indirection(Let* _let) {
+  return let_complex(_let->value.complex_type);
 }
 
-THICC_NODISCARD Var string_indirection(Let _let) {
+THICC_NODISCARD Let* string_indirection(Let* _let) {
   return let_character(*string_view(_let));
 }
 
-THICC_NODISCARD Var function_indirection(Let _let) {
-  Let let_result = function_invoke(_let, let_empty());
-  Let result	 = indirection(let_result);
-  unlet_if_required(let_result);
+THICC_NODISCARD Let* function_indirection(Let* _let) {
+  Let* let_result = function_invoke(_let, let_empty());
+  Let* result	 = indirection(let_result);
+  unlet(let_result);
+
   return result;
 }
 
-THICC_NODISCARD Var array_indirection(Let _let) {
-  return let_copy(*_let.value.array_type.array);
+THICC_NODISCARD Let* array_indirection(Let* _let) {
+  return let_copy(*_let->value.array_type.array);
 }
 
-THICC_NODISCARD Var object_indirection(Let _let) {
-  Let property_name = move_string(string_from_pointer("indirection"));
-  Let property		= member(_let, property_name);
-  Var result;
+THICC_NODISCARD Let* object_indirection(Let* _let) {
+  Let* property_name = let_string("indirection");
+  Let* property		= member(_let, property_name);
+  Let* result;
+  unlet(property_name);
 
   if (let_is_empty(property) || !is_invokable(property)) {
-	unlet_if_required(property);
+	unlet(property);
 
 	return let_empty();
   }
 
   result = object_method_invoke(_let, property, 0);
 
-  unlet_if_required(property);
+  unlet(property);
 
   return result;
 }

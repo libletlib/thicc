@@ -42,65 +42,67 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD MutableReal boolean_as_real(Let _let) {
-  return _let.value.boolean_type ? 1.0l : 0.0l;
+THICC_NODISCARD MutableReal boolean_as_real(Let* _let) {
+  return _let->value.boolean_type ? 1.0l : 0.0l;
 }
 
-THICC_NODISCARD MutableReal character_as_real(Let _let) {
-  return (Real) (CharacterPromotedType) _let.value.character_type;
+THICC_NODISCARD MutableReal character_as_real(Let* _let) {
+  return (Real) (CharacterPromotedType) _let->value.character_type;
 }
 
-THICC_NODISCARD MutableReal natural_as_real(Let _let) {
-  return (Real) _let.value.natural_type;
+THICC_NODISCARD MutableReal natural_as_real(Let* _let) {
+  return (Real) _let->value.natural_type;
 }
 
-THICC_NODISCARD MutableReal integer_as_real(Let _let) {
-  return (Real) _let.value.integer_type;
+THICC_NODISCARD MutableReal integer_as_real(Let* _let) {
+  return (Real) _let->value.integer_type;
 }
 
-THICC_NODISCARD MutableReal real_as_real(Let _let) {
-  return _let.value.real_type;
+THICC_NODISCARD MutableReal real_as_real(Let* _let) {
+  return _let->value.real_type;
 }
 
-THICC_NODISCARD MutableReal complex_as_real(Let _let) {
-  return (Real) _let.value.complex_type.real;
+THICC_NODISCARD MutableReal complex_as_real(Let* _let) {
+  return (Real) _let->value.complex_type.real;
 }
 
-THICC_NODISCARD MutableReal string_as_real(Let _let) {
-  return string_to_real(_let.value.string_type);
+THICC_NODISCARD MutableReal string_as_real(Let* _let) {
+  return string_to_real(_let->value.string_type);
 }
 
-THICC_NODISCARD MutableReal function_as_real(Let _let) {
-  Let  temporary = function_invoke(_let, let_empty());
+THICC_NODISCARD MutableReal function_as_real(Let* _let) {
+  Let*  temporary = function_invoke(_let, let_empty());
   Real result	 = as_real(temporary);
-  unlet_if_required(temporary);
+  unlet(temporary);
   return result;
 }
 
-THICC_NODISCARD MutableReal array_as_real(Let _let) {
+THICC_NODISCARD MutableReal array_as_real(Let* _let) {
   return as_real(*array_view(_let));
 }
 
-THICC_NODISCARD MutableReal object_as_real(Let _let) {
-  Let conversion_value = member(_let, weak_string("real"));
+THICC_NODISCARD MutableReal object_as_real(Let* _let) {
+  Let* key = let_string("real");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let  temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*  temporary = object_method_invoke(_let, conversion_value, 0);
 	  Real result	 = as_real(temporary);
 
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  Real result = as_real(conversion_value);
 
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
 
   if (object_size(object_view(_let)) > 0)
 	return as_real(array_view(array_view(((Root) object_view(_let))->members)[1])[0]);

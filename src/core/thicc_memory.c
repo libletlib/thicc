@@ -52,6 +52,10 @@ static void deallocate(void* _pointer) {
   _pointer = THICC_NAUGHT;
 }
 
+THICC_NODISCARD Var* var_allocate(void) {
+  return (Var*) allocate(sizeof(Var));
+}
+
 THICC_NODISCARD MutableString string_allocate(Size _length) {
   MutableString string = string_empty();
   string.string = allocate(_length);
@@ -68,34 +72,41 @@ THICC_NODISCARD MutableObject object_allocate(void) {
   return allocate(sizeof(struct thicc_struct_object));
 }
 
-void stack_deallocate(THICC_MAYBE_UNUSED Let _let) { /* No-Op */
+void stack_deallocate(Let* _var) {
+  var_deallocate((void*) _var);
 }
 
-void string_deallocate(Var _let) {
-  if (string_view(_let)) {
-	deallocate((void*) _let.value.string_type.string);
-    _let.behaviour = THICC_NAUGHT;
+void var_deallocate(Let* _var) {
+  deallocate((void*) _var);
+}
+
+void string_deallocate(Let* _var) {
+  if (string_view(_var)) {
+	deallocate((void*) _var->value.string_type.string);
   }
+  var_deallocate((void*) _var);
 }
 
-void array_deallocate(Var _let) {
-  if (array_view(_let)) {
+void array_deallocate(Let* _var) {
+  if (array_view(_var)) {
 	MutableSize index = 0;
 
-	for (; index < _let.value.array_type.length; ++index)
-	  unlet(array_view(_let)[index]);
+	for (; index < _var->value.array_type.length; ++index) {
+	  Let* temp = array_view(_var)[index];
+	  unlet(temp);
+	}
 
-	deallocate((void*) _let.value.array_type.array);
-	_let.behaviour = THICC_NAUGHT;
+	deallocate((void*) _var->value.array_type.array);
   }
+  var_deallocate((void*) _var);
 }
 
-void object_deallocate(Var _let) {
-  if (object_view(_let)) {
-	array_deallocate(((Root) _let.value.object_type)->members);
-	deallocate(_let.value.object_type);
-	_let.behaviour = THICC_NAUGHT;
+void object_deallocate(Let* _var) {
+  if (object_view(_var)) {
+	array_deallocate(((Root) _var->value.object_type)->members);
+	deallocate(_var->value.object_type);
   }
+  var_deallocate((void*) _var);
 }
 
 #ifdef __cplusplus

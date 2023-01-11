@@ -39,7 +39,11 @@
 #include <ostream>
 
 namespace thicc {
+  class var;
+  typedef var const let;
+
   namespace backing {
+	inline var move(Let*) THICC_CPP_NOEXCEPT;
 
 	template<class Type>
 	inline THICC_CPP_CONSTEXPR Type* address_of(Type& _type) THICC_CPP_NOEXCEPT {
@@ -47,11 +51,9 @@ namespace thicc {
 	}
   }
 
-  class var;
-  typedef var const let;
-
   class var THICC_CPP_FINAL {
-	Var variable;
+	friend inline var backing::move(Let*) THICC_CPP_NOEXCEPT;
+	Let* variable;
 
   public:
 	~var() THICC_CPP_NOEXCEPT {
@@ -77,9 +79,7 @@ namespace thicc {
 	var(MutableArray const& _value) THICC_CPP_NOEXCEPT : variable(let_array(_value)) {}
 	var(MutableFunction _value) THICC_CPP_NOEXCEPT : variable(let_function(_value)) {}
 	var(MutableObject _value) THICC_CPP_NOEXCEPT : variable(let_object(_value)) {}
-	var(Var const& _var) THICC_CPP_NOEXCEPT {
-	  this->variable = let_copy(_var);
-	}
+	var(Let* _var) THICC_CPP_NOEXCEPT : variable(let_copy(_var)) {}
 
 	var(var const& _other) THICC_CPP_NOEXCEPT : variable(let_copy(_other.variable)) {}
 
@@ -99,8 +99,7 @@ namespace thicc {
 	  return *this;
 	}
 
-	template<>
-	var& operator=(Var const& _other) THICC_CPP_NOEXCEPT {
+	var& operator=(Let* _other) THICC_CPP_NOEXCEPT {
 	  this->variable = let_copy(_other);
 	  return *this;
 	}
@@ -109,17 +108,10 @@ namespace thicc {
 	explicit var(long long _value) : variable(let_integer(_value)) {}
 	explicit var(unsigned long long _value) : variable(let_natural(_value)) {}
 
-	var(var&& _other) noexcept : variable(let_move(_other.variable)) {}
+	var(var&& _other) noexcept : variable(let_move(const_cast<Var*>(_other.variable))) {}
 	var& operator=(var&& _other) noexcept {
 	  if(this != backing::address_of(_other))
-		this->variable = let_move(_other.variable);
-	  return *this;
-	}
-
-	var(Var&& _other) noexcept : variable(let_move(_other)) {}
-	var& operator=(Var&& _other) noexcept {
-	  if(backing::address_of(this->variable) != backing::address_of(_other))
-		this->variable = let_move(_other);
+		this->variable = let_move(const_cast<Var*>(_other.variable));
 	  return *this;
 	}
 #endif
@@ -157,7 +149,7 @@ namespace thicc {
 	  return index_of(this->variable, _value.variable);
 	}
 
-	operator Var() const {
+	operator Let*() const {
 	  return this->variable;
 	}
 
@@ -187,7 +179,7 @@ namespace thicc {
 	var operator()(Type1 THICC_CPP_UREF _type1) const {
 	  if(is_invokable(this->variable)) {
 		let temporary = let(_type1);
-		return invoke(this->variable, 1, &temporary.variable);
+		return invoke(this->variable, 1, temporary.variable);
 	  }
 	  return var();
 	}
@@ -195,10 +187,18 @@ namespace thicc {
 	template<>
 	var operator()(var const& _type1) const {
 	  if(is_invokable(this->variable))
-		return invoke(this->variable, 1, &_type1.variable);
+		return invoke(this->variable, 1, _type1.variable);
 	  return var();
 	}
   };
+
+  namespace backing {
+	inline var move(Let* _let) THICC_CPP_NOEXCEPT {
+	  var result;
+	  result.variable = let_move(const_cast<Var*>(_let));
+	  return result;
+	}
+  }
 }
 
 

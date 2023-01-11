@@ -41,62 +41,64 @@ extern "C" {
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 
-THICC_NODISCARD MutableFunction boolean_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction boolean_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction character_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction character_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction natural_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction natural_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction integer_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction integer_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction real_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction real_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction complex_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction complex_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction string_as_function(THICC_MAYBE_UNUSED Let _let) {
+THICC_NODISCARD MutableFunction string_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
 }
 
-THICC_NODISCARD MutableFunction function_as_function(Let _let) {
-  return _let.value.function_type;
+THICC_NODISCARD MutableFunction function_as_function(Let* _let) {
+  return _let->value.function_type;
 }
 
-THICC_NODISCARD MutableFunction array_as_function(Let _let) {
+THICC_NODISCARD MutableFunction array_as_function(Let* _let) {
   return as_function(*array_view(_let));
 }
 
-THICC_NODISCARD MutableFunction object_as_function(Let _let) {
-  Let conversion_value = member(_let, weak_string("function"));
+THICC_NODISCARD MutableFunction object_as_function(Let* _let) {
+  Let* key = let_string("function");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let	   temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*	   temporary = object_method_invoke(_let, conversion_value, 0);
 	  Function result	 = as_function(temporary);
 
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  Function result = as_function(conversion_value);
 
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
 
   if (object_size(object_view(_let)) > 0)
 	return as_function(array_view(array_view(((Root) object_view(_let))->members)[1])[0]);

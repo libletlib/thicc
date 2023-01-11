@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-MutableBoolean boolean_as_boolean(Let);
-MutableBoolean character_as_boolean(Let);
-MutableBoolean natural_as_boolean(Let);
-MutableBoolean integer_as_boolean(Let);
-MutableBoolean real_as_boolean(Let);
-MutableBoolean complex_as_boolean(Let);
-MutableBoolean string_as_boolean(Let);
-MutableBoolean function_as_boolean(Let);
-MutableBoolean array_as_boolean(Let);
-MutableBoolean object_as_boolean(Let);
+MutableBoolean boolean_as_boolean(Let*);
+MutableBoolean character_as_boolean(Let*);
+MutableBoolean natural_as_boolean(Let*);
+MutableBoolean integer_as_boolean(Let*);
+MutableBoolean real_as_boolean(Let*);
+MutableBoolean complex_as_boolean(Let*);
+MutableBoolean string_as_boolean(Let*);
+MutableBoolean function_as_boolean(Let*);
+MutableBoolean array_as_boolean(Let*);
+MutableBoolean object_as_boolean(Let*);
 
 #ifdef __cplusplus
 }

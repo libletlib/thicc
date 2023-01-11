@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_product(Let, Let);
-Var character_product(Let, Let);
-Var natural_product(Let, Let);
-Var integer_product(Let, Let);
-Var real_product(Let, Let);
-Var complex_product(Let, Let);
-Var string_product(Let, Let);
-Var function_product(Let, Let);
-Var array_product(Let, Let);
-Var object_product(Let, Let);
+Let* boolean_product(Let*, Let*);
+Let* character_product(Let*, Let*);
+Let* natural_product(Let*, Let*);
+Let* integer_product(Let*, Let*);
+Let* real_product(Let*, Let*);
+Let* complex_product(Let*, Let*);
+Let* string_product(Let*, Let*);
+Let* function_product(Let*, Let*);
+Let* array_product(Let*, Let*);
+Let* object_product(Let*, Let*);
 
 #ifdef __cplusplus
 }

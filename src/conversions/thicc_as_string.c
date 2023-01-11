@@ -42,63 +42,65 @@ extern "C" {
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
 
-THICC_NODISCARD MutableString boolean_as_string(Let _let) {
-  return _let.value.boolean_type ? string_copy(string_from_pointer("true")) : string_copy(string_from_pointer("false"));
+THICC_NODISCARD MutableString boolean_as_string(Let* _let) {
+  return _let->value.boolean_type ? string_copy(string_from_pointer("true")) : string_copy(string_from_pointer("false"));
 }
 
-THICC_NODISCARD MutableString character_as_string(Let _let) {
-  return string_from_characters(1, _let.value.character_type);
+THICC_NODISCARD MutableString character_as_string(Let* _let) {
+  return string_from_characters(1, _let->value.character_type);
 }
 
-THICC_NODISCARD MutableString natural_as_string(Let _let) {
-  return string_from_natural(_let.value.natural_type);
+THICC_NODISCARD MutableString natural_as_string(Let* _let) {
+  return string_from_natural(_let->value.natural_type);
 }
 
-THICC_NODISCARD MutableString integer_as_string(Let _let) {
-  return string_from_integer(_let.value.integer_type);
+THICC_NODISCARD MutableString integer_as_string(Let* _let) {
+  return string_from_integer(_let->value.integer_type);
 }
 
-THICC_NODISCARD MutableString real_as_string(Let _let) {
-  return string_from_real(_let.value.real_type);
+THICC_NODISCARD MutableString real_as_string(Let* _let) {
+  return string_from_real(_let->value.real_type);
 }
 
-THICC_NODISCARD MutableString complex_as_string(Let _let) {
-  return string_from_complex(_let.value.complex_type);
+THICC_NODISCARD MutableString complex_as_string(Let* _let) {
+  return string_from_complex(_let->value.complex_type);
 }
 
-THICC_NODISCARD MutableString string_as_string(Let _let) {
-  return string_copy(_let.value.string_type);
+THICC_NODISCARD MutableString string_as_string(Let* _let) {
+  return string_copy(_let->value.string_type);
 }
 
-THICC_NODISCARD MutableString function_as_string(Let _let) {
-  Let			temporary = function_invoke(_let, let_empty());
+THICC_NODISCARD MutableString function_as_string(Let* _let) {
+  Let*			temporary = function_invoke(_let, let_empty());
   MutableString result	  = as_string(temporary);
-  unlet_if_required(temporary);
+  unlet(temporary);
   return result;
 }
 
-THICC_NODISCARD MutableString array_as_string(Let _let) {
-  return string_from_array(_let.value.array_type);
+THICC_NODISCARD MutableString array_as_string(Let* _let) {
+  return string_from_array(_let->value.array_type);
 }
 
-THICC_NODISCARD MutableString object_as_string(Let _let) {
-  Let conversion_value = member(_let, weak_string("string"));
+THICC_NODISCARD MutableString object_as_string(Let* _let) {
+  Let* key = let_string("string");
+  Let* conversion_value = member(_let, key);
+  unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let			temporary = object_method_invoke(_let, conversion_value, 2, &_let);
+	  Let*			temporary = object_method_invoke(_let, conversion_value, 0);
 	  MutableString result	  = as_string(temporary);
-	  unlet_if_required(temporary);
+	  unlet(temporary);
 
 	  return result;
 	} else {
 	  MutableString result = as_string(conversion_value);
-	  unlet_if_required(conversion_value);
+	  unlet(conversion_value);
 
 	  return result;
 	}
   }
 
-  unlet_if_required(conversion_value);
+  unlet(conversion_value);
   return string_from_object(object_view(_let));
 }
 

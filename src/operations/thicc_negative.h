@@ -40,16 +40,16 @@ extern "C" {
 
 #include <thicc_prelude.h>
 
-Var boolean_negative(Let);
-Var character_negative(Let);
-Var natural_negative(Let);
-Var integer_negative(Let);
-Var real_negative(Let);
-Var complex_negative(Let);
-Var string_negative(Let);
-Var function_negative(Let);
-Var array_negative(Let);
-Var object_negative(Let);
+Let* boolean_negative(Let*);
+Let* character_negative(Let*);
+Let* natural_negative(Let*);
+Let* integer_negative(Let*);
+Let* real_negative(Let*);
+Let* complex_negative(Let*);
+Let* string_negative(Let*);
+Let* function_negative(Let*);
+Let* array_negative(Let*);
+Let* object_negative(Let*);
 
 #ifdef __cplusplus
 }
