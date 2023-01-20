@@ -40,6 +40,7 @@ extern "C" {
 
 #include "thicc_prelude.h"
 #include "thicc_struct_var.h"
+#include "thicc_struct_complex.h"
 #include "thicc_struct_string.h"
 #include "thicc_struct_array.h"
 #include <stdarg.h>
@@ -63,6 +64,13 @@ MutableString	 as_string(Let*);
 MutableFunction	 as_function(Let*);
 MutableArray	 as_array(Let*);
 MutableObject	 as_object(Let*);
+
+Let* array_from_booleans(Size, Boolean*);
+Let* array_from_characters(Size, Character*);
+Let* array_from_integers(Size, Integer*);
+Let* array_from_reals(Size, Real*);
+Let* array_from_complex(Size, Complex*);
+Let* array_from_strings(Size, MutableCharacter**);
 
 Let* array_of(Size, ...);
 Let* object_of(Size, ...);

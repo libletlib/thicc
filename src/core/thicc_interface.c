@@ -64,6 +64,60 @@ THICC_NODISCARD Let* array_of(Size _size, ...) {
   return move_array(buffer);
 }
 
+Let* array_from_booleans(Size _size, Boolean* _array) {
+    MutableArray result = array_allocate(_size);
+	MutableSize index = 0;
+	result.length = _size;
+	for(; index < _size; ++index)
+		result.array[index] = let_boolean(_array[index]);
+	return move_array(result);
+}
+
+Let* array_from_characters(Size _size, Character* _array) {
+	MutableArray result = array_allocate(_size);
+	MutableSize index = 0;
+	result.length = _size;
+	for(; index < _size; ++index)
+		result.array[index] = let_character(_array[index]);
+	return move_array(result);
+}
+
+Let* array_from_integers(Size _size, Integer* _array) {
+	MutableArray result = array_allocate(_size);
+	MutableSize index = 0;
+	result.length = _size;
+	for(; index < _size; ++index)
+		result.array[index] = let_integer(_array[index]);
+	return move_array(result);
+}
+
+Let* array_from_reals(Size _size, Real* _array) {
+	MutableArray result = array_allocate(_size);
+	MutableSize index = 0;
+	result.length = _size;
+	for(; index < _size; ++index)
+		result.array[index] = let_real(_array[index]);
+	return move_array(result);
+}
+
+Let* array_from_complex(Size _size, Complex* _array) {
+	MutableArray result = array_allocate(_size);
+	MutableSize index = 0;
+	result.length = _size;
+	for(; index < _size; ++index)
+		result.array[index] = let_complex(_array[index]);
+	return move_array(result);
+}
+
+Let* array_from_strings(Size _size, MutableCharacter** _array) {
+	MutableArray result = array_allocate(_size);
+	MutableSize index = 0;
+	result.length = _size;
+	for(; index < _size; ++index)
+		result.array[index] = let_string(_array[index]);
+	return move_array(result);
+}
+
 THICC_NODISCARD Let* object_of(Size _size, ...) {
   va_list		list;
   MutableObject object;

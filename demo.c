@@ -24,23 +24,38 @@ static THICC_FUNCTION(println) {
 }
 
 static void playground(void) {
-  Let* foo_key		   = let_string("real");
-  Let* foo_value		   = let_real(2.5);
-  Let* foo_sum_key	   = let_string("+");
+  Let* foo_key		    = let_string("real");
+  Let* foo_value	    = let_real(2.5);
+  Let* foo_sum_key	    = let_string("+");
   Let* foo_sum_function = let_function(foo_sum);
-  Let* object1		   = object_of(4, foo_key, foo_value, foo_sum_key, foo_sum_function);
-  Let* object2		   = let_copy(object1);
-  Let* result		   = sum(object1, object2);
+  Let* object1		    = object_of(4, foo_key, foo_value, foo_sum_key, foo_sum_function);
+  Let* object2		    = let_copy(object1);
+  Let* result		    = sum(object1, object2);
   Let* number           = let_integer(5);
+  Let* fact             = let_function(factorial);
+  Let* print            = let_function(println);
+  Let* factorial_validation = let_integer(120);
   Let* factorial_result;
+  unlet(foo_key);
+  unlet(foo_value);
+  unlet(foo_sum_key);
+  unlet(foo_sum_function);
+
   assert(equal(result, number));
 
+  unlet(result);
   unlet(object1);
   unlet(object2);
 
-  factorial_result = invoke(let_function(factorial), 1, number);
-  assert(equal(factorial_result, let_integer(120)));
-  invoke(let_function(println), 1, factorial_result);
+  factorial_result = invoke(fact, 1, number);
+  assert(equal(factorial_result, factorial_validation));
+  invoke(print, 1, factorial_result);
+
+  unlet(number);
+  unlet(print);
+  unlet(fact);
+  unlet(factorial_validation);
+  unlet(factorial_result);
 }
 
 int main(void) {
