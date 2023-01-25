@@ -84,15 +84,10 @@ namespace thicc {
 	var(var const& _other) THICC_CPP_NOEXCEPT : variable(let_copy(_other.variable)) {}
 
 	template<typename Value>
-	var& operator=(Value const& _other) THICC_CPP_NOEXCEPT {
-	  return *this = var(_other);
-	}
+	var& operator=(Value const& _other) THICC_CPP_NOEXCEPT;
 
 	template<>
-	var& operator=(var const& _other) THICC_CPP_NOEXCEPT {
-	  this->variable = let_copy(_other.variable);
-	  return *this;
-	}
+	var& operator=(var const& _other) THICC_CPP_NOEXCEPT;
 
 	var& operator=(Let* _other) THICC_CPP_NOEXCEPT {
 	  this->variable = let_copy(_other);
@@ -193,6 +188,17 @@ namespace thicc {
 	  result.variable = let_move(const_cast<Var*>(_let));
 	  return result;
 	}
+  }
+
+  template<typename Value>
+  var& var::operator=(Value const& _other) THICC_CPP_NOEXCEPT {
+	return *this = var(_other);
+  }
+
+  template<>
+  var& var::operator=(var const& _other) THICC_CPP_NOEXCEPT {
+	this->variable = let_copy(_other.variable);
+	return *this;
   }
 }
 
