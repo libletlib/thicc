@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['thicc_5fc11_0',['THICC_C11',['../dc/d35/thicc__prelude_8h.html#a0e2ecb9f1b6d90bd5a4373557eb6d877',1,'thicc_prelude.h']]],
+  ['thicc_5fc17_1',['THICC_C17',['../dc/d35/thicc__prelude_8h.html#ad394701e720f3d427e27a3752c3196e5',1,'thicc_prelude.h']]],
+  ['thicc_5fc89_2',['THICC_C89',['../dc/d35/thicc__prelude_8h.html#a5cdbf7f4e6b46c0c78a781f21bf34dc6',1,'thicc_prelude.h']]],
+  ['thicc_5fc99_3',['THICC_C99',['../dc/d35/thicc__prelude_8h.html#acbb56e98cf8820ba672f621bb90bd1a0',1,'thicc_prelude.h']]],
+  ['thicc_5fc_5fversion_4',['THICC_C_VERSION',['../dc/d35/thicc__prelude_8h.html#a1e3b5978e66d5dd90e6b416d78695d28',1,'thicc_prelude.h']]],
+  ['thicc_5fchar_5fsigned_5',['THICC_CHAR_SIGNED',['../dc/d35/thicc__prelude_8h.html#a625a5a8c225de4897aca23b9c312215b',1,'thicc_prelude.h']]],
+  ['thicc_5fchar_5funsigned_6',['THICC_CHAR_UNSIGNED',['../dc/d35/thicc__prelude_8h.html#a34ed9b731b491a420d3a0c63838b413b',1,'thicc_prelude.h']]],
+  ['thicc_5fdebug_7',['THICC_DEBUG',['../dc/d35/thicc__prelude_8h.html#ab7242ace4283b91d52a08a84212c6bf1',1,'thicc_prelude.h']]],
+  ['thicc_5fdeprecated_8',['THICC_DEPRECATED',['../dc/d35/thicc__prelude_8h.html#a0f17e5a465379e4a9f929aa1859f3b70',1,'thicc_prelude.h']]],
+  ['thicc_5fequal_9',['THICC_EQUAL',['../dc/d35/thicc__prelude_8h.html#a82370c4eb4bb178aeff5a4704141d884',1,'thicc_prelude.h']]],
+  ['thicc_5ffallthrough_10',['THICC_FALLTHROUGH',['../dc/d35/thicc__prelude_8h.html#ac7e452a3dacbffbd28bf0a9b501e0404',1,'thicc_prelude.h']]],
+  ['thicc_5fimaginary_5fformat_11',['THICC_IMAGINARY_FORMAT',['../dc/d35/thicc__prelude_8h.html#a76bbd2dd63e3dcb23d2b615e5f91c5d8',1,'thicc_prelude.h']]],
+  ['thicc_5finteger_5fformat_12',['THICC_INTEGER_FORMAT',['../dc/d35/thicc__prelude_8h.html#a720d936da439dcdb8bcc9309d9ab45f3',1,'thicc_prelude.h']]],
+  ['thicc_5fleft_5fgreater_13',['THICC_LEFT_GREATER',['../dc/d35/thicc__prelude_8h.html#a8d6d36c3d94d1ff9a4bb802ba3af2473',1,'thicc_prelude.h']]],
+  ['thicc_5fmaybe_5funused_14',['THICC_MAYBE_UNUSED',['../dc/d35/thicc__prelude_8h.html#af43e2529d8f2d5d79e637bd0c9f322af',1,'thicc_prelude.h']]],
+  ['thicc_5fnatural_5fformat_15',['THICC_NATURAL_FORMAT',['../dc/d35/thicc__prelude_8h.html#ac901a9b1276c1ac48680179f04dd88c1',1,'thicc_prelude.h']]],
+  ['thicc_5fnaught_16',['THICC_NAUGHT',['../dc/d35/thicc__prelude_8h.html#acf9531067076da11c0f8c08d17bf477d',1,'thicc_prelude.h']]],
+  ['thicc_5fno_17',['THICC_NO',['../dc/d35/thicc__prelude_8h.html#a49cc352f0af07d5b9b44db0140d6c180',1,'thicc_prelude.h']]],
+  ['thicc_5fnodiscard_18',['THICC_NODISCARD',['../dc/d35/thicc__prelude_8h.html#ae196a78fc7192cddc232c8db68bfce88',1,'thicc_prelude.h']]],
+  ['thicc_5fnoreturn_19',['THICC_NORETURN',['../dc/d35/thicc__prelude_8h.html#a8d3f8c64836039e542c8e950169e006a',1,'thicc_prelude.h']]],
+  ['thicc_5freal_5fformat_20',['THICC_REAL_FORMAT',['../dc/d35/thicc__prelude_8h.html#ac6529118117c4494f4c9718978c54d80',1,'thicc_prelude.h']]],
+  ['thicc_5fright_5fgreater_21',['THICC_RIGHT_GREATER',['../dc/d35/thicc__prelude_8h.html#a35a4ca5badc73fcd4ccd98bab18bfd7d',1,'thicc_prelude.h']]],
+  ['thicc_5fstringify_22',['THICC_STRINGIFY',['../dc/d35/thicc__prelude_8h.html#a0ea4e5dbfe5297f798d721a54f20518d',1,'thicc_prelude.h']]],
+  ['thicc_5fstringify_5fhelper_23',['THICC_STRINGIFY_HELPER',['../dc/d35/thicc__prelude_8h.html#ace2ceec1d06f42659892ad87abb2cb2c',1,'thicc_prelude.h']]],
+  ['thicc_5fyes_24',['THICC_YES',['../dc/d35/thicc__prelude_8h.html#af82642918719f75d3682afe69818552b',1,'thicc_prelude.h']]]
+];

@@ -14,11 +14,7 @@ set(TEST_TIMEOUT 20)
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/fortran)
 
 if (CMAKE_C_COMPILER_ID MATCHES "Clang")
-    if (APPLE)
-        set(CMAKE_C_FLAGS "-Weverything -pedantic-errors")
-    else ()
-        set(CMAKE_C_FLAGS "-Weverything -pedantic-errors")
-    endif ()
+    set(CMAKE_C_FLAGS "-Weverything -pedantic-errors")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_C_FLAGS "-Wall -Wextra -pedantic-errors")
 elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
@@ -38,14 +34,14 @@ add_library(${PROJECT_NAME} STATIC ${THICC_HEADERS} ${THICC_SOURCES})
 add_dependencies(${PROJECT_NAME} npm_install)
 target_include_directories(${PROJECT_NAME} PRIVATE ${HEADER_DIRECTORY})
 IF(NOT WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE m)
+    target_link_libraries(${PROJECT_NAME} PRIVATE m) # Link maths library
 ENDIF()
 set_target_properties(${PROJECT_NAME} PROPERTIES
         VERSION ${PROJECT_VERSION}
         PUBLIC_HEADER ${HEADER_DIRECTORY}/${PROJECT_NAME}.h)
 
 configure_file(${PROJECT_NAME}.pc.in ${PROJECT_NAME}.pc @ONLY)
-install(TARGETS thicc
+install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)

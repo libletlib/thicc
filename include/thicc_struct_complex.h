@@ -16,7 +16,7 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation
+ *      this list of conditions and the following disclaimer in the docs
  *      and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -33,18 +33,32 @@
 #ifndef THICC_THICC_STRUCT_COMPLEX_H
 #define THICC_THICC_STRUCT_COMPLEX_H
 
+/**
+ * \file thicc_struct_complex.h
+ * Contains declaration of the complex number struct and functions directly related to it.
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "thicc_prelude.h"
 
+/**
+ * \brief C99 compatible complex number representation.
+ */
 struct thicc_struct_complex {
-  MutableReal real;
-  MutableReal imaginary;
+  MutableReal real; /**< Real part of the complex number. */
+  MutableReal imaginary; /**< Imaginary part of the complex number. */
 };
 
-MutableComplex cmplx(Real, Real);
+/**
+ * \brief Produce a C99 compatible complex number representation.
+ * \param _real number to use.
+ * \param _imaginary number to use.
+ * \return struct with form of { .real, .imaginary }.
+ */
+MutableComplex cmplx(Real _real, Real _imaginary);
 
 #ifdef __cplusplus
 }

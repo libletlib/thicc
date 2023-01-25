@@ -6,9 +6,9 @@ subroutine playground()
     type(let) :: x, y, z
     character(:, c_char), allocatable :: s
 
-    x = 3
-    y = 3
-    z = x ** y
+    x = 6
+    y = "3"
+    z = x .mod. y
     s = z%as_string()
     print *, s
     deallocate(s)

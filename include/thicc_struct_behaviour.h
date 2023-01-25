@@ -17,7 +17,7 @@
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
  * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
+ * docs and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -34,37 +34,45 @@
 #ifndef THICC_THICC_STRUCT_BEHAVIOUR_H
 #define THICC_THICC_STRUCT_BEHAVIOUR_H
 
+/**
+ * \file thicc_struct_behaviour.h
+ * Includes declarations for behavioural struct that holds function pointers for type-based operations.
+ */
+
 #include "thicc_enum_rank.h"
 #include "thicc_prelude.h"
 
+/**
+ * \brief Struct to hold behaviour of each type of Let in a standardised way.
+ */
 struct thicc_struct_behaviour {
-  Rank rank;
-  void (*const deallocate)(Let*);
-  MutableBoolean (*const as_boolean)(Let*);
-  MutableCharacter (*const as_character)(Let*);
-  MutableNatural (*const as_natural)(Let*);
-  MutableInteger (*const as_integer)(Let*);
-  MutableReal (*const as_real)(Let*);
-  MutableComplex (*const as_complex)(Let*);
-  MutableString (*const as_string)(Let*);
-  MutableFunction (*const as_function)(Let*);
-  MutableArray (*const as_array)(Let*);
-  MutableObject (*const as_object)(Let*);
-  Let* (*const sum)(Let*, Let*);
-  Let* (*const difference)(Let*, Let*);
-  Let* (*const product)(Let*, Let*);
-  Let* (*const quotient)(Let*, Let*);
-  Let* (*const modulo)(Let*, Let*);
-  Let* (*const bit_and)(Let*, Let*);
-  Let* (*const bit_or)(Let*, Let*);
-  Let* (*const bit_xor)(Let*, Let*);
-  Let* (*const bit_not)(Let*);
-  Let* (*const bit_complement)(Let*);
-  Let* (*const index_of)(Let*, Let*);
-  Let* (*const indirection)(Let*);
-  Let* (*const negative)(Let*);
-  Let* (*const positive)(Let*);
-  MutableComparison (*const comparison)(Let*, Let*);
+  Rank rank; /**< Rank of the type. See `thicc_enum_rank.h` for details. */
+  void (*const deallocate)(Let*); /**< Function to deallocate the memory owned by this Let. */
+  MutableBoolean (*const as_boolean)(Let*); /**< Function to convert this type to a Boolean. */
+  MutableCharacter (*const as_character)(Let*); /**< Function to convert this type to a Character. */
+  MutableNatural (*const as_natural)(Let*); /**< Function to convert this type to a Natural. */
+  MutableInteger (*const as_integer)(Let*); /**< Function to convert this type to a Integer. */
+  MutableReal (*const as_real)(Let*); /**< Function to convert this type to a Real. */
+  MutableComplex (*const as_complex)(Let*); /**< Function to convert this type to a Complex. */
+  MutableString (*const as_string)(Let*); /**< Function to convert this type to a String. */
+  MutableFunction (*const as_function)(Let*); /**< Function to convert this type to a Function. */
+  MutableArray (*const as_array)(Let*); /**< Function to convert this type to an Array. */
+  MutableObject (*const as_object)(Let*); /**< Function to convert this type to an Object. */
+  Let* (*const sum)(Let*, Let*); /**< Function to compute the sum (+) operation for this type. */
+  Let* (*const difference)(Let*, Let*); /**< Function to compute the difference (-) operation for this type. */
+  Let* (*const product)(Let*, Let*); /**< Function to compute the product (*) operation for this type. */
+  Let* (*const quotient)(Let*, Let*); /**< Function to compute the quotient (/) operation for this type. */
+  Let* (*const modulo)(Let*, Let*); /**< Function to compute the modulo (%) operation for this type. */
+  Let* (*const bit_and)(Let*, Let*); /**< Function to compute the bitwise AND (&) operation for this type. */
+  Let* (*const bit_or)(Let*, Let*); /**< Function to compute the bitwise OR (|) operation for this type. */
+  Let* (*const bit_xor)(Let*, Let*); /**< Function to compute the bitwise XOR (^) operation for this type. */
+  Let* (*const bit_not)(Let*); /**< Function to compute the boolean negation (!) operation for this type. */
+  Let* (*const bit_complement)(Let*); /**< Function to compute the bitwise complement (~) operation for this type. */
+  Let* (*const index_of)(Let*, Let*); /**< Function to compute the index-of ([]) operation for this type. */
+  Let* (*const indirection)(Let*); /**< Function to compute the unary indirection (*) operation for this type. */
+  Let* (*const negative)(Let*); /**< Function to compute the unary negative (-) operation for this type. */
+  Let* (*const positive)(Let*); /**< Function to compute the unary positive (+) operation for this type. */
+  MutableComparison (*const comparison)(Let*, Let*); /**< Function to compute the three-way (<=>) comparison for this type. */
 };
 
 extern Behaviour boolean_behaviour;

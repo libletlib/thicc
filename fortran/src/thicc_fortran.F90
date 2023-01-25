@@ -61,6 +61,7 @@ module thicc_fortran
         procedure :: let_difference
         procedure :: let_product
         procedure :: let_quotient
+        procedure :: let_modulo
         procedure :: let_power
         procedure :: let_equal
         procedure :: let_not_equal
@@ -73,6 +74,7 @@ module thicc_fortran
         generic, public :: operator(-) => let_difference
         generic, public :: operator(*) => let_product
         generic, public :: operator(/) => let_quotient
+        generic, public :: operator(.mod.) => let_modulo
         generic, public :: operator(**) => let_power
         generic, public :: operator(==) => let_equal
         generic, public :: operator(.ne.) => let_not_equal
@@ -393,6 +395,14 @@ module thicc_fortran
             type(c_ptr) :: quotient
         end function quotient
 
+        function modulo(left, right) bind(C)
+            use, intrinsic :: iso_c_binding, only: c_ptr
+            implicit none
+
+            type(c_ptr), value, intent(in) :: left, right
+            type(c_ptr) :: modulo
+        end function modulo
+
         function equal(left, right) bind(C)
             use, intrinsic :: iso_c_binding, only: c_ptr, c_bool
             implicit none
@@ -543,7 +553,7 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: c_bool
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             logical(c_bool) :: let_as_boolean
             let_as_boolean = as_boolean(self%variable)
         end function let_as_boolean
@@ -552,7 +562,7 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: c_char
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             character(c_char) :: let_as_character
             let_as_character = as_character(self%variable)
         end function let_as_character
@@ -561,7 +571,7 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: THICC_FORTRAN_INTEGER
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             integer(THICC_FORTRAN_INTEGER) :: let_as_integer
             let_as_integer = as_integer(self%variable)
         end function let_as_integer
@@ -570,7 +580,7 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: THICC_FORTRAN_REAL
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             real(THICC_FORTRAN_REAL) :: let_as_real
             let_as_real = as_real(self%variable)
         end function let_as_real
@@ -579,16 +589,16 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: THICC_FORTRAN_COMPLEX
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             complex(THICC_FORTRAN_COMPLEX) :: let_as_complex
             let_as_complex = as_complex(self%variable)
         end function let_as_complex
 
         function let_as_string(self)
-            use, intrinsic :: iso_c_binding, only: c_ptr, c_f_pointer, c_char
+            use, intrinsic :: iso_c_binding, only: c_f_pointer, c_char
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             type(thicc_struct_string) :: thicc_string
             character(:, c_char), allocatable :: let_as_string
             character(c_char), pointer :: c_string(:)
@@ -609,7 +619,7 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: c_funptr
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             type(c_funptr) :: let_as_function
             let_as_function = as_function(self%variable)
         end function let_as_function
@@ -617,7 +627,7 @@ module thicc_fortran
         function let_as_array(self)
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             type(thicc_struct_array) :: let_as_array
             let_as_array = as_array(self%variable)
         end function let_as_array
@@ -626,7 +636,7 @@ module thicc_fortran
             use, intrinsic :: iso_c_binding, only: c_ptr
             implicit none
 
-            class(let) :: self
+            class(let), intent(in) :: self
             type(c_ptr) :: let_as_object
             let_as_object = as_object(self%variable)
         end function let_as_object
@@ -703,6 +713,22 @@ module thicc_fortran
                 let_quotient%variable = quotient(left%variable, right_let%variable)
             end select
         end function let_quotient
+
+        function let_modulo(left, right)
+            implicit none
+
+            class(let), intent(in) :: left
+            class(*), intent(in) :: right
+            type(let) :: let_modulo, right_let
+
+            select type(right)
+            class is(let)
+                let_modulo%variable = modulo(left%variable, right%variable)
+            class default
+                right_let = let(right)
+                let_modulo%variable = modulo(left%variable, right_let%variable)
+            end select
+        end function let_modulo
 
         function let_power(left, right)
             implicit none

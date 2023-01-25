@@ -16,7 +16,7 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation
+ *      this list of conditions and the following disclaimer in the docs
  *      and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -33,19 +33,36 @@
 #ifndef THICC_THICC_STRUCT_ARRAY_H
 #define THICC_THICC_STRUCT_ARRAY_H
 
+/**
+ * \file thicc_struct_array.h
+ * Declare the Array type struct and directly related functions.
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "thicc_prelude.h"
 
+/**
+ * \brief Hold a Let array type values and their length.
+ */
 struct thicc_struct_array {
-  Let**	 array;
-  MutableSize    length;
+  Let**	 array; /**< Pointer of pointers that is the array of Lets. */
+  MutableSize length; /**< Length of the array. */
 };
 
-MutableArray   array_empty(void);
-MutableBoolean array_is_empty(Array);
+/**
+ * \brief Create an empty array.
+ * \return An empty array.
+ */
+MutableArray array_empty(void);
+/**
+ * \brief Check if an array is empty.
+ * \param _array to evaluate for emptiness.
+ * \return true if _array is empty, false otherwise.
+ */
+MutableBoolean array_is_empty(Array _array);
 
 #ifdef __cplusplus
 }

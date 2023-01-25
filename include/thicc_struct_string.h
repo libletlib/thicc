@@ -16,7 +16,7 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation
+ *      this list of conditions and the following disclaimer in the docs
  *      and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -33,21 +33,48 @@
 #ifndef THICC_THICC_STRUCT_STRING_H
 #define THICC_THICC_STRUCT_STRING_H
 
+/**
+ * \file thicc_struct_string.h
+ * Declare the String type struct and directly related functions.
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "thicc_prelude.h"
 
+/**
+ * \brief Hold a Let array type values and their length.
+ */
 struct thicc_struct_string {
-  MutableCharacter* string;
-  MutableSize       length;
+  MutableCharacter* string; /**< Raw C string, null terminated. */
+  MutableSize       length; /**< Length of the string. */
 };
 
+/**
+ * \brief Produces an empty string.
+ * \return An empty string.
+ */
 MutableString	  string_empty(void);
-MutableSize       string_length(String);
+/**
+ * \brief Calculates the length of a String.
+ * \param _string to evaluate length for.
+ * \return Length of the string.
+ */
+MutableSize       string_length(String _string);
+/**
+ * \brief Construct a Let String from a C string literal.
+ * \param _literal to copy.
+ * \return A copy of _literal as a Let.
+ */
 MutableString	  string_from_pointer(MutableCharacter* _literal);
-MutableBoolean	  string_is_empty(String);
+/**
+ * \brief Check if a string is empty.
+ * \param _string to evaluate for emptiness.
+ * \return true if _string is empty, false otherwise.
+ */
+MutableBoolean	  string_is_empty(String _string);
 
 #ifdef __cplusplus
 }

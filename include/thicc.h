@@ -17,7 +17,7 @@
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
  * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
+ * docs and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -33,6 +33,11 @@
  */
 #ifndef THICC_THICC_H
 #define THICC_THICC_H
+
+/**
+ * \file thicc.h
+ * Primary include header and some utility macros for end-user use only.
+ */
 
 #include "thicc_interface.h"
 

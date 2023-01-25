@@ -17,7 +17,7 @@
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
  * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
+ * docs and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -44,7 +44,7 @@ extern "C" {
 #include "../utility/thicc_rank.h"
 #include "thicc_struct_object.h"
 
-#define select_operator(_left, _left_rank, _operator, _right, _right_rank)                       \
+#define select_operator(_left, _left_rank, _operator, _right, _right_rank)                        \
   (_left_rank) == (_right_rank)	 ? (_left)->behaviour->_operator(_left, _right)                   \
   : (_left_rank) > (_right_rank) ? (_left)->behaviour->_operator(_left, cast(_right, _left_rank)) \
 								 : (_right)->behaviour->_operator(cast(_left, _right_rank), _right)
@@ -179,6 +179,7 @@ THICC_NODISCARD Let* member(Let* _object, Let* _member) {
   return let_empty();
 }
 
+
 THICC_NODISCARD Let* cast(Let* _let, Rank _rank) {
   switch (_rank) {
 	case boolean_rank:
@@ -262,6 +263,7 @@ THICC_NODISCARD MutableArray as_array(Let* _let) {
 THICC_NODISCARD MutableObject as_object(Let* _let) {
   return _let->behaviour->as_object(_let);
 }
+
 
 THICC_NODISCARD Let* sum(Let* _left, Let* _right) {
   Rank left_rank  = rank(_left);
@@ -430,12 +432,12 @@ THICC_NODISCARD Let* indirection(Let* _let) {
   return _let->behaviour->indirection(_let);
 }
 
-THICC_NODISCARD Let* positive(Let* _let) {
-  return _let->behaviour->positive(_let);
-}
-
 THICC_NODISCARD Let* negative(Let* _let) {
   return _let->behaviour->negative(_let);
+}
+
+THICC_NODISCARD Let* positive(Let* _let) {
+  return _let->behaviour->positive(_let);
 }
 
 THICC_NODISCARD MutableComparison compare(Let* _left, Let* _right) {
@@ -457,6 +459,7 @@ THICC_NODISCARD MutableComparison compare(Let* _left, Let* _right) {
   }
   return select_operator(_left, left_rank, comparison, _right, right_rank);
 }
+
 
 THICC_NODISCARD MutableBoolean equal(Let* _left, Let* _right) {
   return comparison_equal(compare(_left, _right));

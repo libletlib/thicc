@@ -17,7 +17,7 @@
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
  * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
+ * docs and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -34,6 +34,18 @@
 #ifndef THICC_THICC_ENUM_RANK_H
 #define THICC_THICC_ENUM_RANK_H
 
+/**
+ * \file thicc_enum_rank.h
+ * Includes rank priority enumeration for ThicC data.
+ */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * \brief Enumerate the priority of the Let values. Higher value is higher priority.
+ */
 enum thicc_enum_rank {
   boolean_rank	 = 0,
   character_rank = 1,
@@ -46,5 +58,9 @@ enum thicc_enum_rank {
   array_rank	 = 8,
   object_rank	 = 9
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* THICC_THICC_ENUM_RANK_H */
