@@ -40,12 +40,7 @@ jobs:
       - if: matrix.os == 'ubuntu-latest'
         shell: bash
         run: |
-          sudo apt-get install -y gfortran gobjc
-
-      - if: matrix.os == 'macos-latest'
-        shell: bash
-        run: |
-          brew install gfortran
+          sudo apt-get install -y gobjc
 
       - if: matrix.compiler
         shell: bash

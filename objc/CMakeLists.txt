@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-enable_language(OBJC)
+#enable_language(OBJC)
 project(thicc_objc VERSION 0.0.1 DESCRIPTION "Write some thicc Objective-C." LANGUAGES OBJC)
 
 set(CMAKE_OBJC_STANDARD 90)
