@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,11 +36,11 @@ extern "C" {
 #endif
 
 #include "thicc_as_boolean.h"
-#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_math.h"
 #include "../utility/thicc_object.h"
+#include <thicc_interface.h>
 
 THICC_NODISCARD MutableBoolean boolean_as_boolean(Let* _let) {
   return _let->value.boolean_type;
@@ -63,7 +63,8 @@ THICC_NODISCARD MutableBoolean real_as_boolean(Let* _let) {
 }
 
 THICC_NODISCARD MutableBoolean complex_as_boolean(Let* _let) {
-  return math_real_equal(_let->value.complex_type.real, 0.0l) && math_real_equal(_let->value.complex_type.imaginary, 0.0l)
+  return math_real_equal(_let->value.complex_type.real, 0.0l) &&
+				 math_real_equal(_let->value.complex_type.imaginary, 0.0l)
 			 ? THICC_YES
 			 : THICC_NO;
 }
@@ -84,7 +85,7 @@ THICC_NODISCARD MutableBoolean array_as_boolean(Let* _let) {
 }
 
 THICC_NODISCARD MutableBoolean object_as_boolean(Let* _let) {
-  Let* key = let_string("boolean");
+  Let* key				= let_string("boolean");
   Let* conversion_value = member(_let, key);
   unlet(key);
   if (!let_is_empty(conversion_value)) {

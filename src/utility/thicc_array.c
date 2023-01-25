@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,13 +36,13 @@ extern "C" {
 #endif
 
 #include "thicc_array.h"
+#include "../core/thicc_memory.h"
+#include "thicc_math.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <thicc_interface.h>
 #include <thicc_struct_array.h>
 #include <thicc_struct_var.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "../core/thicc_memory.h"
-#include "thicc_math.h"
 
 THICC_NODISCARD MutableComparison array_compare(Array _left, Array _right) {
   MutableSize index = 0;
@@ -97,7 +97,7 @@ THICC_NODISCARD MutableArray array_remove_subarray(Array _original, Array _subar
   MutableArray buffer = array_allocate(_original.length);
   MutableSize  index  = 0;
   MutableSize  jindex = 0;
-  MutableSize   kindex = 0;
+  MutableSize  kindex = 0;
   for (; jindex < _original.length; ++index, ++jindex) {
 	if (array_compare_n(_original, index, _subarray, _subarray.length))
 	  jindex += _subarray.length;
@@ -233,7 +233,7 @@ THICC_NODISCARD Let* array_element_at(Array _array, Integer _index) {
 }
 
 THICC_NODISCARD MutableArray array_concatenate(Array _left, Array _right) {
-  Size length = _left.length + _right.length;
+  Size		   length = _left.length + _right.length;
   MutableSize  index = 0, jindex = 0;
   MutableArray buffer = array_allocate(length);
   for (; index < _left.length; ++index)

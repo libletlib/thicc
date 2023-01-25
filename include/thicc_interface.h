@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -385,7 +385,7 @@ MutableBoolean equal(Let* _left, Let* _right);
  * on the types of equal rank.
  * \param _left side of the operation.
  * \param _right side of the operation.
-* \return THICC_YES if _left is greater than _right, otherwise THICC_NO.
+ * \return THICC_YES if _left is greater than _right, otherwise THICC_NO.
  */
 MutableBoolean greater_than(Let* _left, Let* _right);
 /**
@@ -395,7 +395,7 @@ MutableBoolean greater_than(Let* _left, Let* _right);
  * on the types of equal rank.
  * \param _left side of the operation.
  * \param _right side of the operation.
-* \return THICC_YES if _left is less than _right, otherwise THICC_NO.
+ * \return THICC_YES if _left is less than _right, otherwise THICC_NO.
  */
 MutableBoolean less_than(Let* _left, Let* _right);
 /**
@@ -405,7 +405,7 @@ MutableBoolean less_than(Let* _left, Let* _right);
  * on the types of equal rank.
  * \param _left side of the operation.
  * \param _right side of the operation.
-* \return THICC_YES if _left and _right are not equal, otherwise THICC_NO.
+ * \return THICC_YES if _left and _right are not equal, otherwise THICC_NO.
  */
 MutableBoolean not_equal(Let* _left, Let* _right);
 /**

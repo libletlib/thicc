@@ -1,3 +1,36 @@
+#
+#   ___       ___       ___       ___       ___
+#  /\  \     /\__\     /\  \     /\  \     /\  \
+#  \:\  \   /:/__/_   _\:\  \   /::\  \   /::\  \
+#  /::\__\ /::\/\__\ /\/::\__\ /:/\:\__\ /:/\:\__\
+# /:/\/__/ \/\::/  / \::/\/__/ \:\ \/__/ \:\ \/__/
+# \/__/      /:/  /   \:\__\    \:\__\    \:\__\
+#            \/__/     \/__/     \/__/     \/__/
+#
+# Copyright 2022 - 2023 Ville Rissanen
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1.   Redistributions of source code must retain the above copyright notice,
+#      this list of conditions and the following disclaimer.
+#
+# 2.   Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 cmake_minimum_required(VERSION 3.23)
 enable_language(C)
 project(thicc VERSION 0.0.1 DESCRIPTION "Write some thicc C." LANGUAGES C)
@@ -27,15 +60,15 @@ file(GLOB_RECURSE TEST_HEADERS RELATIVE ${CMAKE_SOURCE_DIR} "${TEST_DIRECTORY}/*
 file(GLOB_RECURSE TEST_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "${TEST_DIRECTORY}/*.c")
 
 add_custom_target(npm_install ALL
-                  COMMAND npm install
-                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+        COMMAND npm install
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 add_library(${PROJECT_NAME} STATIC ${THICC_HEADERS} ${THICC_SOURCES})
 add_dependencies(${PROJECT_NAME} npm_install)
 target_include_directories(${PROJECT_NAME} PRIVATE ${HEADER_DIRECTORY})
-IF(NOT WIN32)
+IF (NOT WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE m) # Link maths library
-ENDIF()
+ENDIF ()
 set_target_properties(${PROJECT_NAME} PROPERTIES
         VERSION ${PROJECT_VERSION}
         PUBLIC_HEADER ${HEADER_DIRECTORY}/${PROJECT_NAME}.h)
@@ -55,15 +88,15 @@ target_link_libraries(${PROJECT_NAME}_demo PRIVATE ${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME}_demo PRIVATE ${HEADER_DIRECTORY})
 
 add_subdirectory(cpp)
-if(NOT WIN32)
+if (NOT WIN32)
     #add_subdirectory(fortran)
     #add_subdirectory(objc)
-endif()
+endif ()
 
 enable_testing()
 add_test(NAME ${PROJECT_NAME}_test
-         COMMAND $<TARGET_FILE:${PROJECT_NAME}_test>)
+        COMMAND $<TARGET_FILE:${PROJECT_NAME}_test>)
 set_tests_properties(${PROJECT_NAME}_test PROPERTIES TIMEOUT 20)
 add_test(NAME ${PROJECT_NAME}_demo_test
-         COMMAND $<TARGET_FILE:${PROJECT_NAME}_demo>)
+        COMMAND $<TARGET_FILE:${PROJECT_NAME}_demo>)
 set_tests_properties(${PROJECT_NAME}_demo_test PROPERTIES TIMEOUT ${TEST_TIMEOUT})

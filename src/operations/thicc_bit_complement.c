@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,14 +36,14 @@ extern "C" {
 #endif
 
 #include "thicc_bit_complement.h"
-#include <thicc_interface.h>
-#include <thicc_struct_var.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_complex.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_real.h"
 #include "../utility/thicc_string.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 
 THICC_NODISCARD Let* boolean_bit_complement(Let* _let) {
   return let_boolean(_let->value.boolean_type ? THICC_NO : THICC_YES);
@@ -75,7 +75,7 @@ THICC_NODISCARD Let* string_bit_complement(Let* _let) {
 
 THICC_NODISCARD Let* function_bit_complement(Let* _let) {
   Let* let_result = function_invoke(_let, let_empty());
-  Let* result	 = bit_complement(let_result);
+  Let* result	  = bit_complement(let_result);
   unlet(let_result);
   return result;
 }
@@ -86,7 +86,7 @@ THICC_NODISCARD Let* array_bit_complement(Let* _let) {
 
 THICC_NODISCARD Let* object_bit_complement(Let* _let) {
   Let* property_name = let_string("~");
-  Let* property		= member(_let, property_name);
+  Let* property		 = member(_let, property_name);
   Let* result;
   unlet(property_name);
 

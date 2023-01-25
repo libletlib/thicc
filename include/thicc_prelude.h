@@ -7,17 +7,17 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
  * 1.   Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
+ *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -188,8 +188,9 @@ typedef MutableBoolean const Boolean;
 typedef unsigned int	   MutableUnsignedCharacterPromotedType;
 typedef unsigned int const UnsignedCharacterPromotedType;
 #else
-/** UnsignedCharacter promoted type, can be int or if the domain of the signed int is not enough, the type will be unsigned int. */
-typedef int										   MutableUnsignedCharacterPromotedType;
+/** UnsignedCharacter promoted type, can be int or if the domain of the signed int is not enough, the type will be
+ * unsigned int. */
+typedef int MutableUnsignedCharacterPromotedType;
 /** Const version of the UnsignedCharacter promoted type. */
 typedef MutableUnsignedCharacterPromotedType const UnsignedCharacterPromotedType;
 #endif
@@ -201,8 +202,9 @@ typedef MutableUnsignedCharacterPromotedType const UnsignedCharacterPromotedType
 #define THICC_CHAR_SIGNED THICC_YES
 /** Boolean macro to determine the unsignedness of `char`. */
 #define THICC_CHAR_UNSIGNED THICC_NO
-/** Character promoted type. Can be int or unsigned int depending on if `char` is unsigned and if `int` has enough domain. */
-typedef int								   MutableCharacterPromotedType;
+/** Character promoted type. Can be int or unsigned int depending on if `char` is unsigned and if `int` has enough
+ * domain. */
+typedef int MutableCharacterPromotedType;
 /** Const version of the Characters promoted type. */
 typedef MutableCharacterPromotedType const CharacterPromotedType;
 #else
@@ -213,11 +215,11 @@ typedef UnsignedCharacterPromotedType			   CharacterPromotedType;
 #endif
 
 /** Comparison type, int to enable -1, 0, and 1. */
-typedef int				  MutableComparison;
+typedef int MutableComparison;
 /** Const version of the Comparison type. */
-typedef int const		  Comparison;
+typedef int const Comparison;
 /** Size type, maps to to `size_t`. */
-typedef size_t			  MutableSize;
+typedef size_t MutableSize;
 /** Const version of the Size type. */
 typedef MutableSize const Size;
 
@@ -230,23 +232,23 @@ struct thicc_struct_array;
 struct thicc_struct_object;
 
 /** Typedef for easier access to Ranks. */
-typedef enum thicc_enum_rank			  MutableRank;
+typedef enum thicc_enum_rank MutableRank;
 /** Const version of the Rank typedef. */
-typedef MutableRank const				  Rank;
+typedef MutableRank const Rank;
 /** Typedef for easier access to Let internal structure. */
-typedef struct thicc_struct_var 		  Var;
+typedef struct thicc_struct_var Var;
 /** Const typedef for Let internal structure. */
-typedef Var const						  Let;
+typedef Var const Let;
 /** Typedef for easier access to Behaviour. */
-typedef struct thicc_struct_behaviour	  MutableBehaviour;
+typedef struct thicc_struct_behaviour MutableBehaviour;
 /** Const typedef for Behaviour. */
-typedef MutableBehaviour const			  Behaviour;
+typedef MutableBehaviour const Behaviour;
 /** Typedef for easier access to Let internal Value union. */
-typedef union thicc_union_value			  MutableValue;
+typedef union thicc_union_value MutableValue;
 /** Const typedef of the Let internal Value union. */
-typedef MutableValue const				  Value;
+typedef MutableValue const Value;
 /** Typedef for easier access to Let object struct. */
-typedef struct thicc_struct_object*		  MutableRoot;
+typedef struct thicc_struct_object* MutableRoot;
 /** Const typedef of the Let object struct. */
 typedef struct thicc_struct_object const* Root;
 
@@ -258,14 +260,14 @@ typedef struct thicc_struct_object const* Root;
 #define THICC_STRINGIFY(_value) THICC_STRINGIFY_HELPER(_value)
 
 /** Define Character type. */
-typedef char				   MutableCharacter;
+typedef char MutableCharacter;
 /** Const typedef of `Character` type. */
 typedef MutableCharacter const Character;
 #if THICC_C89
 /** Define Natural type. In C89 it is `unsigned long`, in later standards it is `unsigned long long`. */
 typedef unsigned long MutableNatural;
 /** Define Integer type. In C89 it is `long`, in later standards it is `long long`. */
-typedef long		  MutableInteger;
+typedef long MutableInteger;
 /* clang-format off */
 /** Helper macro to format print Natural types. */
 #define THICC_NATURAL_FORMAT %lu
@@ -285,9 +287,9 @@ typedef MutableNatural const Natural;
 /** Const typedef of Integer. */
 typedef MutableInteger const Integer;
 /** Define the Real type. */
-typedef long double			 MutableReal;
+typedef long double MutableReal;
 /** Const typedef of the Real type. */
-typedef MutableReal const	 Real;
+typedef MutableReal const Real;
 /* clang-format off */
 /** Helper macro to format print Real types. */
 #define THICC_REAL_FORMAT %Lg
@@ -298,25 +300,25 @@ typedef MutableReal const	 Real;
 /** Define the Complex type. Compatible with C99 _Complex number type definition. */
 typedef struct thicc_struct_complex MutableComplex;
 /** Const typedef of the Complex type. See `thicc_struct_complex.h` for details. */
-typedef MutableComplex const		Complex;
+typedef MutableComplex const Complex;
 /** Define the Function type and its signature. */
 typedef Let* (*MutableFunction)(Let*, Let*);
 /** Const typedef of the Function type. */
-typedef MutableFunction const	   Function;
+typedef MutableFunction const Function;
 /** Define the String type. See `thicc_struct_string.h` for details. */
 typedef struct thicc_struct_string MutableString;
 /** Const typedef of the String type. */
-typedef MutableString const        String;
+typedef MutableString const String;
 /** Define the Array type. See `thicc_struct_array.h` for details. */
-typedef struct thicc_struct_array  MutableArray;
+typedef struct thicc_struct_array MutableArray;
 /** Const typedef of the Array type. */
-typedef MutableArray const		   Array;
+typedef MutableArray const Array;
 /** Define the Object type. It usually is an empty Let or a Let Object type. */
-typedef void* THICC_RESTRICT	   MutableObject;
+typedef void* THICC_RESTRICT MutableObject;
 /** Const typedef of the Object type. */
 typedef void const* THICC_RESTRICT Object;
 /** Even more const typedef of the Object type. */
-typedef Object const			   ImmutableObject;
+typedef Object const ImmutableObject;
 
 #ifdef __cplusplus
 }

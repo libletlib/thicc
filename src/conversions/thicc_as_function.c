@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,10 +36,10 @@ extern "C" {
 #endif
 
 #include "thicc_as_function.h"
-#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
+#include <thicc_interface.h>
 
 THICC_NODISCARD MutableFunction boolean_as_function(THICC_MAYBE_UNUSED Let* _let) {
   return function_empty();
@@ -78,7 +78,7 @@ THICC_NODISCARD MutableFunction array_as_function(Let* _let) {
 }
 
 THICC_NODISCARD MutableFunction object_as_function(Let* _let) {
-  Let* key = let_string("function");
+  Let* key				= let_string("function");
   Let* conversion_value = member(_let, key);
   unlet(key);
   if (!let_is_empty(conversion_value)) {

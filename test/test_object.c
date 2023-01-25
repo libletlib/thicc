@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -41,28 +41,28 @@ MutableArray root_values(Let*);
 
 THICC_NODISCARD static int conversions(void) {
   Let* value_element = let_integer(1);
-  Let* value_name	= let_string("integer");
-  Let* value		= object_of(2, value_name, value_element);
-  Let* comparable	= object_of(2, value_name, value_element);
+  Let* value_name	 = let_string("integer");
+  Let* value		 = object_of(2, value_name, value_element);
+  Let* comparable	 = object_of(2, value_name, value_element);
 
-  Let* boolean_one = let_boolean(THICC_YES);
+  Let* boolean_one	 = let_boolean(THICC_YES);
   Let* character_one = let_character(1);
-  Let* natural_one	= let_natural(1);
-  Let* integer_one	= let_integer(1);
-  Let* real_one		= let_real(1);
-  Let* complex_one	= let_complex(cmplx(1, 0.0));
-  Let* string_one	= let_string("{\n\t\"integer\": 1\n}");
-  Let* array_one	= array_of(1, value);
-  Let* object_one = object_of(2, value_name, value_element);
+  Let* natural_one	 = let_natural(1);
+  Let* integer_one	 = let_integer(1);
+  Let* real_one		 = let_real(1);
+  Let* complex_one	 = let_complex(cmplx(1, 0.0));
+  Let* string_one	 = let_string("{\n\t\"integer\": 1\n}");
+  Let* array_one	 = array_of(1, value);
+  Let* object_one	 = object_of(2, value_name, value_element);
 
-  Let* boolean_cast = cast(value, boolean_rank);
+  Let* boolean_cast	  = cast(value, boolean_rank);
   Let* character_cast = cast(value, character_rank);
-  Let* natural_cast = cast(value, natural_rank);
-  Let* integer_cast = cast(value, integer_rank);
-  Let* real_cast = cast(value, real_rank);
-  Let* complex_cast = cast(value, complex_rank);
-  Let* string_cast = cast(value, string_rank);
-  Let* array_cast = cast(value, array_rank);
+  Let* natural_cast	  = cast(value, natural_rank);
+  Let* integer_cast	  = cast(value, integer_rank);
+  Let* real_cast	  = cast(value, real_rank);
+  Let* complex_cast	  = cast(value, complex_rank);
+  Let* string_cast	  = cast(value, string_rank);
+  Let* array_cast	  = cast(value, array_rank);
 
   assert(equal(boolean_cast, boolean_one));
   assert(equal(character_cast, character_one));
@@ -102,10 +102,10 @@ THICC_NODISCARD static int conversions(void) {
 }
 
 THICC_NODISCARD static THICC_FUNCTION(bi_operator) {
-  Let* index	= let_integer(0);
-  Let* left	    = index_of(args, index);
-  Let* right	= index_of(args, index);
-  Let* result   = let_integer(as_integer(left) + as_integer(right));
+  Let* index  = let_integer(0);
+  Let* left	  = index_of(args, index);
+  Let* right  = index_of(args, index);
+  Let* result = let_integer(as_integer(left) + as_integer(right));
   unlet(index);
   unlet(left);
   unlet(right);
@@ -122,11 +122,11 @@ THICC_NODISCARD static THICC_FUNCTION(mono_operator) {
 }
 
 THICC_NODISCARD static int operations(void) {
-  Let* value	  = let_integer(1);
-  Let* bi_op	  = let_function(bi_operator);
-  Let* mono_op    = let_function(mono_operator);
+  Let* value   = let_integer(1);
+  Let* bi_op   = let_function(bi_operator);
+  Let* mono_op = let_function(mono_operator);
 
-  Let* value_key	      = let_string("integer");
+  Let* value_key		  = let_string("integer");
   Let* bit_and_key		  = let_string("&");
   Let* bit_complement_key = let_string("~");
   Let* bit_not_key		  = let_string("!");
@@ -144,56 +144,56 @@ THICC_NODISCARD static int operations(void) {
   Let* sum_key			  = let_string("/");
 
   Let* object = object_of(32,
-						 value_key,
-						 value,
-						 bit_and_key,
-						 bi_op,
-						 bit_complement_key,
-						 mono_op,
-						 bit_not_key,
-						 mono_op,
-						 bit_or_key,
-						 bi_op,
-						 bit_xor_key,
-						 bi_op,
-						 comparison_key,
-						 bi_op,
-						 difference_key,
-						 bi_op,
-						 index_of_key,
-						 bi_op,
-						 indirection_key,
-						 mono_op,
-						 modulo_key,
-						 bi_op,
-						 negative_key,
-						 mono_op,
-						 positive_key,
-						 mono_op,
-						 product_key,
-						 bi_op,
-						 quotient_key,
-						 bi_op,
-						 sum_key,
-						 bi_op);
+						  value_key,
+						  value,
+						  bit_and_key,
+						  bi_op,
+						  bit_complement_key,
+						  mono_op,
+						  bit_not_key,
+						  mono_op,
+						  bit_or_key,
+						  bi_op,
+						  bit_xor_key,
+						  bi_op,
+						  comparison_key,
+						  bi_op,
+						  difference_key,
+						  bi_op,
+						  index_of_key,
+						  bi_op,
+						  indirection_key,
+						  mono_op,
+						  modulo_key,
+						  bi_op,
+						  negative_key,
+						  mono_op,
+						  positive_key,
+						  mono_op,
+						  product_key,
+						  bi_op,
+						  quotient_key,
+						  bi_op,
+						  sum_key,
+						  bi_op);
 
   Let* result = let_integer(2);
 
-  Let* bit_and_result = bit_and(object, object);
+  Let* bit_and_result		 = bit_and(object, object);
   Let* bit_complement_result = bit_complement(object);
-  Let* bit_not_result = bit_not(object);
-  Let* bit_or_result = bit_or(object, object);
-  Let* bit_xor_result = bit_xor(object, object);
-  Let* compare_result = let_integer(compare(object, object));
-  Let* difference_result = difference(object, object);
-  Let* index_of_result = index_of(object, object);
-  Let* indirection_result = indirection(object);
-  Let* modulo_result = modulo(object, object);
-  Let* negative_result = negative(object);
-  Let* positive_result = positive(object);
-  Let* product_result = product(object, object);
-  Let* quotient_result = quotient(object, object);
-  Let* sum_result = sum(object, object);
+  Let* bit_not_result		 = bit_not(object);
+  Let* bit_or_result		 = bit_or(object, object);
+  Let* bit_xor_result		 = bit_xor(object, object);
+  Let* compare_result		 = let_integer(compare(object, object));
+  Let* difference_result	 = difference(object, object);
+  Let* index_of_result		 = index_of(object, object);
+  Let* indirection_result	 = indirection(object);
+  Let* modulo_result		 = modulo(object, object);
+  Let* negative_result		 = negative(object);
+  Let* positive_result		 = positive(object);
+  Let* product_result		 = product(object, object);
+  Let* quotient_result		 = quotient(object, object);
+  Let* sum_result			 = sum(object, object);
 
   assert(equal(bit_and_result, result));
   assert(equal(bit_complement_result, result));

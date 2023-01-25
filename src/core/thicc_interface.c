@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -35,14 +35,14 @@
 extern "C" {
 #endif
 
-#include <thicc_interface.h>
-#include "thicc_memory.h"
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_comparison.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_rank.h"
+#include "thicc_memory.h"
 #include "thicc_struct_object.h"
+#include <thicc_interface.h>
 
 #define select_operator(_left, _left_rank, _operator, _right, _right_rank)                        \
   (_left_rank) == (_right_rank)	 ? (_left)->behaviour->_operator(_left, _right)                   \
@@ -65,57 +65,57 @@ THICC_NODISCARD Let* array_of(Size _size, ...) {
 }
 
 Let* array_from_booleans(Size _size, Boolean* _array) {
-    MutableArray result = array_allocate(_size);
-	MutableSize index = 0;
-	result.length = _size;
-	for(; index < _size; ++index)
-		result.array[index] = let_boolean(_array[index]);
-	return move_array(result);
+  MutableArray result = array_allocate(_size);
+  MutableSize  index  = 0;
+  result.length		  = _size;
+  for (; index < _size; ++index)
+	result.array[index] = let_boolean(_array[index]);
+  return move_array(result);
 }
 
 Let* array_from_characters(Size _size, Character* _array) {
-	MutableArray result = array_allocate(_size);
-	MutableSize index = 0;
-	result.length = _size;
-	for(; index < _size; ++index)
-		result.array[index] = let_character(_array[index]);
-	return move_array(result);
+  MutableArray result = array_allocate(_size);
+  MutableSize  index  = 0;
+  result.length		  = _size;
+  for (; index < _size; ++index)
+	result.array[index] = let_character(_array[index]);
+  return move_array(result);
 }
 
 Let* array_from_integers(Size _size, Integer* _array) {
-	MutableArray result = array_allocate(_size);
-	MutableSize index = 0;
-	result.length = _size;
-	for(; index < _size; ++index)
-		result.array[index] = let_integer(_array[index]);
-	return move_array(result);
+  MutableArray result = array_allocate(_size);
+  MutableSize  index  = 0;
+  result.length		  = _size;
+  for (; index < _size; ++index)
+	result.array[index] = let_integer(_array[index]);
+  return move_array(result);
 }
 
 Let* array_from_reals(Size _size, Real* _array) {
-	MutableArray result = array_allocate(_size);
-	MutableSize index = 0;
-	result.length = _size;
-	for(; index < _size; ++index)
-		result.array[index] = let_real(_array[index]);
-	return move_array(result);
+  MutableArray result = array_allocate(_size);
+  MutableSize  index  = 0;
+  result.length		  = _size;
+  for (; index < _size; ++index)
+	result.array[index] = let_real(_array[index]);
+  return move_array(result);
 }
 
 Let* array_from_complex(Size _size, Complex* _array) {
-	MutableArray result = array_allocate(_size);
-	MutableSize index = 0;
-	result.length = _size;
-	for(; index < _size; ++index)
-		result.array[index] = let_complex(_array[index]);
-	return move_array(result);
+  MutableArray result = array_allocate(_size);
+  MutableSize  index  = 0;
+  result.length		  = _size;
+  for (; index < _size; ++index)
+	result.array[index] = let_complex(_array[index]);
+  return move_array(result);
 }
 
 Let* array_from_strings(Size _size, MutableCharacter** _array) {
-	MutableArray result = array_allocate(_size);
-	MutableSize index = 0;
-	result.length = _size;
-	for(; index < _size; ++index)
-		result.array[index] = let_string(_array[index]);
-	return move_array(result);
+  MutableArray result = array_allocate(_size);
+  MutableSize  index  = 0;
+  result.length		  = _size;
+  for (; index < _size; ++index)
+	result.array[index] = let_string(_array[index]);
+  return move_array(result);
 }
 
 THICC_NODISCARD Let* object_of(Size _size, ...) {
@@ -128,7 +128,7 @@ THICC_NODISCARD Let* object_of(Size _size, ...) {
 }
 
 THICC_NODISCARD Let* call(Let* _invokable) {
-  Let* array	 = array_of(0);
+  Let* array  = array_of(0);
   Let* result = function_invoke(_invokable, array);
   unlet(array);
   return result;
@@ -137,7 +137,7 @@ THICC_NODISCARD Let* call(Let* _invokable) {
 THICC_NODISCARD Let* invoke(Let* _invokable, Size _size, ...) {
   va_list list;
   Let*	  array;
-  Let*    result;
+  Let*	  result;
 
   if (_size == 0 || !rank_is_invokable(_invokable))
 	return let_empty();
@@ -162,9 +162,9 @@ THICC_NODISCARD Let* invoke_from_list(Let* _invokable, Size _size, va_list _list
 }
 
 THICC_NODISCARD Let* member(Let* _object, Let* _member) {
-  MutableArray  keys;
-  MutableArray  values;
-  MutableSize   index = 0;
+  MutableArray keys;
+  MutableArray values;
+  MutableSize  index = 0;
 
   if (object_is_empty(object_view(_object)) || let_is_empty(_member))
 	return let_empty();
@@ -178,7 +178,6 @@ THICC_NODISCARD Let* member(Let* _object, Let* _member) {
 
   return let_empty();
 }
-
 
 THICC_NODISCARD Let* cast(Let* _let, Rank _rank) {
   switch (_rank) {
@@ -264,19 +263,18 @@ THICC_NODISCARD MutableObject as_object(Let* _let) {
   return _let->behaviour->as_object(_let);
 }
 
-
 THICC_NODISCARD Let* sum(Let* _left, Let* _right) {
   Rank left_rank  = rank(_left);
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, sum, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, sum, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, sum, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, sum, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -288,13 +286,13 @@ THICC_NODISCARD Let* difference(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, difference, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, difference, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, difference, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, difference, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -306,13 +304,13 @@ THICC_NODISCARD Let* quotient(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, quotient, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, quotient, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, quotient, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, quotient, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -324,13 +322,13 @@ THICC_NODISCARD Let* modulo(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, modulo, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, modulo, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, modulo, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, modulo, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -342,13 +340,13 @@ THICC_NODISCARD Let* product(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, product, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, product, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, product, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, product, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -360,13 +358,13 @@ THICC_NODISCARD Let* bit_and(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, bit_and, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, bit_and, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, bit_and, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, bit_and, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -378,13 +376,13 @@ THICC_NODISCARD Let* bit_or(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, bit_or, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, bit_or, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, bit_or, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, bit_or, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -396,13 +394,13 @@ THICC_NODISCARD Let* bit_xor(Let* _left, Let* _right) {
   Rank right_rank = rank(_right);
   if (left_rank > right_rank) {
 	Let* right_temporary = cast(_right, left_rank);
-	Let* result			= select_operator(_left, left_rank, bit_xor, right_temporary, left_rank);
+	Let* result			 = select_operator(_left, left_rank, bit_xor, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
 	Let* left_temporary = cast(_left, right_rank);
-	Let* result		   = select_operator(left_temporary, right_rank, bit_xor, _right, right_rank);
+	Let* result			= select_operator(left_temporary, right_rank, bit_xor, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
@@ -413,7 +411,7 @@ THICC_NODISCARD Let* index_of(Let* _indexable, Let* _index) {
   Rank right_rank = rank(_index);
   if (right_rank < natural_rank || right_rank > complex_rank) {
 	Let* right_temporary = cast(_index, integer_rank);
-	Let* result = _indexable->behaviour->index_of(_indexable, right_temporary);
+	Let* result			 = _indexable->behaviour->index_of(_indexable, right_temporary);
 	unlet(right_temporary);
 	return result;
   }
@@ -446,20 +444,19 @@ THICC_NODISCARD MutableComparison compare(Let* _left, Let* _right) {
   if (let_is_empty(_left) && let_is_empty(_right))
 	return THICC_EQUAL;
   if (left_rank > right_rank) {
-	Let*				  right_temporary = cast(_right, left_rank);
+	Let*			  right_temporary = cast(_right, left_rank);
 	MutableComparison result		  = select_operator(_left, left_rank, comparison, right_temporary, left_rank);
 	unlet(right_temporary);
 	return result;
   }
   if (right_rank > left_rank) {
-	Let*				  left_temporary = cast(_left, right_rank);
+	Let*			  left_temporary = cast(_left, right_rank);
 	MutableComparison result		 = select_operator(left_temporary, right_rank, comparison, _right, right_rank);
 	unlet(left_temporary);
 	return result;
   }
   return select_operator(_left, left_rank, comparison, _right, right_rank);
 }
-
 
 THICC_NODISCARD MutableBoolean equal(Let* _left, Let* _right) {
   return comparison_equal(compare(_left, _right));

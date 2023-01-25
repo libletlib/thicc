@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,17 +31,16 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "thicc_memory.h"
+#include "thicc_struct_object.h"
+#include <stdlib.h>
+#include <thicc_interface.h>
 #include <thicc_struct_array.h>
 #include <thicc_struct_string.h>
-#include <thicc_interface.h>
-#include <stdlib.h>
-#include "thicc_struct_object.h"
 
 THICC_NODISCARD static void* allocate(Size _size) {
   return calloc(_size, 1);
@@ -58,7 +57,7 @@ THICC_NODISCARD Var* var_allocate(void) {
 
 THICC_NODISCARD MutableString string_allocate(Size _length) {
   MutableString string = string_empty();
-  string.string = allocate(_length);
+  string.string		   = allocate(_length);
   return string;
 }
 

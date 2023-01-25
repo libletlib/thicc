@@ -1,7 +1,7 @@
-#include <thicc.h>
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <thicc.h>
 
 static THICC_FUNCTION(foo_sum) {
   return let_real(as_real(THICC_1ST) + as_real(THICC_2ND));
@@ -24,16 +24,16 @@ static THICC_FUNCTION(println) {
 }
 
 static void playground(void) {
-  Let* foo_key		    = let_string("real");
-  Let* foo_value	    = let_real(2.5);
-  Let* foo_sum_key	    = let_string("+");
-  Let* foo_sum_function = let_function(foo_sum);
-  Let* object1		    = object_of(4, foo_key, foo_value, foo_sum_key, foo_sum_function);
-  Let* object2		    = let_copy(object1);
-  Let* result		    = sum(object1, object2);
-  Let* number           = let_integer(5);
-  Let* fact             = let_function(factorial);
-  Let* print            = let_function(println);
+  Let* foo_key				= let_string("real");
+  Let* foo_value			= let_real(2.5);
+  Let* foo_sum_key			= let_string("+");
+  Let* foo_sum_function		= let_function(foo_sum);
+  Let* object1				= object_of(4, foo_key, foo_value, foo_sum_key, foo_sum_function);
+  Let* object2				= let_copy(object1);
+  Let* result				= sum(object1, object2);
+  Let* number				= let_integer(5);
+  Let* fact					= let_function(factorial);
+  Let* print				= let_function(println);
   Let* factorial_validation = let_integer(120);
   Let* factorial_result;
   unlet(foo_key);

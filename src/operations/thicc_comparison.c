@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,13 +36,13 @@ extern "C" {
 #endif
 
 #include "thicc_comparison.h"
-#include <thicc_interface.h>
-#include <thicc_struct_var.h>
-#include <stdlib.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_math.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
+#include <stdlib.h>
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 
 THICC_NODISCARD MutableComparison boolean_comparison(Let* _left, Let* _right) {
   if (_left->value.boolean_type && !_right->value.boolean_type)
@@ -122,9 +122,9 @@ THICC_NODISCARD MutableComparison array_comparison(Let* _left, Let* _right) {
 }
 
 THICC_NODISCARD MutableComparison object_comparison(Let* _left, Let* _right) {
-  Let* property_name = let_string("<=>");
-  Let* property		= member(_left, property_name);
-  Let* temporary;
+  Let*				property_name = let_string("<=>");
+  Let*				property	  = member(_left, property_name);
+  Let*				temporary;
   MutableComparison result;
   unlet(property_name);
 
@@ -134,7 +134,7 @@ THICC_NODISCARD MutableComparison object_comparison(Let* _left, Let* _right) {
   }
 
   temporary = object_method_invoke(_left, property, 2, _right);
-  result = (Comparison) as_integer(temporary);
+  result	= (Comparison) as_integer(temporary);
 
   unlet(property);
   unlet(temporary);

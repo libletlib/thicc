@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,19 +36,20 @@ extern "C" {
 #endif
 
 #include "thicc_difference.h"
-#include <thicc_interface.h>
-#include <thicc_struct_var.h>
 #include "../utility/thicc_array.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 
 THICC_NODISCARD Let* boolean_difference(Let* _left, Let* _right) {
   return let_boolean((_left->value.boolean_type && !_right->value.boolean_type) ? THICC_YES : THICC_NO);
 }
 
 THICC_NODISCARD Let* character_difference(Let* _left, Let* _right) {
-  return let_character((Character) (CharacterPromotedType) (_left->value.character_type - _right->value.character_type));
+  return let_character(
+	  (Character) (CharacterPromotedType) (_left->value.character_type - _right->value.character_type));
 }
 
 THICC_NODISCARD Let* natural_difference(Let* _left, Let* _right) {
@@ -73,9 +74,9 @@ THICC_NODISCARD Let* string_difference(Let* _left, Let* _right) {
 }
 
 THICC_NODISCARD Let* function_difference(Let* _left, Let* _right) {
-  Let* left_result  = function_invoke(_left, let_empty());
+  Let* left_result	= function_invoke(_left, let_empty());
   Let* right_result = function_invoke(_right, let_empty());
-  Let* result	   = difference(left_result, right_result);
+  Let* result		= difference(left_result, right_result);
   unlet(right_result);
   unlet(left_result);
   return result;
@@ -87,7 +88,7 @@ THICC_NODISCARD Let* array_difference(Let* _left, Let* _right) {
 
 THICC_NODISCARD Let* object_difference(Let* _left, Let* _right) {
   Let* property_name = let_string("-");
-  Let* property		= member(_left, property_name);
+  Let* property		 = member(_left, property_name);
   Let* result;
   unlet(property_name);
 

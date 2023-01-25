@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,14 +31,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "thicc_string.h"
-#include <thicc_interface.h>
-#include <thicc_struct_string.h>
 #include "../core/thicc_memory.h"
 #include "../core/thicc_struct_object.h"
 #include "thicc_array.h"
@@ -51,20 +48,22 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <thicc_interface.h>
+#include <thicc_struct_string.h>
 
 THICC_NODISCARD MutableString string_copy(String _original) {
   MutableString buffer = string_allocate(_original.length + 1);
-  buffer.string = strcpy(buffer.string, _original.string);
-  buffer.length = _original.length;
+  buffer.string		   = strcpy(buffer.string, _original.string);
+  buffer.length		   = _original.length;
   return buffer;
 }
 
 THICC_NODISCARD MutableString string_copy_slice(String _original, Size _start, Size _stop) {
   Size			size   = _stop - _start;
   MutableString buffer = string_allocate(size + 1);
-  buffer.string = strncpy(buffer.string, _original.string + _start, size);
-  buffer.string[size] = '\0';
-  buffer.length = size;
+  buffer.string		   = strncpy(buffer.string, _original.string + _start, size);
+  buffer.string[size]  = '\0';
+  buffer.length		   = size;
   return buffer;
 }
 
@@ -79,8 +78,8 @@ THICC_NODISCARD MutableComparison string_compare(String _left, String _right) {
   return comparison_clamp(strcmp(_left.string, _right.string));
 }
 
-THICC_NODISCARD static char* string_tokenise_helper(MutableCharacter* THICC_RESTRICT _string,
-													Character* THICC_RESTRICT _delimiter,
+THICC_NODISCARD static char* string_tokenise_helper(MutableCharacter* THICC_RESTRICT  _string,
+													Character* THICC_RESTRICT		  _delimiter,
 													MutableCharacter* THICC_RESTRICT* _state) {
   MutableCharacter* THICC_RESTRICT end;
 
@@ -107,15 +106,15 @@ THICC_NODISCARD static char* string_tokenise_helper(MutableCharacter* THICC_REST
 THICC_NODISCARD MutableArray string_tokenise(MutableString _string, String _delimiter) {
   MutableCharacter* THICC_RESTRICT state;
   MutableCharacter* THICC_RESTRICT position = _string.string;
-  MutableString token;
-  MutableArray result;
+  MutableString					   token;
+  MutableArray					   result;
   token.string = string_tokenise_helper(position, _delimiter.string, &state);
-  result = array_from_elements(0);
+  result	   = array_from_elements(0);
 
   while (token.string) {
 	Let* token_string = let_string(token.string);
-	result			 = array_concatenate(result, array_from_elements(1, token_string));
-	token.string	 = string_tokenise_helper(THICC_NAUGHT, _delimiter.string, &state);
+	result			  = array_concatenate(result, array_from_elements(1, token_string));
+	token.string	  = string_tokenise_helper(THICC_NAUGHT, _delimiter.string, &state);
 	unlet(token_string);
   }
 
@@ -138,7 +137,7 @@ THICC_NODISCARD MutableString string_filter_and(String _left, String _right) {
 }
 
 THICC_NODISCARD MutableString string_filter_or(String _left, String _right) {
-  MutableString buffer		  = string_allocate(_left.length + 1);
+  MutableString buffer = string_allocate(_left.length + 1);
   MutableSize	index = 0, jindex = 0, kindex = 0;
 
   for (; index < _left.length; ++index)
@@ -153,11 +152,12 @@ THICC_NODISCARD MutableString string_filter_or(String _left, String _right) {
 }
 
 THICC_NODISCARD MutableString string_filter_xor(String _left, String _right) {
-  MutableString	  buffer		  = string_allocate(_left.length + _right.length + 1);
-  Size			  shortest_length = THICC_MIN(_left.length, _right.length);
-  Size			  longest_length  = THICC_MAX(_left.length, _right.length);
-  MutableCharacter* THICC_RESTRICT longer_pointer  = THICC_LONGER_POINTER(_left.length, _left.string, _right.length, _right.string);
-  MutableSize	  index = 0, jindex = 0;
+  MutableString					   buffer		   = string_allocate(_left.length + _right.length + 1);
+  Size							   shortest_length = THICC_MIN(_left.length, _right.length);
+  Size							   longest_length  = THICC_MAX(_left.length, _right.length);
+  MutableCharacter* THICC_RESTRICT longer_pointer =
+	  THICC_LONGER_POINTER(_left.length, _left.string, _right.length, _right.string);
+  MutableSize index = 0, jindex = 0;
 
   for (; index < longest_length; ++index) {
 	if (index < shortest_length && _left.string[index] != _right.string[index]) {
@@ -175,8 +175,8 @@ THICC_NODISCARD MutableString string_filter_xor(String _left, String _right) {
 }
 
 THICC_NODISCARD MutableString string_map_bit_not(String _string) {
-  MutableSize	index  = 0;
-  MutableString copy   = string_allocate(_string.length + 1);
+  MutableSize	index = 0;
+  MutableString copy  = string_allocate(_string.length + 1);
 
   for (; index < _string.length; ++index)
 	copy.string[index] = (Character) !(CharacterPromotedType) _string.string[index];
@@ -185,9 +185,9 @@ THICC_NODISCARD MutableString string_map_bit_not(String _string) {
 }
 
 THICC_NODISCARD MutableString string_map_bit_complement(String _string) {
-  MutableSize	index  = 0;
-  MutableString copy   = string_allocate(_string.length + 1);
-  copy.length = _string.length;
+  MutableSize	index = 0;
+  MutableString copy  = string_allocate(_string.length + 1);
+  copy.length		  = _string.length;
 
   for (; index < _string.length; ++index)
 	copy.string[index] = (Character) ~(CharacterPromotedType) _string.string[index];
@@ -197,9 +197,9 @@ THICC_NODISCARD MutableString string_map_bit_complement(String _string) {
 
 THICC_NODISCARD MutableString string_map_positive(String _string) {
 #if THICC_CHAR_SIGNED
-  MutableSize	index  = 0;
-  MutableString copy   = string_allocate(_string.length + 1);
-  copy.length = _string.length;
+  MutableSize	index = 0;
+  MutableString copy  = string_allocate(_string.length + 1);
+  copy.length		  = _string.length;
 
   for (; index < _string.length; ++index)
 	copy.string[index] = (Character) + (CharacterPromotedType) _string.string[index];
@@ -212,8 +212,8 @@ THICC_NODISCARD MutableString string_map_positive(String _string) {
 
 THICC_NODISCARD MutableString string_map_negative(String _string) {
 #if THICC_CHAR_SIGNED
-  MutableSize	index  = 0;
-  MutableString copy   = string_allocate(_string.length + 1);
+  MutableSize	index = 0;
+  MutableString copy  = string_allocate(_string.length + 1);
 
   for (; index < _string.length; ++index)
 	copy.string[index] = (Character) - (CharacterPromotedType) _string.string[index];
@@ -225,7 +225,7 @@ THICC_NODISCARD MutableString string_map_negative(String _string) {
 }
 
 THICC_NODISCARD MutableString string_map_increment(MutableString _string) {
-  MutableSize index	 = 0;
+  MutableSize index = 0;
 
   for (; index < _string.length; ++index)
 	++_string.string[index];
@@ -234,7 +234,7 @@ THICC_NODISCARD MutableString string_map_increment(MutableString _string) {
 }
 
 THICC_NODISCARD MutableString string_map_decrement(MutableString _string) {
-  MutableSize index	 = 0;
+  MutableSize index = 0;
 
   for (; index < _string.length; ++index)
 	--_string.string[index];
@@ -254,17 +254,17 @@ THICC_NODISCARD MutableCharacter string_character_at(String _string, Integer _in
 
 THICC_NODISCARD MutableString string_concatenate(String _left, String _right) {
   MutableString buffer = string_allocate(_left.length + _right.length + 1);
-  buffer.length = _left.length + _right.length;
-  buffer.string	= strcat(buffer.string, _left.string);
-  buffer.string	= strcat(buffer.string, _right.string);
+  buffer.length		   = _left.length + _right.length;
+  buffer.string		   = strcat(buffer.string, _left.string);
+  buffer.string		   = strcat(buffer.string, _right.string);
   return buffer;
 }
 
 THICC_NODISCARD MutableString string_remove_substring(String _original, String _substring) {
-  MutableString buffer		   = string_allocate(_original.length);
-  MutableSize	index		   = 0;
-  MutableSize	jindex		   = 0;
-  MutableSize   kindex         = 0;
+  MutableString buffer = string_allocate(_original.length);
+  MutableSize	index  = 0;
+  MutableSize	jindex = 0;
+  MutableSize	kindex = 0;
   for (; jindex < _original.length; ++index, ++jindex) {
 	if (comparison_equal(memcmp(_original.string + index, _substring.string, _substring.length))) {
 	  jindex += _substring.length;
@@ -338,9 +338,9 @@ THICC_NODISCARD MutableString string_from_complex(Complex _number) {
   MutableString result;
   sprintf(real_buffer.string, THICC_STRINGIFY(THICC_REAL_FORMAT), _number.real);
   sprintf(imaginary_buffer.string, THICC_STRINGIFY(THICC_IMAGINARY_FORMAT), _number.imaginary);
-  real_buffer.length = string_length(real_buffer);
+  real_buffer.length	  = string_length(real_buffer);
   imaginary_buffer.length = string_length(imaginary_buffer);
-  result = string_concatenate(real_buffer, imaginary_buffer);
+  result				  = string_concatenate(real_buffer, imaginary_buffer);
   free(real_buffer.string);
   free(imaginary_buffer.string);
   result.length = string_length(result);
@@ -360,7 +360,7 @@ THICC_NODISCARD MutableString string_from_array(Array _array) {
 
 	if (index < _array.length) {
 	  old	 = buffer;
-	  tail = string_from_pointer(", ");
+	  tail	 = string_from_pointer(", ");
 	  buffer = string_concatenate(buffer, tail);
 	  free(old.string);
 	}
@@ -398,14 +398,14 @@ THICC_NODISCARD static MutableString string_from_object_helper(Let* _let) {
 }
 
 THICC_NODISCARD MutableString string_from_object(ImmutableObject _object) {
-  String indent			  = string_from_pointer("\n\t\"");
-  String key_value_delimiter = string_from_pointer("\": ");
-  MutableString	  buffer = string_from_pointer("{\n\t\"");
-  MutableString	  old;
-  Size			  size	 = object_size(_object);
-  Array			  keys	 = root_keys_from_pointer(_object);
-  Array			  values = root_values_from_pointer(_object);
-  MutableSize	  index	 = 0;
+  String		indent				= string_from_pointer("\n\t\"");
+  String		key_value_delimiter = string_from_pointer("\": ");
+  MutableString buffer				= string_from_pointer("{\n\t\"");
+  MutableString old;
+  Size			size   = object_size(_object);
+  Array			keys   = root_keys_from_pointer(_object);
+  Array			values = root_values_from_pointer(_object);
+  MutableSize	index  = 0;
 
   if (size != 0) {
 	MutableString tail = string_from_object_helper(keys.array[index]);

@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,68 +36,68 @@ extern "C" {
 #endif
 
 #include "thicc_as_object.h"
+#include "../utility/thicc_object.h"
 #include <thicc_interface.h>
 #include <thicc_struct_var.h>
-#include "../utility/thicc_object.h"
 
 THICC_NODISCARD MutableObject boolean_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("boolean");
+  Let*			key	   = let_string("boolean");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject character_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("character");
+  Let*			key	   = let_string("character");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject natural_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("natural");
+  Let*			key	   = let_string("natural");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject integer_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("integer");
+  Let*			key	   = let_string("integer");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject real_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("real");
+  Let*			key	   = let_string("real");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject complex_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("complex");
+  Let*			key	   = let_string("complex");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject string_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("string");
+  Let*			key	   = let_string("string");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject function_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("function");
+  Let*			key	   = let_string("function");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;
 }
 
 THICC_NODISCARD MutableObject array_as_object(THICC_MAYBE_UNUSED Let* _let) {
-  Let* key = let_string("array");
+  Let*			key	   = let_string("array");
   MutableObject result = object_compose(2, key, _let);
   unlet(key);
   return result;

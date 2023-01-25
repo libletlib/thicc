@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,14 +36,15 @@ extern "C" {
 #endif
 
 #include "thicc_as_string.h"
-#include <thicc_interface.h>
-#include <thicc_struct_var.h>
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
+#include <thicc_interface.h>
+#include <thicc_struct_var.h>
 
 THICC_NODISCARD MutableString boolean_as_string(Let* _let) {
-  return _let->value.boolean_type ? string_copy(string_from_pointer("true")) : string_copy(string_from_pointer("false"));
+  return _let->value.boolean_type ? string_copy(string_from_pointer("true"))
+								  : string_copy(string_from_pointer("false"));
 }
 
 THICC_NODISCARD MutableString character_as_string(Let* _let) {
@@ -82,7 +83,7 @@ THICC_NODISCARD MutableString array_as_string(Let* _let) {
 }
 
 THICC_NODISCARD MutableString object_as_string(Let* _let) {
-  Let* key = let_string("string");
+  Let* key				= let_string("string");
   Let* conversion_value = member(_let, key);
   unlet(key);
   if (!let_is_empty(conversion_value)) {

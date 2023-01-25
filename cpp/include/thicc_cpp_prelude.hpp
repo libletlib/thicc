@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -15,20 +15,21 @@
  * 1.   Redistributions of source code must retain the above copyright notice,
  *      this list of conditions and the following disclaimer.
  *
- * 2.   Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the docs
- *      and/or other materials provided with the distribution.
+ * 2.   Redistributions in binary form must reproduce the above copyright
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  */
 #ifndef THICC_THICC_CPP_PRELUDE_HPP
 #define THICC_THICC_CPP_PRELUDE_HPP
@@ -108,37 +109,43 @@
 #endif
 
 #undef THICC_STANDARD_BI_OPERATOR
-#define THICC_STANDARD_BI_OPERATOR(_op, _op_name) \
-THICC_CPP_NODISCARD var& operator _op##=(var const& _right) THICC_CPP_NOEXCEPT {\
-  return *this = _op_name(this->variable, _right.variable);\
-}\
-\
-template<typename Type>\
-THICC_CPP_NODISCARD var& operator _op##=(Type THICC_CPP_UREF _right) THICC_CPP_NOEXCEPT {\
-  return *this = _op_name(this->variable, var(_right).variable);\
-}                                                 \
-\
-template<typename Type>\
-THICC_CPP_NODISCARD friend var operator _op(var const& _left, Type THICC_CPP_UREF _right) THICC_CPP_NOEXCEPT {\
-  return _op_name(_left.variable, var(_right).variable);\
-}\
-\
-template<typename Type>\
-THICC_CPP_NODISCARD friend var operator _op(Type THICC_CPP_UREF _left, var const& _right) THICC_CPP_NOEXCEPT {\
-  return _op_name(var(_left).variable, _right.variable);\
-}\
-\
-THICC_CPP_NODISCARD var operator _op(var const& _right) const THICC_CPP_NOEXCEPT {\
-  return _op_name(this->variable, _right.variable);\
-}                                                 \
-THICC_CPP_NODISCARD var operator _op(var& _right) THICC_CPP_NOEXCEPT {\
-  return _op_name(this->variable, _right.variable);\
-}
+#define THICC_STANDARD_BI_OPERATOR(_op, _op_name)                                                                \
+  THICC_CPP_NODISCARD var& operator _op##=(var const& _right) THICC_CPP_NOEXCEPT {                               \
+	return *this = _op_name(this->variable, _right.variable);                                                    \
+  }                                                                                                              \
+                                                                                                                 \
+  template<typename Type>                                                                                        \
+  THICC_CPP_NODISCARD var& operator _op##=(Type THICC_CPP_UREF _right) THICC_CPP_NOEXCEPT {                      \
+	return *this = _op_name(this->variable, var(_right).variable);                                               \
+  }                                                                                                              \
+                                                                                                                 \
+  template<typename Type>                                                                                        \
+  THICC_CPP_NODISCARD friend var operator _op(var const& _left, Type THICC_CPP_UREF _right) THICC_CPP_NOEXCEPT { \
+	return _op_name(_left.variable, var(_right).variable);                                                       \
+  }                                                                                                              \
+                                                                                                                 \
+  template<typename Type>                                                                                        \
+  THICC_CPP_NODISCARD friend var operator _op(Type THICC_CPP_UREF _left, var const& _right) THICC_CPP_NOEXCEPT { \
+	return _op_name(var(_left).variable, _right.variable);                                                       \
+  }                                                                                                              \
+                                                                                                                 \
+  THICC_CPP_NODISCARD var operator _op(var const& _right) const THICC_CPP_NOEXCEPT {                             \
+	return _op_name(this->variable, _right.variable);                                                            \
+  }                                                                                                              \
+  THICC_CPP_NODISCARD var operator _op(var& _right) THICC_CPP_NOEXCEPT {                                         \
+	return _op_name(this->variable, _right.variable);                                                            \
+  }
 
-#define lambda(_code) [](THICC_CPP_MAYBE_UNUSED Let* _self, THICC_CPP_MAYBE_UNUSED Let* _args) -> Let* \
-						{ let self = backing::move(_self), args = backing::move(_args); _code }
+#define lambda(_code)                                                                \
+  [](THICC_CPP_MAYBE_UNUSED Let* _self, THICC_CPP_MAYBE_UNUSED Let* _args) -> Let* { \
+	let self = backing::move(_self), args = backing::move(_args);                    \
+	_code                                                                            \
+  }
 
-#define fn(_code) (THICC_CPP_MAYBE_UNUSED Let* _self, THICC_CPP_MAYBE_UNUSED Let* _args) \
-                  { let self = backing::move(_self), args = backing::move(_args); _code }
+#define fn(_code)                                                            \
+  (THICC_CPP_MAYBE_UNUSED Let * _self, THICC_CPP_MAYBE_UNUSED Let * _args) { \
+	let self = backing::move(_self), args = backing::move(_args);            \
+	_code                                                                    \
+  }
 
 #endif // THICC_THICC_CPP_PRELUDE_HPP

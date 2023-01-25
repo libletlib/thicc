@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -39,39 +39,39 @@ extern "C" {
 
 THICC_NODISCARD static THICC_FUNCTION(foo) {
   Let* foo_element = let_integer(1);
-  Let* result = array_of(1, foo_element);
+  Let* result	   = array_of(1, foo_element);
   unlet(foo_element);
   return result;
 }
 
 THICC_NODISCARD static int conversions(void) {
   Let* value_element = let_integer(1);
-  Let* value			= array_of(1, value_element);
-  Let* comparable	= array_of(1, value_element);
+  Let* value		 = array_of(1, value_element);
+  Let* comparable	 = array_of(1, value_element);
 
-  Let* array			= move_array(as_array(value));
-  Let* object			= move_object(as_object(value));
-  Let* key = let_string("array");
+  Let* array  = move_array(as_array(value));
+  Let* object = move_object(as_object(value));
+  Let* key	  = let_string("array");
 
-  Let* boolean_one = let_boolean(THICC_YES);
-  Let* character_one = let_character(1);
-  Let* natural_one	= let_natural(1);
-  Let* integer_one	= let_integer(1);
-  Let* real_one		= let_real(1);
-  Let* complex_one	= let_complex(cmplx(1, 0.0));
-  Let* string_one	= let_string("[1]");
-  Let* function_one = let_function(foo);
+  Let* boolean_one		   = let_boolean(THICC_YES);
+  Let* character_one	   = let_character(1);
+  Let* natural_one		   = let_natural(1);
+  Let* integer_one		   = let_integer(1);
+  Let* real_one			   = let_real(1);
+  Let* complex_one		   = let_complex(cmplx(1, 0.0));
+  Let* string_one		   = let_string("[1]");
+  Let* function_one		   = let_function(foo);
   Let* function_one_return = call(function_one);
-  Let* array_one	= array_of(1, value);
-  Let* object_one = object_of(2, key, value);
+  Let* array_one		   = array_of(1, value);
+  Let* object_one		   = object_of(2, key, value);
 
-  Let* boolean_cast = cast(value, boolean_rank);
+  Let* boolean_cast	  = cast(value, boolean_rank);
   Let* character_cast = cast(value, character_rank);
-  Let* natural_cast = cast(value, natural_rank);
-  Let* integer_cast = cast(value, integer_rank);
-  Let* real_cast = cast(value, real_rank);
-  Let* complex_cast = cast(value, complex_rank);
-  Let* string_cast = cast(value, string_rank);
+  Let* natural_cast	  = cast(value, natural_rank);
+  Let* integer_cast	  = cast(value, integer_rank);
+  Let* real_cast	  = cast(value, real_rank);
+  Let* complex_cast	  = cast(value, complex_rank);
+  Let* string_cast	  = cast(value, string_rank);
 
   assert(equal(boolean_cast, boolean_one));
   assert(equal(character_cast, character_one));
@@ -116,35 +116,35 @@ THICC_NODISCARD static int conversions(void) {
 }
 
 THICC_NODISCARD static int operations(void) {
-  Let* left_element	= let_integer(1);
+  Let* left_element	 = let_integer(1);
   Let* right_element = let_string("1");
-  Let* left			= array_of(1, left_element);
-  Let* right		= array_of(1, right_element);
-  Let* zero = let_natural(0);
+  Let* left			 = array_of(1, left_element);
+  Let* right		 = array_of(1, right_element);
+  Let* zero			 = let_natural(0);
 
-  Let* bit_and_result = bit_and(left, right);
-  Let* bit_not_result = bit_not(left);
-  Let* bit_or_result = bit_or(left, right);
-  Let* bit_xor_result = bit_xor(left, right);
-  Let* difference_result = difference(left, right);
-  Let* index_of_result = index_of(left, zero);
+  Let* bit_and_result	  = bit_and(left, right);
+  Let* bit_not_result	  = bit_not(left);
+  Let* bit_or_result	  = bit_or(left, right);
+  Let* bit_xor_result	  = bit_xor(left, right);
+  Let* difference_result  = difference(left, right);
+  Let* index_of_result	  = index_of(left, zero);
   Let* indirection_result = indirection(left);
-  Let* positive_result = positive(left);
-  Let* product_result = product(left, right);
-  Let* quotient_result = quotient(left, right);
-  Let* sum_result = sum(left, right);
+  Let* positive_result	  = positive(left);
+  Let* product_result	  = product(left, right);
+  Let* quotient_result	  = quotient(left, right);
+  Let* sum_result		  = sum(left, right);
 
-  Let* bit_and_validation = let_copy(left_element);
-  Let* bit_not_validation = let_boolean(THICC_NO);
-  Let* bit_or_validation = array_of(0);
-  Let* bit_xor_validation = array_of(0);
-  Let* difference_validation = let_copy(left);
-  Let* index_of_validation = let_integer(1);
+  Let* bit_and_validation	  = let_copy(left_element);
+  Let* bit_not_validation	  = let_boolean(THICC_NO);
+  Let* bit_or_validation	  = array_of(0);
+  Let* bit_xor_validation	  = array_of(0);
+  Let* difference_validation  = let_copy(left);
+  Let* index_of_validation	  = let_integer(1);
   Let* indirection_validation = let_integer(1);
-  Let* positive_validation = let_copy(left_element);
-  Let* product_validation = array_of(2, left_element, right_element);
-  Let* quotient_validation = array_of(0);
-  Let* sum_validation = array_of(2, left_element, right_element);
+  Let* positive_validation	  = let_copy(left_element);
+  Let* product_validation	  = array_of(2, left_element, right_element);
+  Let* quotient_validation	  = array_of(0);
+  Let* sum_validation		  = array_of(2, left_element, right_element);
 
   assert(equal(bit_and_result, bit_and_validation));
   assert(equal(bit_not_result, bit_not_validation));

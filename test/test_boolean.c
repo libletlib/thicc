@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -44,24 +44,24 @@ THICC_NODISCARD static THICC_FUNCTION(foo) {
 THICC_NODISCARD static int conversions(void) {
   Let* value = let_boolean(THICC_YES);
 
-  Let* string			= move_string(as_string(value));
-  Let* character			= let_character('1');
+  Let* string	 = move_string(as_string(value));
+  Let* character = let_character('1');
 
-  Let* array				= array_of(1, value);
-  Let* object			= move_object(as_object(value));
-  Let* key = let_string("boolean");
+  Let* array  = array_of(1, value);
+  Let* object = move_object(as_object(value));
+  Let* key	  = let_string("boolean");
 
-  Let* boolean_one = let_boolean(THICC_YES);
-  Let* character_one = let_character('1');
-  Let* natural_one = let_natural(1);
-  Let* integer_one = let_integer(1);
-  Let* real_one = let_real(1.0);
-  Let* complex_one = let_complex(cmplx(1.0, 0.0));
-  Let* string_one = let_string("true");
-  Let* function_one = let_function(foo);
+  Let* boolean_one		   = let_boolean(THICC_YES);
+  Let* character_one	   = let_character('1');
+  Let* natural_one		   = let_natural(1);
+  Let* integer_one		   = let_integer(1);
+  Let* real_one			   = let_real(1.0);
+  Let* complex_one		   = let_complex(cmplx(1.0, 0.0));
+  Let* string_one		   = let_string("true");
+  Let* function_one		   = let_function(foo);
   Let* function_one_return = call(function_one);
-  Let* array_one		= array_of(1, character);
-  Let* object_one		= object_of(2, key, value);
+  Let* array_one		   = array_of(1, character);
+  Let* object_one		   = object_of(2, key, value);
 
   assert(equal(value, boolean_one));
   assert(equal(value, character_one));
@@ -96,27 +96,27 @@ THICC_NODISCARD static int conversions(void) {
 }
 
 THICC_NODISCARD static int operations(void) {
-  Let* left	= let_boolean(THICC_YES);
+  Let* left	 = let_boolean(THICC_YES);
   Let* right = let_boolean(THICC_YES);
 
   Let* yes	= let_boolean(THICC_YES);
   Let* no	= let_boolean(THICC_NO);
   Let* zero = let_integer(0);
 
-  Let* bit_and_result = bit_and(left, right);
+  Let* bit_and_result		 = bit_and(left, right);
   Let* bit_complement_result = bit_complement(left);
-  Let* bit_not_result = bit_not(left);
-  Let* bit_or_result = bit_or(left, right);
-  Let* bit_xor_result = bit_xor(left, right);
-  Let* difference_result = difference(left, right);
-  Let* index_of_result = index_of(left, zero);
-  Let* indirection_result = indirection(left);
-  Let* modulo_result = modulo(left, right);
-  Let* negative_result = negative(left);
-  Let* positive_result = positive(left);
-  Let* product_result = product(left, right);
-  Let* quotient_result = quotient(left, right);
-  Let* sum_result = sum(left, right);
+  Let* bit_not_result		 = bit_not(left);
+  Let* bit_or_result		 = bit_or(left, right);
+  Let* bit_xor_result		 = bit_xor(left, right);
+  Let* difference_result	 = difference(left, right);
+  Let* index_of_result		 = index_of(left, zero);
+  Let* indirection_result	 = indirection(left);
+  Let* modulo_result		 = modulo(left, right);
+  Let* negative_result		 = negative(left);
+  Let* positive_result		 = positive(left);
+  Let* product_result		 = product(left, right);
+  Let* quotient_result		 = quotient(left, right);
+  Let* sum_result			 = sum(left, right);
 
   assert(equal(bit_and_result, yes));
   assert(equal(bit_complement_result, no));

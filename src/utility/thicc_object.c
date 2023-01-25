@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,11 +36,11 @@ extern "C" {
 #endif
 
 #include "thicc_object.h"
-#include <thicc_interface.h>
 #include "../core/thicc_memory.h"
 #include "../core/thicc_struct_object.h"
 #include "thicc_array.h"
 #include "thicc_function.h"
+#include <thicc_interface.h>
 
 THICC_NODISCARD MutableSize object_size(ImmutableObject _object) {
   return ((Root) _object)->members->value.array_type.array[0]->value.array_type.length;
@@ -117,12 +117,12 @@ THICC_NODISCARD MutableObject object_compose_list(Size _size, va_list _list) {
 	value.array[index] = let_copy(va_arg(_list, Let*));
   }
 
-  key.length      = length;
-  value.length    = length;
+  key.length	  = length;
+  value.length	  = length;
   buffer		  = array_allocate(2);
   buffer.array[0] = move_array(key);
   buffer.array[1] = move_array(value);
-  buffer.length   = 2;
+  buffer.length	  = 2;
 
   root->members = move_array(buffer);
   return root;
@@ -140,7 +140,7 @@ THICC_NODISCARD MutableObject object_compose(Size _size, ...) {
 THICC_NODISCARD Let* object_method_invoke(Let* _object, Let* _method, Size _argument_count, ...) {
   va_list list;
   Let*	  array;
-  Let*    result;
+  Let*	  result;
 
   va_start(list, _argument_count);
   array = move_array(array_with_self_reference_from_list(_object, _argument_count, list));

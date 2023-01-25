@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,11 +36,11 @@ extern "C" {
 #endif
 
 #include "thicc_as_real.h"
-#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
+#include <thicc_interface.h>
 
 THICC_NODISCARD MutableReal boolean_as_real(Let* _let) {
   return _let->value.boolean_type ? 1.0l : 0.0l;
@@ -71,7 +71,7 @@ THICC_NODISCARD MutableReal string_as_real(Let* _let) {
 }
 
 THICC_NODISCARD MutableReal function_as_real(Let* _let) {
-  Let*  temporary = function_invoke(_let, let_empty());
+  Let* temporary = function_invoke(_let, let_empty());
   Real result	 = as_real(temporary);
   unlet(temporary);
   return result;
@@ -82,12 +82,12 @@ THICC_NODISCARD MutableReal array_as_real(Let* _let) {
 }
 
 THICC_NODISCARD MutableReal object_as_real(Let* _let) {
-  Let* key = let_string("real");
+  Let* key				= let_string("real");
   Let* conversion_value = member(_let, key);
   unlet(key);
   if (!let_is_empty(conversion_value)) {
 	if (is_invokable(conversion_value)) {
-	  Let*  temporary = object_method_invoke(_let, conversion_value, 0);
+	  Let* temporary = object_method_invoke(_let, conversion_value, 0);
 	  Real result	 = as_real(temporary);
 
 	  unlet(temporary);

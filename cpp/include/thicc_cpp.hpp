@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -15,28 +15,29 @@
  * 1.   Redistributions of source code must retain the above copyright notice,
  *      this list of conditions and the following disclaimer.
  *
- * 2.   Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the docs
- *      and/or other materials provided with the distribution.
+ * 2.   Redistributions in binary form must reproduce the above copyright
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  */
 #ifndef THICC_THICC_CPP_HPP
 #define THICC_THICC_CPP_HPP
 
-#include <thicc.h>
-#include <thicc_struct_var.h>
 #include "thicc_cpp_prelude.hpp"
 #include <ostream>
+#include <thicc.h>
+#include <thicc_struct_var.h>
 
 namespace thicc {
   class var;
@@ -49,11 +50,11 @@ namespace thicc {
 	inline THICC_CPP_CONSTEXPR Type* address_of(Type& _type) THICC_CPP_NOEXCEPT {
 	  return reinterpret_cast<Type*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(_type)));
 	}
-  }
+  } // namespace backing
 
   class var THICC_CPP_FINAL {
 	friend inline var backing::move(Let*) THICC_CPP_NOEXCEPT;
-	Let* variable;
+	Let*			  variable;
 
   public:
 	~var() THICC_CPP_NOEXCEPT {
@@ -97,7 +98,7 @@ namespace thicc {
 
 	var(var&& _other) noexcept : variable(let_move(const_cast<Var*>(_other.variable))) {}
 	var& operator=(var&& _other) noexcept {
-	  if(this != backing::address_of(_other))
+	  if (this != backing::address_of(_other))
 		this->variable = let_move(const_cast<Var*>(_other.variable));
 	  return *this;
 	}
@@ -157,7 +158,7 @@ namespace thicc {
 	}
 
 	var operator()() const {
-	  if(is_invokable(this->variable))
+	  if (is_invokable(this->variable))
 		return call(this->variable);
 	  return let();
 	}
@@ -172,7 +173,7 @@ namespace thicc {
 	  result.variable = let_move(const_cast<Var*>(_let));
 	  return result;
 	}
-  }
+  } // namespace backing
 
   template<typename Value>
   var& var::operator=(Value const& _other) THICC_CPP_NOEXCEPT {
@@ -187,7 +188,7 @@ namespace thicc {
 
   template<typename Type1>
   var var::operator()(Type1 THICC_CPP_UREF _type1) const {
-	if(is_invokable(this->variable)) {
+	if (is_invokable(this->variable)) {
 	  let temporary = let(_type1);
 	  return invoke(this->variable, 1, temporary.variable);
 	}
@@ -196,12 +197,10 @@ namespace thicc {
 
   template<>
   var var::operator()(var const& _type1) const {
-	if(is_invokable(this->variable))
+	if (is_invokable(this->variable))
 	  return invoke(this->variable, 1, _type1.variable);
 	return var();
   }
-}
-
-
+} // namespace thicc
 
 #endif // THICC_THICC_CPP_HPP

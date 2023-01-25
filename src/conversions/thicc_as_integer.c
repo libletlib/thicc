@@ -7,7 +7,7 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -16,8 +16,8 @@
  *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * docs and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,11 +36,11 @@ extern "C" {
 #endif
 
 #include "thicc_as_integer.h"
-#include <thicc_interface.h>
 #include "../core/thicc_struct_object.h"
 #include "../utility/thicc_function.h"
 #include "../utility/thicc_object.h"
 #include "../utility/thicc_string.h"
+#include <thicc_interface.h>
 
 THICC_NODISCARD MutableInteger boolean_as_integer(Let* _let) {
 #if THICC_C89
@@ -86,7 +86,7 @@ THICC_NODISCARD MutableInteger array_as_integer(Let* _let) {
 }
 
 THICC_NODISCARD MutableInteger object_as_integer(Let* _let) {
-  Let* key = let_string("integer");
+  Let* key				= let_string("integer");
   Let* conversion_value = member(_let, key);
   unlet(key);
   if (!let_is_empty(conversion_value)) {
