@@ -56,8 +56,8 @@ target_include_directories(${PROJECT_NAME}_demo PRIVATE ${HEADER_DIRECTORY})
 
 add_subdirectory(cpp)
 if(NOT WIN32)
-    add_subdirectory(fortran)
-    add_subdirectory(objc)
+    #add_subdirectory(fortran)
+    #add_subdirectory(objc)
 endif()
 
 enable_testing()

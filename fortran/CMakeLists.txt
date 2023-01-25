@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-#enable_language(Fortran)
+enable_language(Fortran)
 project(thicc_fortran VERSION 0.0.1 DESCRIPTION "Write some thicc Fortran." LANGUAGES Fortran)
 
 include(FortranCInterface)
