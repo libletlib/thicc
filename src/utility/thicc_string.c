@@ -81,7 +81,7 @@ THICC_NODISCARD MutableComparison string_compare(String _left, String _right) {
 
 THICC_NODISCARD static char* string_tokenise_helper(MutableCharacter* THICC_RESTRICT _string,
 													Character* THICC_RESTRICT _delimiter,
-													MutableCharacter** THICC_RESTRICT _state) {
+													MutableCharacter* THICC_RESTRICT* _state) {
   MutableCharacter* THICC_RESTRICT end;
 
   if (!_string)
