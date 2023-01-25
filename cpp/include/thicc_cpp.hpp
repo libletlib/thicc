@@ -166,20 +166,9 @@ namespace thicc {
 	}
 
 	template<typename Type1>
-	var operator()(Type1 THICC_CPP_UREF _type1) const {
-	  if(is_invokable(this->variable)) {
-		let temporary = let(_type1);
-		return invoke(this->variable, 1, temporary.variable);
-	  }
-	  return var();
-	}
-
+	var operator()(Type1 THICC_CPP_UREF _type1) const;
 	template<>
-	var operator()(var const& _type1) const {
-	  if(is_invokable(this->variable))
-		return invoke(this->variable, 1, _type1.variable);
-	  return var();
-	}
+	var operator()(var const& _type1) const;
   };
 
   namespace backing {
@@ -199,6 +188,22 @@ namespace thicc {
   var& var::operator=(var const& _other) THICC_CPP_NOEXCEPT {
 	this->variable = let_copy(_other.variable);
 	return *this;
+  }
+
+  template<typename Type1>
+  var var::operator()(Type1 THICC_CPP_UREF _type1) const {
+	if(is_invokable(this->variable)) {
+	  let temporary = let(_type1);
+	  return invoke(this->variable, 1, temporary.variable);
+	}
+	return var();
+  }
+
+  template<>
+  var var::operator()(var const& _type1) const {
+	if(is_invokable(this->variable))
+	  return invoke(this->variable, 1, _type1.variable);
+	return var();
   }
 }
 

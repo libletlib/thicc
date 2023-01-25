@@ -138,7 +138,7 @@ THICC_CPP_NODISCARD var operator _op(var& _right) THICC_CPP_NOEXCEPT {\
 #define lambda(_code) [](THICC_CPP_MAYBE_UNUSED Let* _self, THICC_CPP_MAYBE_UNUSED Let* _args) -> Let* \
 						{ let self = backing::move(_self), args = backing::move(_args); _code }
 
-#define fn(_code) (THICC_CPP_MAYBE_UNUSED Let* _self, THICC_CPP_MAYBE_UNUSED Let* _args) -> Let* \
+#define fn(_code) (THICC_CPP_MAYBE_UNUSED Let* _self, THICC_CPP_MAYBE_UNUSED Let* _args) \
                   { let self = backing::move(_self), args = backing::move(_args); _code }
 
 #endif // THICC_THICC_CPP_PRELUDE_HPP
