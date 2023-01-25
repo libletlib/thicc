@@ -7,17 +7,17 @@
  * \/__/      /:/  /   \:\__\    \:\__\    \:\__\
  *            \/__/     \/__/     \/__/     \/__/
  *
- * Copyright 2022 Ville Rissanen
+ * Copyright 2022 - 2023 Ville Rissanen
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
  * 1.   Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
+ *      this list of conditions and the following disclaimer.
  *
  * 2.   Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
+ *      notice, this list of conditions and the following disclaimer in the
+ *      documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -34,21 +34,23 @@
 #ifndef THICC_THICC_H
 #define THICC_THICC_H
 
+/**
+ * \file thicc.h
+ * Primary include header and some utility macros for end-user use only.
+ */
+
 #include "thicc_interface.h"
-#include "thicc_struct_var.h"
 
-#undef st
-#undef nd
-#undef rd
-#undef th
-#define st (array_view(args)[0])
-#define nd (array_view(args)[1])
-#define rd (array_view(args)[2])
-#define th (array_view(args)[3])
+#undef THICC_1ST
+#undef THICC_2ND
+#undef THICC_3RD
+#undef THICC_4TH
+#define THICC_1ST (array_view(args)[0])
+#define THICC_2ND (array_view(args)[1])
+#define THICC_3RD (array_view(args)[2])
+#define THICC_4TH (array_view(args)[3])
 
-#undef function
-#define function(_name) Var _name(THICC_MAYBE_UNUSED Let self, THICC_MAYBE_UNUSED Let args)
-
-#define unit let_empty()
+#undef THICC_FUNCTION
+#define THICC_FUNCTION(_name) Let* _name(THICC_MAYBE_UNUSED Let* self, THICC_MAYBE_UNUSED Let* args)
 
 #endif /* THICC_THICC_H */
