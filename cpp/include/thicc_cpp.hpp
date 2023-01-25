@@ -86,9 +86,6 @@ namespace thicc {
 	template<typename Value>
 	var& operator=(Value const& _other) THICC_CPP_NOEXCEPT;
 
-	template<>
-	var& operator=(var const& _other) THICC_CPP_NOEXCEPT;
-
 	var& operator=(Let* _other) THICC_CPP_NOEXCEPT {
 	  this->variable = let_copy(_other);
 	  return *this;
@@ -167,8 +164,6 @@ namespace thicc {
 
 	template<typename Type1>
 	var operator()(Type1 THICC_CPP_UREF _type1) const;
-	template<>
-	var operator()(var const& _type1) const;
   };
 
   namespace backing {
