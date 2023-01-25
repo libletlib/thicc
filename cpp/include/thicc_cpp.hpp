@@ -83,11 +83,6 @@ namespace thicc {
 
 	var(var const& _other) THICC_CPP_NOEXCEPT : variable(let_copy(_other.variable)) {}
 
-	var& operator=(var const& _other) THICC_CPP_NOEXCEPT {
-	  this->variable = let_copy(_other.variable);
-	  return *this;
-	}
-
 	template<typename Value>
 	var& operator=(Value const& _other) THICC_CPP_NOEXCEPT {
 	  return *this = var(_other);
