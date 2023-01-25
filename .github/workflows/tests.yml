@@ -48,7 +48,7 @@ jobs:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         c_standard: [ 90, 99, 11, 17 ]
         cpp_standard: [ 98, 11, 14, 17, 20 ]
-        #        fortran_standard: [ 2003, 2008, 2018 ]
+#       fortran_standard: [ 2003, 2008, 2018 ]
         exclude:
           - os: windows-latest
             compiler: gcc
@@ -70,11 +70,6 @@ jobs:
         run: |
           cmake -E make_directory ${{runner.workspace}}/build
 
-      - if: matrix.os == 'ubuntu-latest'
-        shell: bash
-        run: |
-          sudo apt-get install -y gobjc
-
       - if: matrix.compiler
         shell: bash
         working-directory: ${{runner.workspace}}/build
@@ -83,7 +78,7 @@ jobs:
                   -DCMAKE_C_COMPILER=${{ matrix.compiler }} \
                   -DCMAKE_C_STANDARD=${{ matrix.c_standard }} \
                   -DCMAKE_CXX_STANDARD=${{ matrix.cpp_standard }} \
-          #                -DCMAKE_FORTRAN_STANDARD=${{ matrix.fortran_standard }} \
+#                 -DCMAKE_FORTRAN_STANDARD=${{ matrix.fortran_standard }} \
                $GITHUB_WORKSPACE
 
       - if: (matrix.compiler != 'clang') || (matrix.compiler != 'gcc')
