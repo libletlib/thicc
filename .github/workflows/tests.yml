@@ -13,7 +13,9 @@ jobs:
       matrix:
         compiler: [ gcc, msvc, clang ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        standard: [ 90, 99, 11, 17 ]
+        c_standard: [ 90, 99, 11, 17 ]
+        cpp_standard: [ 98, 11, 14, 17, 20 ]
+        fortran_standard: [ 2003, 2008, 2018 ]
         exclude:
           - os: windows-latest
             compiler: gcc
@@ -35,12 +37,12 @@ jobs:
         run: |
           cmake -E make_directory ${{runner.workspace}}/build
 
-      - if: matrix.os == ubuntu-latest
+      - if: matrix.os == 'ubuntu-latest'
         shell: bash
         run: |
-          sudo apt-get install -y gcc g++ gfortran gobjc gobjc++ clang
+          sudo apt-get install -y gfortran gobjc
 
-      - if: matrix.os == macos-latest
+      - if: matrix.os == 'macos-latest'
         shell: bash
         run: |
           brew install gfortran
@@ -51,7 +53,9 @@ jobs:
         run: |
           cmake -DCMAKE_BUILD_TYPE=Debug \
                 -DCMAKE_C_COMPILER=${{ matrix.compiler }} \
-                -DCMAKE_C_STANDARD=${{ matrix.standard }} \
+                -DCMAKE_C_STANDARD=${{ matrix.c_standard }} \
+                -DCMAKE_CXX_STANDARD=${{ matrix.cpp_standard }} \
+                -DCMAKE_FORTRAN_STANDARD=${{ matrix.fortran_standard }} \
                 $GITHUB_WORKSPACE
 
       - if: (matrix.compiler != 'clang') || (matrix.compiler != 'gcc')
@@ -59,7 +63,8 @@ jobs:
         working-directory: ${{runner.workspace}}/build
         run: |
           cmake -DCMAKE_BUILD_TYPE=Debug \
-                -DCMAKE_C_STANDARD=${{ matrix.standard }} \
+                -DCMAKE_C_STANDARD=${{ matrix.c_standard }} \
+                -DCMAKE_CXX_STANDARD=${{ matrix.cpp_standard }} \
                 $GITHUB_WORKSPACE
 
       - name: Build
