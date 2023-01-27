@@ -51,8 +51,8 @@ extern "C" {
  */
 struct thicc_struct_var {
   MutableValue value; /**< Union that holds all possible Let internal data types. */
-  Behaviour*
-	  behaviour; /**< Pointer to a global struct, that dictates behaviour on operations based on internal type. */
+  Behaviour* behaviour;
+  /**< Pointer to a global struct, that dictates behaviour on operations based on internal type. */
 };
 
 /**
@@ -99,6 +99,7 @@ Let* let_complex(Complex _value);
 Let* let_string(MutableCharacter* _value);
 /**
  * \brief Move a String's memory to a Let.
+ * This doesn't create a new allocation for memory, but trusts the original allocation to be correct.
  * \param _value to move memory from to Let.
  * \return Let with _value, without copy.
  */
@@ -117,6 +118,7 @@ Let* let_function(Function _value);
 Let* let_array(Array _value);
 /**
  * \brief Move a Array's memory to a Let.
+ * This doesn't create a new allocation for memory, but trusts the original allocation to be correct.
  * \param _value to move memory from to Let.
  * \return Let with _value, without copy.
  */
@@ -129,29 +131,37 @@ Let* move_array(MutableArray _value);
 Let* let_object(ImmutableObject _value);
 /**
  * \brief Move a Object's memory to a Let.
+* This doesn't create a new allocation for memory, but trusts the original allocation to be correct.
  * \param _value to move memory from to Let.
  * \return Let with _value, without copy.
  */
 Let* move_object(MutableObject _value);
 /**
- * \brief Produce a deep copy of a Let.
+ * \brief Create a deep copy of a Let.
  * \param _let to copy.
  * \return Deep copy of _let.
  */
 Let* let_copy(Let* _let);
 /**
  * \brief Move memory from one Let to a new one.
+ * This creates a new Let struct with its own allocation and gains the values obtained from _let.
+ * The Value and Behaviour of _let are set to `THICC_NAUGHT`, which renders _let empty.
  * \param _let to move from.
  * \return New Let with memory of _let.
  */
 Let* let_move(Var* _let);
 /**
  * \brief Make an empty Let value.
+ * Let is empty if its Behaviour is `THICC_NAUGHT` and its value is `THICC_NAUGHT` or the pointer itself is
+ * `THICC_NAUGHT`.
  * \return An empty Let.s
  */
 Let* let_empty(void);
 /**
  * \brief Test if a Let is empty.
+ * Let is empty if its Behaviour is `THICC_NAUGHT` and its value is `THICC_NAUGHT` or the pointer itself is
+ * `THICC_NAUGHT`. In the latter case the pointer holds no memory and does not have to be freed, but can be freed
+ * without undefined behaviour.
  * \param _let to evaluate for emptiness.
  * \return true if Let is empty, false otherwise.
  */

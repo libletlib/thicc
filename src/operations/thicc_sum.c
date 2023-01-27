@@ -44,7 +44,7 @@ extern "C" {
 #include <thicc_struct_var.h>
 
 THICC_NODISCARD Let* boolean_sum(Let* _left, Let* _right) {
-  return let_boolean((!_left->value.boolean_type && !_right->value.boolean_type) ? THICC_NO : THICC_YES);
+  return let_boolean((_left->value.boolean_type && _right->value.boolean_type) ? THICC_YES : THICC_NO);
 }
 
 THICC_NODISCARD Let* character_sum(Let* _left, Let* _right) {

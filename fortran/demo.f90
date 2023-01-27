@@ -44,7 +44,6 @@ subroutine playground()
     s = z%as_string()
     print *, s
     deallocate(s)
-
 end subroutine playground
 
 
