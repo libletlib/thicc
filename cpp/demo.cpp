@@ -40,7 +40,7 @@ using namespace thicc;
 
 static Let* func fn(return let_copy(args[0]);)
 
-	int main() {
+int main() {
   let zz = func;
 
   var x = 5;

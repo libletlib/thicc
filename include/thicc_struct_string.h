@@ -50,11 +50,12 @@ extern "C" {
  */
 struct thicc_struct_string {
   MutableCharacter* string; /**< Raw C string, null terminated. */
-  MutableSize		length; /**< Length of the string. */
+  MutableSize		length; /**< Length of the string, excluding the null terminator. */
 };
 
 /**
  * \brief Produces an empty string.
+ * This is a string with a pointer to `THICC_NAUGHT` and length of 0.
  * \return An empty string.
  */
 MutableString string_empty(void);
@@ -72,6 +73,7 @@ MutableSize string_length(String _string);
 MutableString string_from_pointer(MutableCharacter* _literal);
 /**
  * \brief Check if a string is empty.
+ * A String is empty, if the pointer to it is `THICC_NAUGHT` or its length is 0.
  * \param _string to evaluate for emptiness.
  * \return true if _string is empty, false otherwise.
  */
