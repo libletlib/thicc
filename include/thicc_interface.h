@@ -246,17 +246,17 @@ Let* member(Let* _object, Let* _member);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Sum shortly by type:
- * `Boolean`: AND gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_NO`.
- * `Character`: Form a two character string. `'a' + 'b' = "ab"`.
- * `Natural`: Normal plus operation.
- * `Integer`: Normal plus operation.
- * `Real`: Normal plus operation.
- * `Complex`: Normal plus operation.
- * `String`: `String` concatenation.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Array concatenation.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Sum shortly by type:																								<br>
+ * `Boolean`: AND gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_NO`.				<br>
+ * `Character`: Form a two character string. `'a' + 'b' = "ab"`.													<br>
+ * `Natural`: Normal plus operation.																				<br>
+ * `Integer`: Normal plus operation.																				<br>
+ * `Real`: Normal plus operation.																					<br>
+ * `Complex`: Normal plus operation.																				<br>
+ * `String`: `String` concatenation.																				<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Array concatenation.																					<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -269,17 +269,17 @@ Let* sum(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Difference shortly by type:
- * `Boolean`: AND gate, right hand side is negated. `THICC_YES` - (`THICC_NO` => `THICC_YES`) = `THICC_YES`.
- * `Character`: Treat as ASCII integers.
- * `Natural`: Normal minus operation.
- * `Integer`: Normal minus operation.
- * `Real`: Normal minus operation.
- * `Complex`: Normal minus operation.
- * `String`: Remove right hand side substring from left hand side `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Remove right hand side subarray from left hand side array.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Difference shortly by type:																						<br>
+ * `Boolean`: AND gate, right hand side is negated. `THICC_YES` - (`THICC_NO` => `THICC_YES`) = `THICC_YES`.		<br>
+ * `Character`: Treat as ASCII integers.																			<br>
+ * `Natural`: Normal minus operation.																				<br>
+ * `Integer`: Normal minus operation.																				<br>
+ * `Real`: Normal minus operation.																					<br>
+ * `Complex`: Normal minus operation.																				<br>
+ * `String`: Remove right hand side substring from left hand side `String`.											<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Remove right hand side subarray from left hand side array.												<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -292,17 +292,17 @@ Let* difference(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Quotient shortly by type:
- * `Boolean`: AND gate. `THICC_YES` / `THICC_YES` = `THICC_YES`; `THICC_YES` / `THICC_NO` = `THICC_NO`.
- * `Character`: Treat as ASCII integers, if the result would be a floating point number, its type will be `Real`.
- * `Natural`: Normal division operation, if the result would be a floating point number, its type will be `Real`.
- * `Integer`: Normal division operation, if the result would be a floating point number, its type will be `Real`.
- * `Real`: Normal division operation.
- * `Complex`: Normal division operation.
- * `String`: Filter left hand side `String` with the characters on the right hand side `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Filter left hand side `Array` with the elements on the right hand side `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Quotient shortly by type:																						<br>
+ * `Boolean`: AND gate. `THICC_YES` / `THICC_YES` = `THICC_YES`; `THICC_YES` / `THICC_NO` = `THICC_NO`.				<br>
+ * `Character`: Treat as ASCII integers, if the result would be a floating point number, its type will be `Real`.	<br>
+ * `Natural`: Normal division operation, if the result would be a floating point number, its type will be `Real`.	<br>
+ * `Integer`: Normal division operation, if the result would be a floating point number, its type will be `Real`.	<br>
+ * `Real`: Normal division operation.																				<br>
+ * `Complex`: Normal division operation.																			<br>
+ * `String`: Filter left hand side `String` with the characters on the right hand side `String`.					<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Filter left hand side `Array` with the elements on the right hand side `Array`.							<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -315,17 +315,17 @@ Let* quotient(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Modulo shortly by type:
- * `Boolean`: AND gate. `THICC_YES` % `THICC_YES` = `THICC_YES`; `THICC_YES` % `THICC_NO` = `THICC_NO`.
- * `Character`: Treat as ASCII integers.
- * `Natural`: Normal modulo operation.
- * `Integer`: Normal modulo operation.
- * `Real`: Normal modulo operation.
- * `Complex`: Normal modulo operation.
- * `String`: Tokenise left hand side `String` into an `Array` based on tokens on the right hand side `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Zip into one `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Modulo shortly by type:																							<br>
+ * `Boolean`: AND gate. `THICC_YES` % `THICC_YES` = `THICC_YES`; `THICC_YES` % `THICC_NO` = `THICC_NO`.				<br>
+ * `Character`: Treat as ASCII integers.																			<br>
+ * `Natural`: Normal modulo operation.																				<br>
+ * `Integer`: Normal modulo operation.																				<br>
+ * `Real`: Normal modulo operation.																					<br>
+ * `Complex`: Normal modulo operation.																				<br>
+ * `String`: Tokenise left hand side `String` into an `Array` based on tokens on the right hand side `String`.		<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Zip into one `Array`.																					<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -338,17 +338,17 @@ Let* modulo(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Product shortly by type:
- * `Boolean`: AND gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_NO`.
- * `Character`: Treat as `sum(Let* _left, Let* _right)` operation.
- * `Natural`: Normal product operation.
- * `Integer`: Normal product operation.
- * `Real`: Normal product operation.
- * `Complex`: Normal product operation.
- * `String`: Treat as `sum(Let* _left, Let* _right)` operation.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Treat as `sum(Let* _left, Let* _right)` operation.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Product shortly by type:																							<br>
+ * `Boolean`: AND gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_NO`.				<br>
+ * `Character`: Treat as `sum(Let* _left, Let* _right)` operation.													<br>
+ * `Natural`: Normal product operation.																				<br>
+ * `Integer`: Normal product operation.																				<br>
+ * `Real`: Normal product operation.																				<br>
+ * `Complex`: Normal product operation.																				<br>
+ * `String`: Treat as `sum(Let* _left, Let* _right)` operation.														<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Treat as `sum(Let* _left, Let* _right)` operation.														<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -361,17 +361,17 @@ Let* product(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Bitwise AND shortly by type:
- * `Boolean`: AND gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_NO`.
- * `Character`: Treat as ASCII integers.
- * `Natural`: Normal bitwise AND operation.
- * `Integer`: Normal bitwise AND operation.
- * `Real`: Custom bitwise AND operation.
- * `Complex`: Custom bitwise AND operation.
- * `String`: Filter left hand side `String` to include only characters in the right hand side `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Filter left hand side `Array` to include only elements in the right hand side `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Bitwise AND shortly by type:																						<br>
+ * `Boolean`: AND gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_NO`.				<br>
+ * `Character`: Treat as ASCII integers.																			<br>
+ * `Natural`: Normal bitwise AND operation.																			<br>
+ * `Integer`: Normal bitwise AND operation.																			<br>
+ * `Real`: Custom bitwise AND operation.																			<br>
+ * `Complex`: Custom bitwise AND operation.																			<br>
+ * `String`: Filter left hand side `String` to include only characters in the right hand side `String`.				<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Filter left hand side `Array` to include only elements in the right hand side `Array`.					<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -384,17 +384,17 @@ Let* bit_and(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Bitwise OR shortly by type:
- * `Boolean`: OR gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_YES`.
- * `Character`: Treat as ASCII integers.
- * `Natural`: Normal bitwise OR operation.
- * `Integer`: Normal bitwise OR operation.
- * `Real`: Custom bitwise OR operation.
- * `Complex`: Custom bitwise OR operation.
- * `String`: Filter left hand side `String` to include only characters not in the right hand side `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Filter left hand side `Array` to include only elements not in the right hand side `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Bitwise OR shortly by type:																						<br>
+ * `Boolean`: OR gate. `THICC_YES` + `THICC_YES` = `THICC_YES`; `THICC_YES` + `THICC_NO` = `THICC_YES`.				<br>
+ * `Character`: Treat as ASCII integers.																			<br>
+ * `Natural`: Normal bitwise OR operation.																			<br>
+ * `Integer`: Normal bitwise OR operation.																			<br>
+ * `Real`: Custom bitwise OR operation.																				<br>
+ * `Complex`: Custom bitwise OR operation.																			<br>
+ * `String`: Filter left hand side `String` to include only characters not in the right hand side `String`.			<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Filter left hand side `Array` to include only elements not in the right hand side `Array`.				<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -407,17 +407,17 @@ Let* bit_or(Let* _left, Let* _right);
  * then the lower ranking type is cast to the same rank as the higher ranking type. Then the operation is executed
  * on the types of equal rank.
  *
- * Bitwise XOR shortly by type:
- * `Boolean`: XOR gate. `THICC_YES` + `THICC_YES` = `THICC_NO`; `THICC_YES` + `THICC_NO` = `THICC_YES`.
- * `Character`: Treat as ASCII integers.
- * `Natural`: Normal bitwise XOR operation.
- * `Integer`: Normal bitwise XOR operation.
- * `Real`: Custom bitwise XOR operation.
- * `Complex`: Custom bitwise XOR operation.
- * `String`: Filter both `String`s to include only characters not in either `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Filter both `Array`s to include only elements not in either `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Bitwise XOR shortly by type:																						<br>
+ * `Boolean`: XOR gate. `THICC_YES` + `THICC_YES` = `THICC_NO`; `THICC_YES` + `THICC_NO` = `THICC_YES`.				<br>
+ * `Character`: Treat as ASCII integers.																			<br>
+ * `Natural`: Normal bitwise XOR operation.																			<br>
+ * `Integer`: Normal bitwise XOR operation.																			<br>
+ * `Real`: Custom bitwise XOR operation.																			<br>
+ * `Complex`: Custom bitwise XOR operation.																			<br>
+ * `String`: Filter both `String`s to include only characters not in either `String`.								<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Filter both `Array`s to include only elements not in either `Array`.									<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _left side of the operation.
  * \param _right side of the operation.
@@ -429,17 +429,17 @@ Let* bit_xor(Let* _left, Let* _right);
  * The _index argument will be converted to the Integer type, unless it already is an integral type as defined by
  * `is_integral` function.
  *
- * Index-of shortly by type:
- * `Boolean`: Return value.
- * `Character`: Return value.
- * `Natural`: Return digit in the number. Index can be negative or under-/overflow safely.
- * `Integer`: Return digit in the number. Index can be negative or under-/overflow safely.
- * `Real`: Return digit in the number. Index can be negative or under-/overflow safely.
- * `Complex`: Return digit in the real number part. Index can be negative or under-/overflow safely.
- * `String`: Return `Character` in the `String`. Index can be negative or under-/overflow safely.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Return element in the `Array`. Index can be negative or under-/overflow safely.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Index-of shortly by type:																						<br>
+ * `Boolean`: Return value.																							<br>
+ * `Character`: Return value.																						<br>
+ * `Natural`: Return digit in the number. Index can be negative or under-/overflow safely.							<br>
+ * `Integer`: Return digit in the number. Index can be negative or under-/overflow safely.							<br>
+ * `Real`: Return digit in the number. Index can be negative or under-/overflow safely.								<br>
+ * `Complex`: Return digit in the real number part. Index can be negative or under-/overflow safely.				<br>
+ * `String`: Return `Character` in the `String`. Index can be negative or under-/overflow safely.					<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Return element in the `Array`. Index can be negative or under-/overflow safely.							<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _indexable to get element from.
  * \param _index to access.
@@ -449,17 +449,17 @@ Let* index_of(Let* _indexable, Let* _index);
 /**
  * \brief Return the boolean NOT of a Let.
  *
- * Boolean NOT shortly by type:
- * `Boolean`: Boolean negation of value.
- * `Character`: Boolean negation of ASCII value.
- * `Natural`: Boolean negation of value.
- * `Integer`: Boolean negation of value.
- * `Real`: Boolean negation of value.
- * `Complex`: If not { .real = 0.0, .imaginary = 0.0 }, `THICC_YES`, otherwise `THICC_NO`.
- * `String`: Is the pointer `THICC_NAUGHT`?
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Boolean negation of every element in `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Boolean NOT shortly by type:																						<br>
+ * `Boolean`: Boolean negation of value.																			<br>
+ * `Character`: Boolean negation of ASCII value.																	<br>
+ * `Natural`: Boolean negation of value.																			<br>
+ * `Integer`: Boolean negation of value.																			<br>
+ * `Real`: Boolean negation of value.																				<br>
+ * `Complex`: If not { .real = 0.0, .imaginary = 0.0 }, `THICC_YES`, otherwise `THICC_NO`.							<br>
+ * `String`: Is the pointer `THICC_NAUGHT`?																			<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Boolean negation of every element in `Array`.															<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _let to operate on.
  * \return Result of the operation.
@@ -468,17 +468,17 @@ Let* bit_not(Let* _let);
 /**
  * \brief Return the binary complement of a Let.
  *
- * Boolean complement shortly by type:
- * `Boolean`: Same as `bit_not(Let* _let)`.
- * `Character`: Binary complement of the ASCII value.
- * `Natural`: Binary complement of value.
- * `Integer`: Binary complement of value.
- * `Real`: Custom binary complement of value.
- * `Complex`: Custom binary complement of value.
- * `String`: Binary complement of every character of `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Binary complement of every element of `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Boolean complement shortly by type:																				<br>
+ * `Boolean`: Same as `bit_not(Let* _let)`.																			<br>
+ * `Character`: Binary complement of the ASCII value.																<br>
+ * `Natural`: Binary complement of value.																			<br>
+ * `Integer`: Binary complement of value.																			<br>
+ * `Real`: Custom binary complement of value.																		<br>
+ * `Complex`: Custom binary complement of value.																	<br>
+ * `String`: Binary complement of every character of `String`.														<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Binary complement of every element of `Array`.															<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _let to operate on.
  * \return Result of the operation.
@@ -487,17 +487,17 @@ Let* bit_complement(Let* _let);
 /**
  * \brief Return the indirection of a Let.
  *
- * Indirection shortly by type:
- * `Boolean`: Return value.
- * `Character`: Return value.
- * `Natural`: Return value.
- * `Integer`: Return value.
- * `Real`: Return value.
- * `Complex`: Return value.
- * `String`: Return first `Character`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Return first element.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Indirection shortly by type:																						<br>
+ * `Boolean`: Return value.																							<br>
+ * `Character`: Return value.																						<br>
+ * `Natural`: Return value.																							<br>
+ * `Integer`: Return value.																							<br>
+ * `Real`: Return value.																							<br>
+ * `Complex`: Return value.																							<br>
+ * `String`: Return first `Character`.																				<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Return first element.																					<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _let to operate on.
  * \return Result of the operation.
@@ -506,17 +506,17 @@ Let* indirection(Let* _let);
 /**
  * \brief Return the negative of a Let.
  *
- * Indirection shortly by type:
- * `Boolean`: `THICC_NO`.
- * `Character`: Return negative value, converting to a `Integer`, if `Character` is not a signed type.
- * `Natural`: Negative value as `Integer`.
- * `Integer`: Negative value.
- * `Real`: Negative value.
- * `Complex`: Negative value.
- * `String`: Negative value for each `Character` of the `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Negative value for each element of the `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Indirection shortly by type:																						<br>
+ * `Boolean`: `THICC_NO`.																							<br>
+ * `Character`: Return negative value, converting to a `Integer`, if `Character` is not a signed type.				<br>
+ * `Natural`: Negative value as `Integer`.																			<br>
+ * `Integer`: Negative value.																						<br>
+ * `Real`: Negative value.																							<br>
+ * `Complex`: Negative value.																						<br>
+ * `String`: Negative value for each `Character` of the `String`.													<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Negative value for each element of the `Array`.															<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _let to operate on.
  * \return Result of the operation.
@@ -525,17 +525,17 @@ Let* negative(Let* _let);
 /**
  * \brief Return the positive of a Let.
  *
- * Indirection shortly by type:
- * `Boolean`: `THICC_YES`.
- * `Character`: Positive value.
- * `Natural`: Positive value.
- * `Integer`: Positive value.
- * `Real`: Positive value.
- * `Complex`: Positive value.
- * `String`: Positive value for each character of the `String`.
- * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.
- * `Array`: Positive value for each element of the `Array`.
- * `Object`: User implementable, otherwise an empty `Let`.
+ * Indirection shortly by type:																						<br>
+ * `Boolean`: `THICC_YES`.																							<br>
+ * `Character`: Positive value.																						<br>
+ * `Natural`: Positive value.																						<br>
+ * `Integer`: Positive value.																						<br>
+ * `Real`: Positive value.																							<br>
+ * `Complex`: Positive value.																						<br>
+ * `String`: Positive value for each character of the `String`.														<br>
+ * `Function`: Functions are invoked with no arguments and operation is re-evaluated based on the result types.		<br>
+ * `Array`: Positive value for each element of the `Array`.															<br>
+ * `Object`: User implementable, otherwise an empty `Let`.															<br>
  *
  * \param _let to operate on.
  * \return Result of the operation.
